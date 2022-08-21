@@ -30,7 +30,6 @@ The Data Structures Domain is further Divided into the following sub-domains.
 [Trie](#trie-) |
 [Advanced](#advanced-) |
 
-## Sub Domains & Problems (+Solutions) in the Data Structures Domain
 
 ### Arrays ![problems-solved](https://img.shields.io/badge/Solved-6/6-1abc9c.svg)
 
@@ -43,6 +42,7 @@ The Data Structures Domain is further Divided into the following sub-domains.
 | [Sparse Arrays](https://www.hackerrank.com/challenges/arrays-ds) | Medium | [![Java](https://img.icons8.com/color/40/000000/java-coffee-cup-logo.png)](src/arrays/SparseArrays.java) |
 | [Array Manipulation](https://www.hackerrank.com/challenges/crush) | Hard | [![Java](https://img.icons8.com/color/40/000000/java-coffee-cup-logo.png)](src/arrays/ArrayManipulation.java) |
 
+---
 
 ### Linked List ![problems-solved](https://img.shields.io/badge/Solved-6/6-1abc9c.svg)
 
