@@ -1,121 +1,86 @@
 package com.dsa.stack;
 
+import java.util.EmptyStackException;
+
 // Reference
 // https://www.geeksforgeeks.org/implement-a-stack-using-singly-linked-list/
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/stack/Stack.java
 
-import static java.lang.System.exit;
+public class StackUsingLinkedList {
 
-//Create Stack Using Linked list
-class StackUsingLinkedlist {
+	private ListNode top;
+	private int length;
 
-	// A linked list node
-	private class Node {
+	private class ListNode {
+		private int data; 
+		private ListNode next; 
 
-		int data; // integer data
-		Node link; // reference variable Node type
-	}
-
-	// create global top reference variable global
-	Node top;
-
-	// Constructor
-	StackUsingLinkedlist() {
-		this.top = null;
-	}
-
-	// Utility function to add an element x in the stack
-	public void push(int x) // insert at the beginning
-	{
-		// create new node temp and allocate memory
-		Node temp = new Node();
-
-		// check if stack (heap) is full. Then inserting an
-		// element would lead to stack overflow
-		if (temp == null) {
-			System.out.print("\nHeap Overflow");
-			return;
+		public ListNode(int data) {
+			this.data = data;
+			this.next = null;
 		}
-
-		// initialize data into temp data field
-		temp.data = x;
-
-		// put top reference into temp link
-		temp.link = top;
-
-		// update top reference
-		top = temp;
 	}
 
-	// Utility function to check if the stack is empty or not
+	public StackUsingLinkedList() {
+		top = null;
+		length = 0;
+	}
+
+	public int length() {
+		return length;
+	}
+
 	public boolean isEmpty() {
-		return top == null;
+		return length == 0;
 	}
 
-	// Utility function to return top element in a stack
+	public void push(int data) {
+		ListNode temp = new ListNode(data);
+		temp.next = top;
+		top = temp;
+		length++;
+	}
+
+	public int pop() {
+		if (isEmpty()) {
+			throw new EmptyStackException();
+		}
+		int result = top.data;
+		top = top.next;
+		length--;
+		return result;
+	}
+
 	public int peek() {
-		// check for empty stack
-		if (!isEmpty()) {
-			return top.data;
-		} else {
-			System.out.println("Stack is empty");
-			return -1;
+		if (isEmpty()) {
+			throw new EmptyStackException();
 		}
-	}
-
-	// Utility function to pop top element from the stack
-	public void pop() // remove at the beginning
-	{
-		// check for stack underflow
-		if (top == null) {
-			System.out.print("\nStack Underflow");
-			return;
-		}
-
-		// update the top pointer to point to the next node
-		top = (top).link;
+		return top.data;
 	}
 
 	public void display() {
-		// check for stack underflow
 		if (top == null) {
 			System.out.printf("\nStack Underflow");
-			exit(1);
+			return;
 		} else {
-			Node temp = top;
+			ListNode temp = top;
 			while (temp != null) {
-
-				// print node data
-				System.out.printf("%d->", temp.data);
-
-				// assign temp link to temp
-				temp = temp.link;
+				System.out.print(temp.data + "==>");
+				temp = temp.next;
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		// create Object of Implementing class
-		StackUsingLinkedlist obj = new StackUsingLinkedlist();
-		// insert Stack value
-		obj.push(11);
-		obj.push(22);
-		obj.push(33);
-		obj.push(44);
+		StackUsingLinkedList stack = new StackUsingLinkedList();
+		stack.push(10);
+		stack.push(15);
+		stack.push(20);
 
-		// print Stack elements
-		obj.display();
-
-		// print Top element of Stack
-		System.out.printf("\nTop element is %d\n", obj.peek());
-
-		// Delete top element of Stack
-		obj.pop();
-		obj.pop();
-
-		// print Stack elements
-		obj.display();
-
-		// print Top element of Stack
-		System.out.printf("\nTop element is %d\n", obj.peek());
+		System.out.println(stack.peek());
+		stack.pop();
+		System.out.println(stack.peek());
+		stack.pop();
+		System.out.println(stack.peek());
 	}
 }
