@@ -1,13 +1,13 @@
 package com.dsa.linkedlist;
 
+// Reference
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/SinglyLinkedList.java
+
 public class SinglyLinkedList {
 
-	// Reference :
-	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/SinglyLinkedList.java
-
 	private static class ListNode {
-		private int data; // Can be a generic type
-		private ListNode next; // Reference to next ListNode in list
+		private int data;
+		private ListNode next;
 
 		public ListNode(int data) {
 			this.data = data;

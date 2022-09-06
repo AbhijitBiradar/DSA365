@@ -1,9 +1,10 @@
 package com.dsa.search;
 
+// Reference
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/search/BinarySearch.java
+
 public class BinarySearch {
-	
-	// Reference
-	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/search/BinarySearch.java
+
 	public int binarySearch(int[] nums, int key) {
 		int low = 0;
 		int high = nums.length - 1;

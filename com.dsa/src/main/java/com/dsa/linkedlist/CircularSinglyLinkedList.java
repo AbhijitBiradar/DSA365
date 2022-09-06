@@ -2,7 +2,11 @@ package com.dsa.linkedlist;
 
 import java.util.NoSuchElementException;
 
-public class CircularLinkedList {
+
+// Refer
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/CircularLinkedList.java
+
+public class CircularSinglyLinkedList {
 
 	private ListNode last;
 	private int length;
@@ -16,7 +20,7 @@ public class CircularLinkedList {
 		}
 	}
 
-	public CircularLinkedList() {
+	public CircularSinglyLinkedList() {
 		last = null;
 		length = 0;
 	}
@@ -97,7 +101,7 @@ public class CircularLinkedList {
 	}
 
 	public static void main(String[] args) {
-		CircularLinkedList cll = new CircularLinkedList();
+		CircularSinglyLinkedList cll = new CircularSinglyLinkedList();
 		cll.createCircularLinkedList();
 		cll.display();
 	}

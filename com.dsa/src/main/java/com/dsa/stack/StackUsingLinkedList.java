@@ -3,7 +3,6 @@ package com.dsa.stack;
 import java.util.EmptyStackException;
 
 // Reference
-// https://www.geeksforgeeks.org/implement-a-stack-using-singly-linked-list/
 // https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/stack/Stack.java
 
 public class StackUsingLinkedList {
@@ -12,8 +11,8 @@ public class StackUsingLinkedList {
 	private int length;
 
 	private class ListNode {
-		private int data; 
-		private ListNode next; 
+		private int data;
+		private ListNode next;
 
 		public ListNode(int data) {
 			this.data = data;
@@ -31,23 +30,30 @@ public class StackUsingLinkedList {
 	}
 
 	public boolean isEmpty() {
-		return length == 0;
+		return (length == 0);
 	}
 
 	public void push(int data) {
 		ListNode temp = new ListNode(data);
+
 		temp.next = top;
 		top = temp;
 		length++;
+
+		System.out.println("Node pushed successfully!");
 	}
 
 	public int pop() {
 		if (isEmpty()) {
 			throw new EmptyStackException();
 		}
+
 		int result = top.data;
 		top = top.next;
 		length--;
+
+		System.out.println("Node poped successfully!");
+
 		return result;
 	}
 

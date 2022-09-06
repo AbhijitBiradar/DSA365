@@ -1,9 +1,10 @@
 package com.dsa.search;
 
+// Reference
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/search/LinearSearch.java
+
 public class LinearSearch {
-	
-	// REference
-	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/search/LinearSearch.java
+
 	public int search(int[] arr, int n, int x) {
 		// edge case
 		if (arr == null || arr.length == 0) {

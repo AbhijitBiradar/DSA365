@@ -2,6 +2,9 @@ package com.dsa.linkedlist;
 
 import java.util.NoSuchElementException;
 
+// Refer
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/DoublyLinkedList.java
+
 public class DoublyLinkedList {
 
 	private ListNode head;
