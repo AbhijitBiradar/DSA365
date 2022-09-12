@@ -2,6 +2,9 @@ package com.dsa.queue;
 
 // Reference
 // https://www.programiz.com/dsa/circular-queue
+// https://www.youtube.com/watch?v=TPsNjRJYTEQ
+// https://www.youtube.com/watch?v=lPL-pmBm04Q
+// https://www.youtube.com/watch?v=lPdSHEh8LiU
 
 public class CircularQueueUsingArray {
 	int SIZE = 5; // Size of Circular Queue
@@ -13,7 +16,7 @@ public class CircularQueueUsingArray {
 		rear = -1;
 	}
 
-// Check if the queue is full
+	// Check if the queue is full
 	boolean isFull() {
 		if (front == 0 && rear == SIZE - 1) {
 			return true;
@@ -24,7 +27,7 @@ public class CircularQueueUsingArray {
 		return false;
 	}
 
-// Check if the queue is empty
+	// Check if the queue is empty
 	boolean isEmpty() {
 		if (front == -1)
 			return true;
@@ -32,20 +35,21 @@ public class CircularQueueUsingArray {
 			return false;
 	}
 
-// Adding an element
+	// Adding an element
 	void enQueue(int element) {
 		if (isFull()) {
 			System.out.println("Queue is full");
 		} else {
-			if (front == -1)
+			if (front == -1) {
 				front = 0;
+			}
 			rear = (rear + 1) % SIZE;
 			items[rear] = element;
 			System.out.println("Inserted " + element);
 		}
 	}
 
-// Removing an element
+	// Removing an element
 	int deQueue() {
 		int element;
 		if (isEmpty()) {
@@ -53,11 +57,12 @@ public class CircularQueueUsingArray {
 			return (-1);
 		} else {
 			element = items[front];
+
+			/* Q has only one element, so we reset the queue after deleting it. */
 			if (front == rear) {
 				front = -1;
 				rear = -1;
-			} /* Q has only one element, so we reset the queue after deleting it. */
-			else {
+			} else {
 				front = (front + 1) % SIZE;
 			}
 			return (element);
@@ -81,35 +86,35 @@ public class CircularQueueUsingArray {
 
 	public static void main(String[] args) {
 
-		CircularQueueUsingArray q = new CircularQueueUsingArray();
+		CircularQueueUsingArray cqua = new CircularQueueUsingArray();
 
 		// Fails because front = -1
-		q.deQueue();
+		cqua.deQueue();
 
-		q.enQueue(1);
-		q.enQueue(2);
-		q.enQueue(3);
-		q.enQueue(4);
-		q.enQueue(5);
+		cqua.enQueue(1);
+		cqua.enQueue(2);
+		cqua.enQueue(3);
+		cqua.enQueue(4);
+		cqua.enQueue(5);
 
 		// Fails to enqueue because front == 0 && rear == SIZE - 1
-		q.enQueue(6);
+		cqua.enQueue(6);
 
-		q.display();
+		cqua.display();
 
-		int elem = q.deQueue();
+		int elem = cqua.deQueue();
 
 		if (elem != -1) {
 			System.out.println("Deleted Element is " + elem);
 		}
-		q.display();
+		cqua.display();
 
-		q.enQueue(7);
+		cqua.enQueue(7);
 
-		q.display();
+		cqua.display();
 
 		// Fails to enqueue because front == rear + 1
-		q.enQueue(8);
+		cqua.enQueue(8);
 	}
 
 }

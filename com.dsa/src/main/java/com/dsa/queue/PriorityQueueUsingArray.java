@@ -13,14 +13,13 @@ class item {
 
 class PriorityQueueUsingArray {
 
-//Store the element of a priority queue
+	// Store the element of a priority queue
 	static item[] pr = new item[100000];
 
-//Pointer to the last index
+	// Pointer to the last index
 	static int size = -1;
 
-//Function to insert a new element
-//into priority queue
+	// Function to insert a new element into priority queue
 	static void enqueue(int value, int priority) {
 		// Increase the size
 		size++;
@@ -31,18 +30,15 @@ class PriorityQueueUsingArray {
 		pr[size].priority = priority;
 	}
 
-//Function to check the top element
+	//Function to check the top element
 	static int peek() {
 		int highestPriority = Integer.MIN_VALUE;
 		int ind = -1;
 
-		// Check for the element with
-		// highest priority
+		// Check for the element with highest priority
 		for (int i = 0; i <= size; i++) {
 
-			// If priority is same choose
-			// the element with the
-			// highest value
+			// If priority is same choose the element with the highest value
 			if (highestPriority == pr[i].priority && ind > -1 && pr[ind].value < pr[i].value) {
 				highestPriority = pr[i].priority;
 				ind = i;
@@ -56,35 +52,28 @@ class PriorityQueueUsingArray {
 		return ind;
 	}
 
-//Function to remove the element with
-//the highest priority
+	// Function to remove the element with the highest priority
 	static void dequeue() {
-		// Find the position of the element
-		// with highest priority
+		// Find the position of the element with highest priority
 		int ind = peek();
 
-		// Shift the element one index before
-		// from the position of the element
-		// with highest priority is found
+		// Shift the element one index before from the position of the element with highest priority is found
 		for (int i = ind; i < size; i++) {
 			pr[i] = pr[i + 1];
 		}
 
-		// Decrease the size of the
-		// priority queue by one
+		// Decrease the size of the priority queue by one
 		size--;
 	}
 
 	public static void main(String[] args) {
-		// Function Call to insert elements
-		// as per the priority
+		// Function Call to insert elements as per the priority
 		enqueue(10, 2);
 		enqueue(14, 4);
 		enqueue(16, 4);
 		enqueue(12, 3);
 
-		// Stores the top element
-		// at the moment
+		// Stores the top element at the moment
 		int ind = peek();
 
 		System.out.println(pr[ind].value);

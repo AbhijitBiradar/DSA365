@@ -12,12 +12,14 @@ public class DoublyLinkedList {
 	private int length;
 
 	private class ListNode {
-		private int data; // Can be any generic type
+		private int data;
 		private ListNode next;
 		private ListNode previous;
 
 		public ListNode(int data) {
 			this.data = data;
+			this.next = null;
+			this.previous = null;
 		}
 	}
 
@@ -27,47 +29,46 @@ public class DoublyLinkedList {
 		this.length = 0;
 	}
 
-	// code not working watch video
 	public boolean isEmpty() {
-		return length == 0; // or head == null
+		return (length == 0);
 	}
-	
-	// code not working watch video
+
 	public int length() {
 		return length;
 	}
-	
-	// code not working watch video
+
 	public void displayForward() {
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return;
 		}
 
-		ListNode temp = head;
-		while (temp != null) {
-			System.out.print(temp.data + " --> ");
-			temp = temp.next;
+		System.out.println("Displaying nodes in forward direction:");
+		ListNode tempNode = head;
+		while (tempNode != null) {
+			System.out.print(tempNode.data + " --> ");
+			tempNode = tempNode.next;
 		}
 		System.out.println("null");
 	}
-	
-	// code not working watch video
+
 	public void displayBackward() {
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return;
 		}
 
-		ListNode temp = tail;
-		while (temp != null) {
-			System.out.print(temp.data + " --> ");
-			temp = temp.previous;
+		System.out.println("Displaying nodes in backward direction:");
+		ListNode tempNode = tail;
+		while (tempNode != null) {
+			System.out.print(tempNode.data + " --> ");
+			tempNode = tempNode.previous;
 		}
 		System.out.println("null");
 	}
 	
-	// code not working watch video
-	public void insertFirst(int value) {
-		ListNode newNode = new ListNode(value);
+	public void insertAtStart(int data) {
+		ListNode newNode = new ListNode(data);
 		if (isEmpty()) {
 			tail = newNode;
 		} else {
@@ -76,10 +77,11 @@ public class DoublyLinkedList {
 		newNode.next = head;
 		head = newNode;
 		length++;
+
+		System.out.println("New Node inserted at first!");
 	}
-	
-	// code not working watch video
-	public void insertEnd(int value) {
+
+	public void insertAtEnd(int value) {
 		ListNode newNode = new ListNode(value);
 		if (isEmpty()) {
 			head = newNode;
@@ -89,55 +91,81 @@ public class DoublyLinkedList {
 		}
 		tail = newNode;
 		length++;
+
+		System.out.println("New Node inserted at end!");
 	}
-	// code not working watch video
+
 	public ListNode deleteFirst() {
 		if (isEmpty()) {
+			System.out.println("Linked List is empty!");
 			throw new NoSuchElementException();
 		}
 
-		ListNode temp = head;
+		ListNode tempNode = head;
 		if (head == tail) {
 			tail = null;
 		} else {
 			head.next.previous = null;
 		}
 		head = head.next;
-		temp.next = null;
+		tempNode.next = null;
 		length--;
-		return temp;
+
+		System.out.println("Node deleted from first!");
+
+		return tempNode;
 	}
-	
-	// code not working watch video
+
 	public ListNode deleteLast() {
 		if (isEmpty()) {
+			System.out.println("Linked List is empty!");
 			throw new NoSuchElementException();
 		}
 
-		ListNode temp = tail;
+		ListNode tempNode = tail;
 		if (head == tail) {
 			head = null;
 		} else {
 			tail.previous.next = null;
 		}
 		tail = tail.previous;
-		temp.previous = null;
+		tempNode.previous = null;
 		length--;
-		return temp;
+
+		System.out.println("Node deleted from end!");
+
+		return tempNode;
 	}
 
 	public static void main(String[] args) {
 		DoublyLinkedList dll = new DoublyLinkedList();
-		dll.insertEnd(1);
-		dll.insertEnd(2);
-		dll.insertEnd(3);
+
+		System.out.println("Is Linked List is empty? : " + dll.isEmpty());
+
+		dll.insertAtEnd(1);
+		dll.insertAtEnd(2);
+		dll.insertAtEnd(3);
 
 		dll.displayForward();
+		dll.displayBackward();
 
-		dll.deleteLast();
-		dll.deleteLast();
+		dll.insertAtStart(4);
+		dll.insertAtStart(5);
+		dll.insertAtStart(6);
 
 		dll.displayForward();
+		dll.displayBackward();
+
+		System.out.println("Length of Linked List : " + dll.length());
+
+		dll.deleteFirst();
+		dll.displayForward();
+
+		System.out.println("Length of Linked List : " + dll.length());
+
+		dll.deleteLast();
+		dll.displayForward();
+
+		System.out.println("Length of Linked List : " + dll.length());
 	}
-
 }

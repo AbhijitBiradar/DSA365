@@ -1,93 +1,95 @@
 package com.dsa.queue;
 
-import java.util.*;
-
 // Reference
+// https://kalkicode.com/implement-circular-queue-using-linked-list
 // https://www.geeksforgeeks.org/circular-queue-set-2-circular-linked-list-implementation/
+// https://tutorialspoint.dev/data-structure/queue-data-structure/circular-queue-set-2-circular-linked-list-implementation
+// http://www.cs.columbia.edu/~allen/S14/NOTES/CQueue.java.txt
 
 class CircularQueueUsingLinkedList {
 
 	// Structure of a Node
-	static class Node {
-		int data;
-		Node link;
+	private static class Node {
+		private int data;
+		private Node next;
+
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
+		}
 	}
 
-	static class Queue {
-		Node front, rear;
-	}
+	private Node front;
+	private Node rear;
 
 	// Function to create Circular queue
-	static void enQueue(Queue q, int value) {
-		Node temp = new Node();
-		temp.data = value;
-		if (q.front == null)
-			q.front = temp;
-		else
-			q.rear.link = temp;
+	void enQueue(int data) {
+		Node tempNode = new Node(data);
+		if (front == null) {
+			front = tempNode;
+		} else {
+			rear.next = tempNode;
+		}
 
-		q.rear = temp;
-		q.rear.link = q.front;
+		rear = tempNode;
+		rear.next = front;
 	}
 
 	// Function to delete element from Circular Queue
-	static int deQueue(Queue q) {
-		if (q.front == null) {
+	int deQueue() {
+		if (front == null) {
 			System.out.printf("Queue is empty");
 			return Integer.MIN_VALUE;
 		}
 
 		// If this is the last node to be deleted
 		int value; // Value to be dequeued
-		if (q.front == q.rear) {
-			value = q.front.data;
-			q.front = null;
-			q.rear = null;
-		} else // There are more than one nodes
-		{
-			Node temp = q.front;
-			value = temp.data;
-			q.front = q.front.link;
-			q.rear.link = q.front;
+		if (front == rear) {
+			value = front.data;
+			front = null;
+			rear = null;
+		} else {
+			// There are more than one nodes
+			Node tempNode = front;
+			value = tempNode.data;
+			front = front.next;
+			rear.next = front;
 		}
-
 		return value;
 	}
 
 	// Function displaying the elements of Circular Queue
-	static void displayQueue(Queue q) {
-		Node temp = q.front;
+	void displayQueue() {
+		Node tempNode = front;
 		System.out.printf("\nElements in Circular Queue are: ");
-		while (temp.link != q.front) {
-			System.out.printf("%d ", temp.data);
-			temp = temp.link;
+		while (tempNode.next != front) {
+			System.out.printf("%d ", tempNode.data);
+			tempNode = tempNode.next;
 		}
-		System.out.printf("%d", temp.data);
+		System.out.printf("%d", tempNode.data);
 	}
 
 	/* Driver of the program */
 	public static void main(String args[]) {
-		// Create a queue and initialize front and rear
-		Queue q = new Queue();
-		q.front = q.rear = null;
+		CircularQueueUsingLinkedList cqull = new CircularQueueUsingLinkedList();
 
 		// Inserting elements in Circular Queue
-		enQueue(q, 14);
-		enQueue(q, 22);
-		enQueue(q, 6);
+		cqull.enQueue(14);
+		cqull.enQueue(22);
+		cqull.enQueue(6);
 
 		// Display elements present in Circular Queue
-		displayQueue(q);
+		cqull.displayQueue();
 
 		// Deleting elements from Circular Queue
-		System.out.printf("\nDeleted value = %d", deQueue(q));
-		System.out.printf("\nDeleted value = %d", deQueue(q));
+		System.out.printf("\nDeleted value = %d", cqull.deQueue());
+		System.out.printf("\nDeleted value = %d", cqull.deQueue());
 
 		// Remaining elements in Circular Queue
-		displayQueue(q);
+		cqull.displayQueue();
 
-		enQueue(q, 9);
-		enQueue(q, 20);
-		displayQueue(q);
+		cqull.enQueue(9);
+		cqull.enQueue(20);
+		cqull.displayQueue();
 	}
 }
