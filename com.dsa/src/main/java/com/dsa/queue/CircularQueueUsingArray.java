@@ -7,17 +7,16 @@ package com.dsa.queue;
 // https://www.youtube.com/watch?v=lPdSHEh8LiU
 
 public class CircularQueueUsingArray {
-	int SIZE = 5; // Size of Circular Queue
-	int front, rear;
-	int items[] = new int[SIZE];
+	private int SIZE = 5;
+	private int front, rear;
+	private int items[] = new int[SIZE];
 
-	CircularQueueUsingArray() {
+	public CircularQueueUsingArray() {
 		front = -1;
 		rear = -1;
 	}
 
-	// Check if the queue is full
-	boolean isFull() {
+	public boolean isFull() {
 		if (front == 0 && rear == SIZE - 1) {
 			return true;
 		}
@@ -27,16 +26,16 @@ public class CircularQueueUsingArray {
 		return false;
 	}
 
-	// Check if the queue is empty
-	boolean isEmpty() {
-		if (front == -1)
+	public boolean isEmpty() {
+		if (front == -1) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
-	// Adding an element
-	void enQueue(int element) {
+	// Not understood the formula
+	public void enQueue(int element) {
 		if (isFull()) {
 			System.out.println("Queue is full");
 		} else {
@@ -49,8 +48,8 @@ public class CircularQueueUsingArray {
 		}
 	}
 
-	// Removing an element
-	int deQueue() {
+	// Not understood the formula
+	public int deQueue() {
 		int element;
 		if (isEmpty()) {
 			System.out.println("Queue is empty");
@@ -69,18 +68,18 @@ public class CircularQueueUsingArray {
 		}
 	}
 
-	void display() {
-		/* Function to display status of Circular Queue */
+	// Not understood the formula
+	public void display() {
 		int i;
 		if (isEmpty()) {
-			System.out.println("Empty Queue");
+			System.out.println("Queue is empty!");
 		} else {
-			System.out.println("Front -> " + front);
-			System.out.println("Items -> ");
-			for (i = front; i != rear; i = (i + 1) % SIZE)
+			for (i = front; i != rear; i = (i + 1) % SIZE) {
 				System.out.print(items[i] + " ");
+			}
 			System.out.println(items[i]);
-			System.out.println("Rear -> " + rear);
+			System.out.println("Front : " + front);
+			System.out.println("Rear : " + rear);
 		}
 	}
 
@@ -102,10 +101,10 @@ public class CircularQueueUsingArray {
 
 		cqua.display();
 
-		int elem = cqua.deQueue();
+		int element = cqua.deQueue();
 
-		if (elem != -1) {
-			System.out.println("Deleted Element is " + elem);
+		if (element != -1) {
+			System.out.println("Deleted Element is " + element);
 		}
 		cqua.display();
 

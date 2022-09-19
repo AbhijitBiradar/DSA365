@@ -1,142 +1,243 @@
 package com.dsa.linkedlist;
 
-import java.util.*;
-
 // Refer
-// https://www.geeksforgeeks.org/doubly-circular-linked-list-set-1-introduction-and-insertion/
 // https://www.sanfoundry.com/java-program-implement-circular-doubly-linked-list/
+// https://www.youtube.com/playlist?list=PLBlnK6fEyqRjW4jK-CbshJuX20nc_3IaN
 
 class CircularDoublyLinkedList {
 
-	static Node start;
+	private ListNode head;
+	private ListNode tail;
+	private int length;
 
-	// Structure of a Node
-	static class Node {
-		int data;
-		Node next;
-		Node prev;
-	};
+	private class ListNode {
+		private ListNode next;
+		private ListNode previous;
+		private int data;
 
-	// Function to insert at the end
-	static void insertEnd(int value) {
-		// If the list is empty, create a single node
-		// circular and doubly list
-		if (start == null) {
-			Node new_node = new Node();
-			new_node.data = value;
-			new_node.next = new_node.prev = new_node;
-			start = new_node;
+		public ListNode(int data) {
+			this.data = data;
+			this.next = null;
+			this.previous = null;
+		}
+	}
+
+	public CircularDoublyLinkedList() {
+		this.head = null;
+		this.tail = null;
+	}
+
+	public boolean isEmpty() {
+		return head == null;
+	}
+
+	public int length() {
+		return length;
+	}
+
+	public void insertAtFirst(int data) {
+		ListNode newNode = new ListNode(data);
+
+		if (head == null) {
+			newNode.next = newNode;
+			newNode.previous = newNode;
+			head = newNode;
+			tail = newNode;
+		} else {
+			newNode.previous = tail;
+			tail.next = newNode;
+			head.previous = newNode;
+			newNode.next = head;
+			head = newNode;
+		}
+		length++;
+		System.out.println("New node inserted at start");
+	}
+
+	public void insertAtEnd(int data) {
+		ListNode newNode = new ListNode(data);
+		if (head == null) {
+			newNode.next = newNode;
+			newNode.previous = newNode;
+			head = newNode;
+			tail = head;
+		} else {
+			newNode.previous = tail;
+			tail.next = newNode;
+			head.previous = newNode;
+			newNode.next = head;
+			tail = newNode;
+		}
+		length++;
+		System.out.println("New node inserted at end");
+	}
+
+	public void insertAtPos(int data, int pos) {
+		ListNode newNode = new ListNode(data);
+		if (pos == 1) {
+			insertAtFirst(data);
+			return;
+		}
+		ListNode ptr = head;
+		for (int i = 2; i <= length; i++) {
+			if (i == pos) {
+				ListNode tempNode = ptr.next;
+				ptr.next = newNode;
+				newNode.previous = ptr;
+				newNode.next = tempNode;
+				tempNode.previous = newNode;
+			}
+			ptr = ptr.next;
+		}
+		length++;
+		System.out.println("New node inserted at " + pos + " position");
+	}
+
+	public void deleteFromFirst() {
+		if (length == 1) {
+			head = null;
+			tail = null;
+			length = 0;
+			System.out.println("Node deleted from first position : ");
+			return;
+		}
+		head = head.next;
+		head.previous = tail;
+		tail.next = head;
+		length--;
+		System.out.println("Node deleted from first position : ");
+	}
+
+	public void deleteFromEnd() {
+		tail = tail.previous;
+		tail.next = head;
+		head.previous = tail;
+		length--;
+		System.out.println("Node deleted from end position : ");
+	}
+
+	public void deleteAtPos(int pos) {
+		if (pos == 1) {
+			if (length == 1) {
+				head = null;
+				tail = null;
+				length = 0;
+				System.out.println("Node deleted from position : " + pos);
+				return;
+			}
+			head = head.next;
+			head.previous = tail;
+			tail.next = head;
+			length--;
+			System.out.println("Node deleted from position : " + pos);
+			return;
+		}
+		if (pos == length) {
+			tail = tail.previous;
+			tail.next = head;
+			head.previous = tail;
+			length--;
+			System.out.println("Node deleted from position : " + pos);
+			return;
+		}
+		ListNode tempNode = head.next;
+		for (int i = 2; i <= length; i++) {
+			if (i == pos) {
+				ListNode previousNode = tempNode.previous;
+				ListNode nextNode = tempNode.next;
+
+				previousNode.next = nextNode;
+				nextNode.previous = previousNode;
+				length--;
+				System.out.println("Node deleted from position : " + pos);
+				return;
+			}
+			tempNode = tempNode.next;
+		}
+	}
+
+	public boolean search(int data) {
+
+		// case 1 : list is empty
+		if (length == 0) {
+			System.out.println("Linked list is empty");
+			return false;
+		}
+
+		// case 2 : positve case element found
+		ListNode tempNode = head;
+		while (tempNode.next != tail) {
+			if (tempNode.data == data) {
+				System.out.println("Element found in circular linked list!");
+				return true;
+			}
+			tempNode = tempNode.next;
+		}
+		System.out.println("Element not found in circular linked list!");
+		return false;
+	}
+
+	public void createCircularDoublyLinkedList() {
+
+	}
+
+	public void display() {
+		System.out.print("Displaying Circular Doubly Linked List : ");
+		ListNode tempNode = head;
+		if (length == 0) {
+			System.out.println("Linked list is empty");
+			return;
+		}
+		if (head.next == head) {
+			System.out.print(head.data + " ==> " + tempNode.data + "\n");
 			return;
 		}
 
-		// If list is not empty
-
-		/* Find last node */
-		Node last = (start).prev;
-
-		// Create Node dynamically
-		Node new_node = new Node();
-		new_node.data = value;
-
-		// Start is going to be next of new_node
-		new_node.next = start;
-
-		// Make new node previous of start
-		(start).prev = new_node;
-
-		// Make last previous of new node
-		new_node.prev = last;
-
-		// Make new node next of old last
-		last.next = new_node;
-	}
-
-	// Function to insert Node at the beginning
-	// of the List,
-	static void insertBegin(int value) {
-		// Pointer points to last Node
-		Node last = (start).prev;
-
-		Node new_node = new Node();
-		new_node.data = value; // Inserting the data
-
-		// setting up previous and next of new node
-		new_node.next = start;
-		new_node.prev = last;
-
-		// Update next and previous pointers of start
-		// and last.
-		last.next = (start).prev = new_node;
-
-		// Update start pointer
-		start = new_node;
-	}
-
-	// Function to insert node with value as value1.
-	// The new node is inserted after the node with
-	// with value2
-	static void insertAfter(int value1, int value2) {
-		Node new_node = new Node();
-		new_node.data = value1; // Inserting the data
-
-		// Find node having value2 and next node of it
-		Node temp = start;
-		while (temp.data != value2)
-			temp = temp.next;
-		Node next = temp.next;
-
-		// insert new_node between temp and next.
-		temp.next = new_node;
-		new_node.prev = temp;
-		new_node.next = next;
-		next.prev = new_node;
-	}
-
-	static void display() {
-		Node temp = start;
-
-		System.out.printf("\nTraversal in forward direction \n");
-		while (temp.next != start) {
-			System.out.printf("%d ", temp.data);
-			temp = temp.next;
+		System.out.print(head.data + " ==> ");
+		tempNode = head.next;
+		while (tempNode.next != head) {
+			System.out.print(tempNode.data + " ==> ");
+			tempNode = tempNode.next;
 		}
-		System.out.printf("%d ", temp.data);
-
-		System.out.printf("\nTraversal in reverse direction \n");
-		Node last = start.prev;
-		temp = last;
-		while (temp.prev != last) {
-			System.out.printf("%d ", temp.data);
-			temp = temp.prev;
-		}
-		System.out.printf("%d ", temp.data);
+		System.out.print(tempNode.data + " ==> ");
+		tempNode = tempNode.next;
+		System.out.print(tempNode.data + "\n");
 	}
 
-	/* Driver code */
 	public static void main(String[] args) {
-		/* Start with the empty list */
-		Node start = null;
+		CircularDoublyLinkedList c = new CircularDoublyLinkedList();
+		c.insertAtFirst(1);
+		c.display();
+		c.insertAtFirst(3);
+		c.display();
 
-		// Insert 5. So linked list becomes 5.null
-		insertEnd(5);
+		c.insertAtEnd(5);
+		c.display();
+		c.insertAtEnd(7);
+		c.display();
 
-		// Insert 4 at the beginning. So linked
-		// list becomes 4.5
-		insertBegin(4);
+		c.insertAtPos(9, 1); // first position
+		c.display();
+		c.insertAtPos(11, 4); // middle position
+		c.display();
+		c.insertAtPos(13, 6); // last position
+		c.display();
+		
+		c.search(11);
+		c.search(100);
 
-		// Insert 7 at the end. So linked list
-		// becomes 4.5.7
-		insertEnd(7);
+		c.deleteFromFirst();
+		c.display();
 
-		// Insert 8 at the end. So linked list
-		// becomes 4.5.7.8
-		insertEnd(8);
+		c.deleteFromEnd();
+		c.display();
 
-		// Insert 6, after 5. So linked list
-		// becomes 4.5.6.7.8
-		insertAfter(6, 5);
-
-		System.out.printf("Created circular doubly linked list is: ");
-		display();
+		c.deleteAtPos(1); // first position
+		c.display();
+		c.deleteAtPos(3); // middle position
+		c.display();
+		c.deleteAtPos(5); // last position
+		c.display();
 	}
+
 }

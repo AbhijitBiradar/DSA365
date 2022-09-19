@@ -1,37 +1,46 @@
 package com.dsa.tree;
 
-//Checking if a binary tree is a complete binary tree in Java
-
-//Node creation
-class Node {
-	int data;
-	Node left, right;
-
-	Node(int item) {
-		data = item;
-		left = right = null;
-	}
-}
+// Checking if a binary tree is a complete binary tree in Java
+// https://www.scaler.com/topics/complete-binary-tree/
+// https://www.programiz.com/dsa/complete-binary-tree#:~:text=A%20complete%20binary%20tree%20is,is%20filled%20from%20the%20left.&text=All%20the%20leaf%20elements%20must,be%20a%20full%20binary%20tree.
+// https://www.geeksforgeeks.org/complete-binary-tree/
+// https://www.interviewcake.com/concept/java/complete-binary-tree
 
 class CompleteBinaryTree {
-	Node root;
 
-// Count the number of nodes
+	private static class Node {
+		private int data;
+		private Node left;
+		private Node right;
+
+		Node(int item) {
+			this.data = item;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	private Node root;
+
+	// Count the number of nodes
 	int countNumNodes(Node root) {
-		if (root == null)
+		if (root == null) {
 			return (0);
+		}
 		return (1 + countNumNodes(root.left) + countNumNodes(root.right));
 	}
 
-// Check for complete binary tree
+	// Check for complete binary tree
 	boolean checkComplete(Node root, int index, int numberNodes) {
 
 		// Check if the tree is empty
-		if (root == null)
+		if (root == null) {
 			return true;
+		}
 
-		if (index >= numberNodes)
+		if (index >= numberNodes) {
 			return false;
+		}
 
 		return (checkComplete(root.left, 2 * index + 1, numberNodes)
 				&& checkComplete(root.right, 2 * index + 2, numberNodes));
@@ -47,12 +56,13 @@ class CompleteBinaryTree {
 		tree.root.left.left = new Node(4);
 		tree.root.right.left = new Node(6);
 
-		int node_count = tree.countNumNodes(tree.root);
+		int nodeCount = tree.countNumNodes(tree.root);
 		int index = 0;
 
-		if (tree.checkComplete(tree.root, index, node_count))
+		if (tree.checkComplete(tree.root, index, nodeCount)) {
 			System.out.println("The tree is a complete binary tree");
-		else
+		} else {
 			System.out.println("The tree is not a complete binary tree");
+		}
 	}
 }

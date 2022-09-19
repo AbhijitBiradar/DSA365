@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 
 // Refer
 // https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/CircularLinkedList.java
+// https://www.youtube.com/watch?v=2bqbgNQi2UE
+// https://www.youtube.com/watch?v=aaULI7OIeD8
 
 public class CircularSinglyLinkedList {
 
@@ -112,23 +114,31 @@ public class CircularSinglyLinkedList {
 		return tempNode;
 	}
 
-	// not understood this code. watch videos
+	// Refer
+	// https://www.youtube.com/watch?v=2bqbgNQi2UE
 	
 	public ListNode removeFromLast() {
 		ListNode tempNode;
+
+		// case 1: List is empty
 		if (last == null) {
 			System.out.println("Circular Singly Linked List is empty!");
-			return null;
-		} else {
-			tempNode = last.next;
-			while (tempNode.next.next != last.next) {
-				tempNode = tempNode.next;
-			}
-			tempNode.next = last.next;
-			last.next = null;
-			last = tempNode;
-			length--;
+			return last;
 		}
+
+		// case 2: Only one node in the list
+		if (last.next == last) {
+			last = null;
+			return last;
+		}
+
+		tempNode = last.next;
+		while (tempNode.next != last) {
+			tempNode = tempNode.next;
+		}
+		tempNode.next = last.next;		
+		last = tempNode;
+		length--;
 
 		System.out.println("Node removed successfully from last position in Circular Linked list");
 

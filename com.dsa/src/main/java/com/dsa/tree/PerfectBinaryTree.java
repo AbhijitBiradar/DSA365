@@ -2,16 +2,28 @@ package com.dsa.tree;
 
 // Reference
 // https://www.programiz.com/dsa/perfect-binary-tree
+// https://www.geeksforgeeks.org/check-weather-given-binary-tree-perfect-not/
+// https://www.includehelp.com/data-structure-tutorial/perfect-binary-tree.aspx
+// https://www.javatpoint.com/binary-tree
 
 class PerfectBinaryTree {
 
-	static class Node {
-		int key;
-		Node left, right;
+	private static class Node {
+		private int data;
+		private Node left;
+		private Node right;
+
+		public Node(int data) {
+			this.data = data;
+			this.right = null;
+			this.left = null;
+		}
 	}
 
-// Calculate the depth
-	static int depth(Node node) {
+	private Node root;
+
+	// Calculate the depth
+	public int depth(Node node) {
 		int d = 0;
 		while (node != null) {
 			d++;
@@ -20,49 +32,45 @@ class PerfectBinaryTree {
 		return d;
 	}
 
-// Check if the tree is perfect binary tree
-	static boolean is_perfect(Node root, int d, int level) {
+	
+	public boolean isPerfect(Node root, int depth, int level) {
 
 		// Check if the tree is empty
-		if (root == null)
+		if (root == null) {
 			return true;
+		}
 
 		// If for children
-		if (root.left == null && root.right == null)
-			return (d == level + 1);
+		if (root.left == null && root.right == null) {
+			return (depth == level + 1);
+		}
 
-		if (root.left == null || root.right == null)
+		if (root.left == null || root.right == null) {
 			return false;
+		}
 
-		return is_perfect(root.left, d, level + 1) && is_perfect(root.right, d, level + 1);
+		return isPerfect(root.left, depth, level + 1) && isPerfect(root.right, depth, level + 1);
 	}
 
-// Wrapper function
-	static boolean is_Perfect(Node root) {
-		int d = depth(root);
-		return is_perfect(root, d, 0);
-	}
-
-// Create a new node
-	static Node newNode(int k) {
-		Node node = new Node();
-		node.key = k;
-		node.right = null;
-		node.left = null;
-		return node;
+	// Wrapper function
+	public boolean isPerfect(Node root) {
+		int depth = depth(root);
+		return isPerfect(root, depth, 0);
 	}
 
 	public static void main(String args[]) {
-		Node root = null;
-		root = newNode(1);
-		root.left = newNode(2);
-		root.right = newNode(3);
-		root.left.left = newNode(4);
-		root.left.right = newNode(5);
+		PerfectBinaryTree pbt = new PerfectBinaryTree();
 
-		if (is_Perfect(root) == true)
+		pbt.root = new Node(1);
+		pbt.root.left = new Node(2);
+		pbt.root.right = new Node(3);
+		pbt.root.left.left = new Node(4);
+		pbt.root.left.right = new Node(5);
+
+		if (pbt.isPerfect(pbt.root) == true) {
 			System.out.println("The tree is a perfect binary tree");
-		else
+		} else {
 			System.out.println("The tree is not a perfect binary tree");
+		}
 	}
 }

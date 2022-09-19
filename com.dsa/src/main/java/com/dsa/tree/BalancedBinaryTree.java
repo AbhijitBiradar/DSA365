@@ -2,28 +2,28 @@ package com.dsa.tree;
 
 //Checking if a binary tree is height balanced in Java
 
-//Node creation
-class Node {
-
-	int data;
-	Node left, right;
-
-	Node(int d) {
-		data = d;
-		left = right = null;
-	}
-}
-
-//Calculate height
-class Height {
-	int height = 0;
-}
-
 class BalancedBinaryTree {
 
-	Node root;
+	private static class Node {
 
-// Check height balance
+		private int data;
+		private Node left;
+		private Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	private static class Height {
+		private int height = 0;
+	}
+
+	private Node root;
+
+	// Check height balance
 	boolean checkHeightBalance(Node root, Height height) {
 
 		// Check for emptiness
@@ -39,11 +39,11 @@ class BalancedBinaryTree {
 
 		height.height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
 
-		if ((leftHeight - rightHeight >= 2) || (rightHeight - leftHeight >= 2))
+		if ((leftHeight - rightHeight >= 2) || (rightHeight - leftHeight >= 2)) {
 			return false;
-
-		else
+		} else {
 			return l && r;
+		}
 	}
 
 	public static void main(String args[]) {
@@ -56,9 +56,10 @@ class BalancedBinaryTree {
 		tree.root.left.left = new Node(4);
 		tree.root.left.right = new Node(5);
 
-		if (tree.checkHeightBalance(tree.root, height))
+		if (tree.checkHeightBalance(tree.root, height)) {
 			System.out.println("The tree is balanced");
-		else
+		} else {
 			System.out.println("The tree is not balanced");
+		}
 	}
 }

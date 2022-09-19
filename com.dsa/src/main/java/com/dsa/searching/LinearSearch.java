@@ -1,4 +1,4 @@
-package com.dsa.search;
+package com.dsa.searching;
 
 // Reference
 // https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/search/LinearSearch.java

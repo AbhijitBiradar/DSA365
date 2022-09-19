@@ -8,7 +8,6 @@ package com.dsa.queue;
 
 class CircularQueueUsingLinkedList {
 
-	// Structure of a Node
 	private static class Node {
 		private int data;
 		private Node next;
@@ -22,8 +21,12 @@ class CircularQueueUsingLinkedList {
 	private Node front;
 	private Node rear;
 
-	// Function to create Circular queue
-	void enQueue(int data) {
+	public CircularQueueUsingLinkedList() {
+		this.front = null;
+		this.rear = null;
+	}
+
+	public void enQueue(int data) {
 		Node tempNode = new Node(data);
 		if (front == null) {
 			front = tempNode;
@@ -33,63 +36,61 @@ class CircularQueueUsingLinkedList {
 
 		rear = tempNode;
 		rear.next = front;
+		System.out.println(data  +" data Inserted successfully!");
 	}
 
-	// Function to delete element from Circular Queue
-	int deQueue() {
+	public int deQueue() {
 		if (front == null) {
 			System.out.printf("Queue is empty");
-			return Integer.MIN_VALUE;
+			return (-1);
 		}
 
-		// If this is the last node to be deleted
+		// case 1: If this is the last node to be deleted
 		int value; // Value to be dequeued
 		if (front == rear) {
 			value = front.data;
 			front = null;
 			rear = null;
 		} else {
-			// There are more than one nodes
+			// case 2: There are more than one nodes
 			Node tempNode = front;
 			value = tempNode.data;
 			front = front.next;
-			rear.next = front;
+			rear.next = front; // Not understood this line
 		}
+		System.out.println(value + " data deleted successfully!");
 		return value;
 	}
 
-	// Function displaying the elements of Circular Queue
-	void displayQueue() {
+	public void display() {
+		System.out.println("Displaying elements in Queue: ");
 		Node tempNode = front;
-		System.out.printf("\nElements in Circular Queue are: ");
 		while (tempNode.next != front) {
-			System.out.printf("%d ", tempNode.data);
+			System.out.print(tempNode.data + "==> ");
 			tempNode = tempNode.next;
 		}
-		System.out.printf("%d", tempNode.data);
+		System.out.println(tempNode.data);
 	}
 
-	/* Driver of the program */
 	public static void main(String args[]) {
 		CircularQueueUsingLinkedList cqull = new CircularQueueUsingLinkedList();
 
-		// Inserting elements in Circular Queue
 		cqull.enQueue(14);
 		cqull.enQueue(22);
 		cqull.enQueue(6);
 
-		// Display elements present in Circular Queue
-		cqull.displayQueue();
+		cqull.display();
 
-		// Deleting elements from Circular Queue
-		System.out.printf("\nDeleted value = %d", cqull.deQueue());
-		System.out.printf("\nDeleted value = %d", cqull.deQueue());
+		System.out.println();
+		cqull.deQueue();
+		System.out.println();
+		cqull.deQueue();
+		System.out.println();
 
-		// Remaining elements in Circular Queue
-		cqull.displayQueue();
+		cqull.display();
 
 		cqull.enQueue(9);
 		cqull.enQueue(20);
-		cqull.displayQueue();
+		cqull.display();
 	}
 }

@@ -6,68 +6,69 @@ package com.dsa.tree;
 // https://kalkicode.com/preorder-traversal-of-binary-tree-using-recursion-in-java
 // https://kalkicode.com/postorder-traversal-of-binary-tree-with-recursion-in-java
 
-//Node creation
-class Node {
-	int key;
-	Node left, right;
-
-	public Node(int item) {
-		key = item;
-		left = right = null;
-	}
-}
-
 class SimpleBinaryTree {
-	Node root;
 
-	SimpleBinaryTree(int key) {
-		root = new Node(key);
-	}
+	private static class Node {
+		private int data;
+		private Node left;
+		private Node right;
 
-	SimpleBinaryTree() {
-		root = null;
-	}
-
-// Traverse Inorder
-	public void traverseInOrder(Node node) {
-		if (node != null) {
-			traverseInOrder(node.left);
-			System.out.print(" " + node.key);
-			traverseInOrder(node.right);
+		public Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
 		}
 	}
 
-// Traverse Postorder
-	public void traversePostOrder(Node node) {
-		if (node != null) {
-			traversePostOrder(node.left);
-			traversePostOrder(node.right);
-			System.out.print(" " + node.key);
-		}
+	private Node root;
+
+	public SimpleBinaryTree(int data) {
+		this.root = new Node(data);
 	}
 
-// Traverse Preorder
+	public SimpleBinaryTree() {
+		this.root = null;
+	}
+
 	public void traversePreOrder(Node node) {
 		if (node != null) {
-			System.out.print(" " + node.key);
+			System.out.print(" " + node.data);
 			traversePreOrder(node.left);
 			traversePreOrder(node.right);
 		}
 	}
 
+	public void traverseInOrder(Node node) {
+		if (node != null) {
+			traverseInOrder(node.left);
+			System.out.print(" " + node.data);
+			traverseInOrder(node.right);
+		}
+	}
+
+	public void traversePostOrder(Node node) {
+		if (node != null) {
+			traversePostOrder(node.left);
+			traversePostOrder(node.right);
+			System.out.print(" " + node.data);
+		}
+	}
+
 	public static void main(String[] args) {
-		SimpleBinaryTree tree = new SimpleBinaryTree();
+		SimpleBinaryTree sbTree = new SimpleBinaryTree();
 
-		tree.root = new Node(1);
-		tree.root.left = new Node(2);
-		tree.root.right = new Node(3);
-		tree.root.left.left = new Node(4);
+		sbTree.root = new Node(1);
+		sbTree.root.left = new Node(2);
+		sbTree.root.right = new Node(3);
+		sbTree.root.left.left = new Node(4);
 
-		System.out.print("Pre order Traversal: ");
-		tree.traversePreOrder(tree.root);
-		System.out.print("\nIn order Traversal: ");
-		tree.traverseInOrder(tree.root);
-		System.out.print("\nPost order Traversal: ");
-		tree.traversePostOrder(tree.root);
+		System.out.println("Pre Order Traversal: ");
+		sbTree.traversePreOrder(sbTree.root);
+
+		System.out.println("In Order Traversal: ");
+		sbTree.traverseInOrder(sbTree.root);
+
+		System.out.println("Post Order Traversal: ");
+		sbTree.traversePostOrder(sbTree.root);
 	}
 }
