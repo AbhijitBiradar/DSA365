@@ -1,9 +1,13 @@
 package com.dsa.sorting;
 
+
+// Reference
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/sorting/MergeSort.java
+// https://www.youtube.com/watch?v=oSNFxMazbkg&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=144
+// https://www.youtube.com/watch?v=fUaNL5FUG0c&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=145
+// https://www.youtube.com/watch?v=ThWBE8Y83bw&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=146
+
 public class MergeSort {
-	
-	// Reference
-	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/sorting/MergeSort.java
 	
 	public void printArray(int[] arr) {
 		int n = arr.length;
@@ -51,6 +55,7 @@ public class MergeSort {
 	public static void main(String[] args) {
 		int[] arr = new int[] { 9, 5, 2, 4, 3, -1 };
 		MergeSort ms = new MergeSort();
+		ms.printArray(arr);
 		ms.sort(arr, new int[arr.length], 0, arr.length - 1);
 		ms.printArray(arr);
 	}

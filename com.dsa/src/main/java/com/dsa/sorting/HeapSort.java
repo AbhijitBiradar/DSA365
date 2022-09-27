@@ -2,6 +2,10 @@ package com.dsa.sorting;
 
 // Reference
 // https://www.programiz.com/dsa/heap-sort
+// https://www.youtube.com/watch?v=nJ6FdAIr_6g
+// https://www.youtube.com/watch?v=Q_eia3jC9Ts&t=2s
+// https://www.youtube.com/watch?v=UVW0NfG_YWA&t=3s
+// Not Understood
 
 public class HeapSort {
 

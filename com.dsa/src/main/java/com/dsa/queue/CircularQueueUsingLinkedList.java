@@ -1,6 +1,9 @@
 package com.dsa.queue;
 
 // Reference
+// https://www.youtube.com/watch?v=7LTEqqlHx8s
+
+// Other Reference
 // https://kalkicode.com/implement-circular-queue-using-linked-list
 // https://www.geeksforgeeks.org/circular-queue-set-2-circular-linked-list-implementation/
 // https://tutorialspoint.dev/data-structure/queue-data-structure/circular-queue-set-2-circular-linked-list-implementation
@@ -26,50 +29,65 @@ class CircularQueueUsingLinkedList {
 		this.rear = null;
 	}
 
+	// Refer
+	// https://www.youtube.com/watch?v=7LTEqqlHx8s
 	public void enQueue(int data) {
-		Node tempNode = new Node(data);
-		if (front == null) {
-			front = tempNode;
+		Node newNode = new Node(data);
+		if (front == null && rear == null) {
+			// Case 1 : Queue is empty
+			front = newNode;
+			rear = newNode;
 		} else {
-			rear.next = tempNode;
+			// Case 2 : Queue is not empty
+			rear.next = newNode;
+			rear = newNode;
 		}
-
-		rear = tempNode;
-		rear.next = front;
-		System.out.println(data  +" data Inserted successfully!");
+		rear.next = front; // This code is to make it circular connection
+		System.out.println(data + " data Inserted successfully!");
 	}
 
+	// Refer
+	// https://www.youtube.com/watch?v=7LTEqqlHx8s
 	public int deQueue() {
 		if (front == null) {
+			// Case 1 : Queue is empty
 			System.out.printf("Queue is empty");
 			return (-1);
 		}
 
-		// case 1: If this is the last node to be deleted
 		int value; // Value to be dequeued
 		if (front == rear) {
+			// Case 2A : If this is the last element to be deleted
 			value = front.data;
 			front = null;
 			rear = null;
 		} else {
-			// case 2: There are more than one nodes
+			// Case 2B : There are more than one elements
 			Node tempNode = front;
 			value = tempNode.data;
 			front = front.next;
-			rear.next = front; // Not understood this line
+			rear.next = front; // This code is to make it circular connection
 		}
 		System.out.println(value + " data deleted successfully!");
 		return value;
 	}
 
+	// Refer
+	// https://www.youtube.com/watch?v=7LTEqqlHx8s
 	public void display() {
 		System.out.println("Displaying elements in Queue: ");
-		Node tempNode = front;
-		while (tempNode.next != front) {
-			System.out.print(tempNode.data + "==> ");
-			tempNode = tempNode.next;
+		// Case 1 : Queue is empty
+		if (front == null) {
+			System.out.println("Queue is empty!");
+		} else {
+			// Case 2 : Queue is not empty
+			Node tempNode = front;
+			while (tempNode.next != front) {
+				System.out.print(tempNode.data + " ==> ");
+				tempNode = tempNode.next;
+			}
+			System.out.println(tempNode.data);
 		}
-		System.out.println(tempNode.data);
 	}
 
 	public static void main(String args[]) {

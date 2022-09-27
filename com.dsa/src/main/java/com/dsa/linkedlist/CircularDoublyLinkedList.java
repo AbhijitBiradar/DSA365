@@ -39,11 +39,13 @@ class CircularDoublyLinkedList {
 		ListNode newNode = new ListNode(data);
 
 		if (head == null) {
+			// case 1: Linked list is empty
 			newNode.next = newNode;
 			newNode.previous = newNode;
 			head = newNode;
 			tail = newNode;
 		} else {
+			// case 2: Linked list is not empty
 			newNode.previous = tail;
 			tail.next = newNode;
 			head.previous = newNode;
@@ -57,11 +59,13 @@ class CircularDoublyLinkedList {
 	public void insertAtEnd(int data) {
 		ListNode newNode = new ListNode(data);
 		if (head == null) {
+			// case 1: Linked list is empty
 			newNode.next = newNode;
 			newNode.previous = newNode;
 			head = newNode;
-			tail = head;
+			tail = newNode;
 		} else {
+			// case 2: Linked list is not empty
 			newNode.previous = tail;
 			tail.next = newNode;
 			head.previous = newNode;
@@ -74,26 +78,37 @@ class CircularDoublyLinkedList {
 
 	public void insertAtPos(int data, int pos) {
 		ListNode newNode = new ListNode(data);
+
+		// case 1 : position is 1
 		if (pos == 1) {
 			insertAtFirst(data);
 			return;
 		}
-		ListNode ptr = head;
+
+		// case 2 : position is > 1
+		ListNode currentNode = head;
 		for (int i = 2; i <= length; i++) {
 			if (i == pos) {
-				ListNode tempNode = ptr.next;
-				ptr.next = newNode;
-				newNode.previous = ptr;
-				newNode.next = tempNode;
-				tempNode.previous = newNode;
+				ListNode nextNode = currentNode.next;
+				currentNode.next = newNode;
+				newNode.previous = currentNode;
+				newNode.next = nextNode;
+				nextNode.previous = newNode;
 			}
-			ptr = ptr.next;
+			currentNode = currentNode.next;
 		}
 		length++;
 		System.out.println("New node inserted at " + pos + " position");
 	}
 
 	public void deleteFromFirst() {
+		// case 1 : list is empty
+		if (isEmpty()) {
+			System.out.println("Circular Linked list is empty!");
+			return;
+		}
+
+		// case 2: Linked list size =1
 		if (length == 1) {
 			head = null;
 			tail = null;
@@ -101,6 +116,8 @@ class CircularDoublyLinkedList {
 			System.out.println("Node deleted from first position : ");
 			return;
 		}
+
+		// case 3: Linked list contain more than 1 element
 		head = head.next;
 		head.previous = tail;
 		tail.next = head;
@@ -109,6 +126,14 @@ class CircularDoublyLinkedList {
 	}
 
 	public void deleteFromEnd() {
+
+		// case 1 : list is empty
+		if (isEmpty()) {
+			System.out.println("Circular Linked list is empty!");
+			return;
+		}
+
+		// case 2: Linked list contain more than 1 element
 		tail = tail.previous;
 		tail.next = head;
 		head.previous = tail;
@@ -117,7 +142,20 @@ class CircularDoublyLinkedList {
 	}
 
 	public void deleteAtPos(int pos) {
+		// case 1 : list is empty
+		if (isEmpty()) {
+			System.out.println("Circular Linked list is empty!");
+			return;
+		}
+
+		// case 2 : invalid position (position <=0)
+		if (pos <= 0) {
+			System.out.println("Please provide valid position!");
+			return;
+		}
+
 		if (pos == 1) {
+			// case 3 : position = 1 & linked list length = 1
 			if (length == 1) {
 				head = null;
 				tail = null;
@@ -125,6 +163,8 @@ class CircularDoublyLinkedList {
 				System.out.println("Node deleted from position : " + pos);
 				return;
 			}
+
+			// case 4 : position = 1 but linked list contain more than one element
 			head = head.next;
 			head.previous = tail;
 			tail.next = head;
@@ -132,6 +172,8 @@ class CircularDoublyLinkedList {
 			System.out.println("Node deleted from position : " + pos);
 			return;
 		}
+
+		// case 5 : position is last element
 		if (pos == length) {
 			tail = tail.previous;
 			tail.next = head;
@@ -140,6 +182,8 @@ class CircularDoublyLinkedList {
 			System.out.println("Node deleted from position : " + pos);
 			return;
 		}
+
+		// case 6 : position > 1 & less than last position
 		ListNode tempNode = head.next;
 		for (int i = 2; i <= length; i++) {
 			if (i == pos) {
@@ -164,7 +208,7 @@ class CircularDoublyLinkedList {
 			return false;
 		}
 
-		// case 2 : positve case element found
+		// case 2 : element found
 		ListNode tempNode = head;
 		while (tempNode.next != tail) {
 			if (tempNode.data == data) {
@@ -173,6 +217,8 @@ class CircularDoublyLinkedList {
 			}
 			tempNode = tempNode.next;
 		}
+		
+		// case 3 : element not found
 		System.out.println("Element not found in circular linked list!");
 		return false;
 	}
@@ -222,7 +268,7 @@ class CircularDoublyLinkedList {
 		c.display();
 		c.insertAtPos(13, 6); // last position
 		c.display();
-		
+
 		c.search(11);
 		c.search(100);
 

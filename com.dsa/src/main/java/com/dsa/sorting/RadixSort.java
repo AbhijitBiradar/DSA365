@@ -2,12 +2,17 @@ package com.dsa.sorting;
 
 // Reference
 // https://www.programiz.com/dsa/radix-sort
+// https://www.youtube.com/watch?v=9QSgBO9yjKU&t=8s
+// https://www.youtube.com/watch?v=Il45xNUHGp0&t=7s
+// https://www.youtube.com/watch?v=6du1LrLbDpA&t=4s
+// https://www.youtube.com/watch?v=JMlYkE8hGJM&t=13s
+// https://www.youtube.com/watch?v=Y1QrOxxo1n8
 
 import java.util.Arrays;
 
 class RadixSort {
 
-// Using counting sort to sort the elements in the basis of significant places
+	// Using counting sort to sort the elements in the basis of significant places
 	void countingSort(int array[], int size, int place) {
 		int[] output = new int[size + 1];
 		int max = array[0];
@@ -38,7 +43,7 @@ class RadixSort {
 			array[i] = output[i];
 	}
 
-// Function to get the largest element from an array
+	// Function to get the largest element from an array
 	int getMax(int array[], int n) {
 		int max = array[0];
 		for (int i = 1; i < n; i++)
@@ -47,7 +52,7 @@ class RadixSort {
 		return max;
 	}
 
-// Main function to implement radix sort
+	// Main function to implement radix sort
 	void radixSort(int array[], int size) {
 		// Get maximum element
 		int max = getMax(array, size);
@@ -57,7 +62,7 @@ class RadixSort {
 			countingSort(array, size, place);
 	}
 
-// Driver code
+	// Driver code
 	public static void main(String args[]) {
 		int[] data = { 121, 432, 564, 23, 1, 45, 788 };
 		int size = data.length;

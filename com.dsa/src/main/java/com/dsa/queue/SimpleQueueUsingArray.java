@@ -2,11 +2,17 @@ package com.dsa.queue;
 
 // Reference
 // https://www.programiz.com/dsa/queue
+// https://www.youtube.com/watch?v=T0qUiI_L7S8		
+// https://www.youtube.com/watch?v=bW2URZB61sg	
+// https://www.youtube.com/watch?v=UQnbuAXjNtI	
+// https://www.youtube.com/watch?v=YqrFeU90Coo
 
-// Rule 0 : Initially, set value of FRONT and REAR to -1
-// Rule 1 : While Enquing, Increase the REAR index by 1
-// Rule 2 : While Dequing, increase the FRONT index by 1
-// Rule 3 : While Dequing, for the last element, reset the values of FRONT and REAR to -1
+// Rules
+// Rule 0 : front is used for deletion purpose and Rear is used for inserting purpose
+// Rule 1 : Initially, set value of FRONT and REAR to -1
+// Rule 2 : While Enquing, Increase the REAR index by 1
+// Rule 3 : While Dequing, increase the FRONT index by 1
+// Rule 4 : While Dequing, for the last element, reset the values of FRONT and REAR to -1
 
 public class SimpleQueueUsingArray {
 	private int SIZE = 10;
@@ -36,30 +42,35 @@ public class SimpleQueueUsingArray {
 
 	public void enQueue(int element) {
 		if (isFull()) {
+			// Case 1: Queue is full
 			System.out.println("Queue is already full!");
 		} else {
+			// Case 2: Queue is not full
 			if (front == -1) {
 				front = 0;
 			}
 			rear++;
 			items[rear] = element;
-			System.out.println("New Element Inserted :" + element);
+			System.out.println("New Element Inserted : " + element);
 		}
 	}
 
 	public int deQueue() {
 		int element;
 		if (isEmpty()) {
+			// Case 1: Queue is empty
 			System.out.println("Queue is empty!");
 			return (-1);
 		} else {
+			// Case 2: Queue is not empty
 			element = items[front];
 
 			if (front >= rear) {
-				/* Q has only one element, so we reset the queue after deleting it. */
+				// Case 2A: Queue is not empty & have only one element
 				front = -1;
 				rear = -1;
 			} else {
+				// Case 2B: Queue is not empty & have more than one element
 				front++;
 			}
 			System.out.println("Element Deleted : " + element);
@@ -69,19 +80,22 @@ public class SimpleQueueUsingArray {
 
 	public int peek() {
 		if (isEmpty()) {
+			// Case 1: Queue is full
 			System.out.println("Queue is empty!");
 			return (-1);
 		} else {
+			// Case 2: Queue is not full
 			return (items[front]);
 		}
 	}
 
 	public void display() {
-		/* Function to display elements of Queue */
 		int i;
 		if (isEmpty()) {
+			// Case 1: Queue is empty
 			System.out.println("Empty Queue");
 		} else {
+			// Case 2: Queue is not empty
 			System.out.println("Displaying queue elements:");
 
 			for (i = front; i <= rear; i++) {
@@ -89,7 +103,7 @@ public class SimpleQueueUsingArray {
 			}
 
 			System.out.println("\nFront index : " + front);
-			System.out.println("\nRear index : " + rear);
+			System.out.println("Rear index : " + rear);
 		}
 	}
 

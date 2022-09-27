@@ -2,13 +2,19 @@ package com.dsa.sorting;
 
 // Reference
 // https://www.programiz.com/dsa/quick-sort
+// https://www.geeksforgeeks.org/quick-sort/
+// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/sorting/Sort012.java
+// https://www.youtube.com/watch?v=O1VG37bKmFs&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=150
+// https://www.youtube.com/watch?v=0ijh_0h35wc&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=151
+// https://www.youtube.com/watch?v=ppZaAsb15Ug&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=152
+// https://www.youtube.com/watch?v=9qVESt5bBfQ&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=153
 
 import java.util.Arrays;
 
 class Quicksort {
 
-// method to find the partition position
-	static int partition(int array[], int low, int high) {
+	// method to find the partition position
+	public int partition(int array[], int low, int high) {
 
 		// choose the rightmost element as pivot
 		int pivot = array[high];
@@ -16,13 +22,11 @@ class Quicksort {
 		// pointer for greater element
 		int i = (low - 1);
 
-		// traverse through all elements
-		// compare each element with pivot
+		// traverse through all elements compare each element with pivot
 		for (int j = low; j < high; j++) {
 			if (array[j] <= pivot) {
 
-				// if element smaller than pivot is found
-				// swap it with the greatr element pointed by i
+				// if element smaller than pivot is found swap it with the greater element pointed by i
 				i++;
 
 				// swapping element at i with element at j
@@ -42,12 +46,10 @@ class Quicksort {
 		return (i + 1);
 	}
 
-	static void quickSort(int array[], int low, int high) {
+	public void quickSort(int array[], int low, int high) {
 		if (low < high) {
 
-			// find pivot element such that
-			// elements smaller than pivot are on the left
-			// elements greater than pivot are on the right
+			// find pivot element such that elements smaller than pivot are on the left elements greater than pivot are on the right
 			int pi = partition(array, low, high);
 
 			// recursive call on the left of pivot
@@ -57,22 +59,19 @@ class Quicksort {
 			quickSort(array, pi + 1, high);
 		}
 	}
-}
 
-//Main class
-class Main {
 	public static void main(String args[]) {
 
-		int[] data = { 8, 7, 2, 1, 0, 9, 6 };
+		int[] arr = { 8, 7, 2, 1, 0, 9, 6 };
 		System.out.println("Unsorted Array");
-		System.out.println(Arrays.toString(data));
-
-		int size = data.length;
+		System.out.println(Arrays.toString(arr));		
 
 		// call quicksort() on array data
-		Quicksort.quickSort(data, 0, size - 1);
+		Quicksort q = new Quicksort();
+		q.quickSort(arr, 0, arr.length - 1);
 
 		System.out.println("Sorted Array in Ascending Order: ");
-		System.out.println(Arrays.toString(data));
+		System.out.println(Arrays.toString(arr));
 	}
+
 }

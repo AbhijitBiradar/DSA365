@@ -1,14 +1,17 @@
 package com.dsa.sorting;
 
-// Reference
-// https://www.programiz.com/dsa/shell-sort
-
 import java.util.Arrays;
 
-//Shell sort
+//Reference
+//https://www.programiz.com/dsa/shell-sort
+//https://www.youtube.com/watch?v=9crZRd8GPWM
+//https://www.youtube.com/watch?v=xtydR3vKw3g
+//https://www.youtube.com/watch?v=4fO6PnW1WSs
+//https://www.youtube.com/watch?v=ZtjCHnHTK5Q
+
 class ShellSort {
 
-// Rearrange elements at each n/2, n/4, n/8, ... intervals
+	// Rearrange elements at each n/2, n/4, n/8, ... intervals
 	void shellSort(int array[], int n) {
 		for (int interval = n / 2; interval > 0; interval /= 2) {
 			for (int i = interval; i < n; i += 1) {
@@ -22,7 +25,7 @@ class ShellSort {
 		}
 	}
 
-// Driver code
+	// Driver code
 	public static void main(String args[]) {
 		int[] data = { 9, 8, 3, 7, 5, 6, 4, 1 };
 		int size = data.length;

@@ -1,10 +1,12 @@
 package com.dsa.sorting;
 
 public class BubbleSort {
-	
+
 	// Reference
 	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/sorting/BubbleSort.java
-	
+	// https://www.youtube.com/watch?v=eFreSZFj1bI&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=132
+	// https://www.youtube.com/watch?v=pYyl9QAtRdk&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=133
+
 	public void printArray(int[] arr) {
 		int n = arr.length;
 		for (int i = 0; i < n; i++) {
@@ -14,12 +16,12 @@ public class BubbleSort {
 	}
 
 	public void sort(int[] arr) {
-		int n = arr.length;
+		int length = arr.length;
 		boolean isSwapped;
 
-		for (int i = 0; i < n - 1; i++) {
+		for (int i = 0; i < length - 1; i++) {
 			isSwapped = false;
-			for (int j = 0; j < n - 1 - i; j++) {
+			for (int j = 0; j < length - 1 - i; j++) {
 				if (arr[j] > arr[j + 1]) {
 					int temp = arr[j];
 					arr[j] = arr[j + 1];

@@ -2,6 +2,10 @@ package com.dsa.sorting;
 
 // Reference
 // https://www.programiz.com/dsa/bucket-sort
+// https://www.youtube.com/watch?v=E9OccfF9mpI&t=1s
+// https://www.youtube.com/watch?v=7mahJ1axrR8&t=10s
+// https://www.youtube.com/watch?v=JMlYkE8hGJM&t=13s	
+// https://www.youtube.com/watch?v=3Y08uZpgBM8
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,9 +1,6 @@
 package com.dsa.queue;
 
 // Reference
-// https://www.programiz.com/dsa/circular-queue
-// https://www.youtube.com/watch?v=TPsNjRJYTEQ
-// https://www.youtube.com/watch?v=lPL-pmBm04Q
 // https://www.youtube.com/watch?v=lPdSHEh8LiU
 
 public class CircularQueueUsingArray {
@@ -34,46 +31,55 @@ public class CircularQueueUsingArray {
 		}
 	}
 
-	// Not understood the formula
+	// Refer
+	// https://www.youtube.com/watch?v=lPdSHEh8LiU
 	public void enQueue(int element) {
 		if (isFull()) {
+			// Case 1 : Queue is full
 			System.out.println("Queue is full");
 		} else {
 			if (front == -1) {
+				// Case 2A : Queue is empty & this is first element
 				front = 0;
 			}
+			// Case 2B : Queue is not empty & have more than one element
 			rear = (rear + 1) % SIZE;
 			items[rear] = element;
 			System.out.println("Inserted " + element);
 		}
 	}
 
-	// Not understood the formula
+	// Refer
+	// https://www.youtube.com/watch?v=lPdSHEh8LiU
 	public int deQueue() {
 		int element;
 		if (isEmpty()) {
+			// Case 1 : Queue is empty
 			System.out.println("Queue is empty");
 			return (-1);
 		} else {
 			element = items[front];
-
-			/* Q has only one element, so we reset the queue after deleting it. */
 			if (front == rear) {
+				// Case 2A : Queue is having only one element
 				front = -1;
 				rear = -1;
 			} else {
+				// Case 2B : Queue is having more than one element
 				front = (front + 1) % SIZE;
 			}
 			return (element);
 		}
 	}
 
-	// Not understood the formula
+	// Refer
+	// https://www.youtube.com/watch?v=lPdSHEh8LiU
 	public void display() {
 		int i;
 		if (isEmpty()) {
+			// Case 1 : Queue is empty
 			System.out.println("Queue is empty!");
 		} else {
+			// Case 2 : Queue is not empty
 			for (i = front; i != rear; i = (i + 1) % SIZE) {
 				System.out.print(items[i] + " ");
 			}

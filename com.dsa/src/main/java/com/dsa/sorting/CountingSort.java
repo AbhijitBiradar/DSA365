@@ -2,6 +2,10 @@ package com.dsa.sorting;
 
 // Reference
 // https://www.programiz.com/dsa/counting-sort
+// https://www.youtube.com/watch?v=mowMVn9wTnE
+// https://www.youtube.com/watch?v=pEJiGC-ObQE
+// https://www.youtube.com/watch?v=HkvChUv9dDg&t=1s
+// https://www.youtube.com/watch?v=bbUqXF5pSD0
 
 import java.util.Arrays;
 
@@ -45,13 +49,14 @@ class CountingSort {
 		}
 	}
 
-// Driver code
+	// Driver code
 	public static void main(String args[]) {
-		int[] data = { 4, 2, 2, 8, 3, 3, 1 };
-		int size = data.length;
+		int[] arr = { 4, 2, 2, 8, 3, 3, 1 };
+
 		CountingSort cs = new CountingSort();
-		cs.countSort(data, size);
+		cs.countSort(arr, arr.length);
+
 		System.out.println("Sorted Array in Ascending Order: ");
-		System.out.println(Arrays.toString(data));
+		System.out.println(Arrays.toString(arr));
 	}
 }
