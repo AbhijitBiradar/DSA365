@@ -1,95 +1,130 @@
 package com.dsa.queue;
 
-
 import java.util.*;
 
 // Refer
 // https://www.geeksforgeeks.org/priority-queue-set-1-introduction/
 
-class item {
-	public int value;
-	public int priority;
-};
-
 class PriorityQueueUsingArray {
-
-	// Store the element of a priority queue
-	static item[] pr = new item[100000];
-
-	// Pointer to the last index
-	static int size = -1;
-
-	// Function to insert a new element into priority queue
-	static void enqueue(int value, int priority) {
-		// Increase the size
-		size++;
-
-		// Insert the element
-		pr[size] = new item();
-		pr[size].value = value;
-		pr[size].priority = priority;
+	private class item {
+		private int value;
+		private int priority;
 	}
 
-	//Function to check the top element
-	static int peek() {
-		int highestPriority = Integer.MIN_VALUE;
-		int ind = -1;
+	private item[] priorityQueue = new item[100000];
+	private int size = -1;
 
-		// Check for the element with highest priority
-		for (int i = 0; i <= size; i++) {
+	public boolean isEmpty() {
+		return (size == -1);
+	}
 
-			// If priority is same choose the element with the highest value
-			if (highestPriority == pr[i].priority && ind > -1 && pr[ind].value < pr[i].value) {
-				highestPriority = pr[i].priority;
-				ind = i;
-			} else if (highestPriority < pr[i].priority) {
-				highestPriority = pr[i].priority;
-				ind = i;
-			}
+	public boolean isFull() {
+		return (size == priorityQueue.length - 1);
+	}
+
+	// Refer
+	// https://www.geeksforgeeks.org/priority-queue-set-1-introduction/
+	public void enqueue(int value, int priority) {
+		if (isFull()) {
+			System.out.println("Queue is full!");
+		} else {
+			size++;
+			priorityQueue[size] = new item();
+			priorityQueue[size].value = value;
+			priorityQueue[size].priority = priority;
+
+			System.out.println("New value enqued with Value : " + value + " Priority : " + priority);
 		}
-
-		// Return position of the element
-		return ind;
 	}
+
+	// Refer
+	// https://www.geeksforgeeks.org/priority-queue-set-1-introduction/
 
 	// Function to remove the element with the highest priority
-	static void dequeue() {
-		// Find the position of the element with highest priority
-		int ind = peek();
+	public void dequeue() {
 
-		// Shift the element one index before from the position of the element with highest priority is found
-		for (int i = ind; i < size; i++) {
-			pr[i] = pr[i + 1];
+		if (isEmpty()) {
+			System.out.println("Queue is empty!");
+		} else {
+			int index = peek(); // Find the position of the element with highest priority
+
+			// Shift the element one index before from the position of the element with
+			// highest priority is found
+			for (int i = index; i < size; i++) {
+				priorityQueue[i] = priorityQueue[i + 1];
+			}
+
+			// Decrease the size of the priority queue by one
+			size--;
+
+			System.out.println("Value Dequed!");
 		}
+	}
 
-		// Decrease the size of the priority queue by one
-		size--;
+	// Function to check the top element
+	public int peek() {
+		if (isEmpty()) {
+			System.out.println("Queue is empty!");
+			return (-1);
+		} else {
+			int highestPriority = Integer.MIN_VALUE;
+			int index = -1;
+
+			// Check for the element with highest priority
+			for (int i = 0; i <= size; i++) {
+
+				// If priority is same choose the element with the highest value
+				if (highestPriority == priorityQueue[i].priority && index > -1
+						&& priorityQueue[index].value < priorityQueue[i].value) {
+					highestPriority = priorityQueue[i].priority;
+					index = i;
+				} else if (highestPriority < priorityQueue[i].priority) {
+					highestPriority = priorityQueue[i].priority;
+					index = i;
+				}
+			}
+
+			// Return position of the element
+			return index;
+		}
+	}
+
+	// Function to return value of specific index
+	public int getPriorityValue(int index) {
+		if (isEmpty()) {
+			System.out.println("Queue is empty!");
+			return (-1);
+		} else {
+			return (priorityQueue[index].value);
+		}
 	}
 
 	public static void main(String[] args) {
+
+		PriorityQueueUsingArray pqa = new PriorityQueueUsingArray();
 		// Function Call to insert elements as per the priority
-		enqueue(10, 2);
-		enqueue(14, 4);
-		enqueue(16, 4);
-		enqueue(12, 3);
+		pqa.enqueue(10, 2);
+		pqa.enqueue(14, 4);
+		pqa.enqueue(16, 4);
+		pqa.enqueue(12, 3);
 
 		// Stores the top element at the moment
-		int ind = peek();
+		int index = pqa.peek();
 
-		System.out.println(pr[ind].value);
-
-		// Dequeue the top element
-		dequeue();
-
-		// Check the top element
-		ind = peek();
-		System.out.println(pr[ind].value);
+		System.out.println("Value at Peek with highest Priority: " + pqa.getPriorityValue(index));
 
 		// Dequeue the top element
-		dequeue();
+		pqa.dequeue();
 
 		// Check the top element
-		ind = peek();
-		System.out.println(pr[ind].value);
+		index = pqa.peek();
+		System.out.println("Value at Peek with highest Priority: " + pqa.getPriorityValue(index));
+
+		// Dequeue the top element
+		pqa.dequeue();
+
+		// Check the top element
+		index = pqa.peek();
+		System.out.println("Value at Peek with highest Priority: " + pqa.getPriorityValue(index));
 	}
 }

@@ -3,91 +3,113 @@ package com.dsa.queue;
 import java.util.*;
 
 // Reference
+// https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
 // https://www.geeksforgeeks.org/priority-queue-using-linked-list/#:~:text=Implement%20Priority%20Queue%20using%20Linked,removing%20it%20from%20the%20queue.
+// https://tutorialspoint.dev/data-structure/queue-data-structure/priority-queue-using-linked-list
+// https://www.codingninjas.com/codestudio/library/priority-queue-implementation-using-linked-list
 
 class PriorityQueueUsingLinkedList {
 
-	// Node
-	static class Node {
-		int data;
+	private class Node {
+		private int data;
+		private int priority;
+		private Node next;
 
-		// Lower values indicate higher priority
-		int priority;
-
-		Node next;
-
+		public Node(int data, int priority) {
+			this.data = data;
+			this.priority = priority;
+			this.next = null;
+		}
 	}
 
-	static Node node = new Node();
+	private Node head;
 
-	// Function to Create A New Node
-	static Node newNode(int d, int p) {
-		Node temp = new Node();
-		temp.data = d;
-		temp.priority = p;
-		temp.next = null;
-
-		return temp;
+	public PriorityQueueUsingLinkedList() {
+		this.head = null;
 	}
 
-	// Return the value at head
-	static int peek(Node head) {
-		return (head).data;
-	}
+	// Reference
+	// https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
+	public void push(int data, int priority) {
+		Node newNode = new Node(data, priority);
+		// Case 1 : Queue is empty
+		// If head is null, this is the first node to be added so make head = newNode
+		if (head == null) {
+			head = newNode;
+			System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+			return;
+		}
 
-	// Removes the element with the highest priority form the list
-	static Node pop(Node head) {
-		Node temp = head;
-		(head) = (head).next;
-		return head;
-	}
-
-	// Function to push according to priority
-	static Node push(Node head, int d, int p) {
-		Node start = (head);
-
-		// Create new Node
-		Node temp = newNode(d, p);
-
-		// Special Case: The head of list has lesser priority than new node. So insert
-		// new node before head node and change head node.
-		if ((head).priority > p) {
-
-			// Insert New Node before head
-			temp.next = head;
-			(head) = temp;
+		// Case 2 : Queue is not empty
+		Node tempNode = head;
+		Node previousNode = null;
+		// search for first node having priority less than new node's priority
+		while (tempNode != null && tempNode.priority > priority) {
+			previousNode = tempNode;
+			tempNode = tempNode.next;
+		}
+		if (tempNode == null) {
+			// Case 2A : No node with priority less than this node (Case 1)
+			previousNode.next = newNode;
+			System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
 		} else {
-
-			// Traverse the list and find a position to insert new node
-			while (start.next != null && start.next.priority < p) {
-				start = start.next;
+			if (previousNode == null) {
+				// Case 2B-A : All the nodes have priority less than new node's priority then
+				// add this new node at the starting
+				newNode.next = head;
+				head = newNode;
+				System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+			} else {
+				// Case 2B-B : Add this node before the node with priority less than new node's
+				// priority
+				newNode.next = tempNode;
+				previousNode.next = newNode;
+				System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
 			}
-
-			// Either at the ends of the list or at required position
-			temp.next = start.next;
-			start.next = temp;
 		}
-		return head;
 	}
 
-	// Function to check is list is empty
-	static int isEmpty(Node head) {
-		return ((head) == null) ? 1 : 0;
+	// Reference
+	// https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
+	private int pop() {
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
+			return -1;
+		} else {
+			// Case 2 : Queue is not empty
+			// head of the linked list contains the maximum priority element
+			int data = head.data;
+			int priority = head.priority;
+			// removing the highest priority element
+			head = head.next;
+			System.out.println("Removed data: " + data + " & priority : " + priority + " from queue!");
+			return data;
+		}
 	}
 
-	// Driver code
-	public static void main(String args[]) {
-		// Create a Priority Queue
-		// 7.4.5.6
-		Node pq = newNode(4, 1);
-		pq = push(pq, 5, 2);
-		pq = push(pq, 6, 3);
-		pq = push(pq, 7, 0);
-
-		while (isEmpty(pq) == 0) {
-			System.out.printf("%d ", peek(pq));
-			pq = pop(pq);
+	public int peek() {
+		if (isEmpty()) {
+			return -1;
+		} else {
+			// head of the linked list contains the maximum priority element
+			return head.data;
 		}
+	}
 
+	public boolean isEmpty() {
+		return (head == null);
+	}
+
+	public static void main(String[] args) {
+		PriorityQueueUsingLinkedList pqull = new PriorityQueueUsingLinkedList();
+		pqull.push(5, 2);
+		pqull.push(1, 3);
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
+		pqull.push(7, 5);
+		pqull.push(9, 1);
+		pqull.pop();
+		pqull.pop();
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
 	}
 }
