@@ -1,182 +1,177 @@
 package com.dsa.queue;
 
-// Reference
-// https://www.geeksforgeeks.org/implementation-deque-using-doubly-linked-list/
-
-import java.util.*;
+//Refer this
+//https://kalkicode.com/deque-implementation-using-doubly-linked-list
+//https://www.youtube.com/watch?v=2ItzVMoenxI&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=85		
+//https://www.youtube.com/watch?v=G81jTgSOf7g&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=86		
+//https://www.youtube.com/watch?v=VMnsIC4kams&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=87		
+//https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=88		
+//https://www.youtube.com/watch?v=M4GdPUfH18k&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89		
+//https://www.youtube.com/watch?v=LPrPHjH5CWE&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=90		
+//https://www.youtube.com/watch?v=incgHtVrYAk&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=91
 
 class DequeueUsingLinkedList {
 
-	// Node of a doubly linked list
-	static class Node {
-		int data;
-		Node prev, next;
+	private class Node {
+		private int data;
+		private Node next;
 
-		// Function to get a new node
-		static Node getnode(int data) {
-			Node newNode = new Node();
-			newNode.data = data;
-			newNode.prev = newNode.next = null;
-			return newNode;
-		}
-	};
-
-	// A structure to represent a deque
-	static class Deque {
-		Node front;
-		Node rear;
-		int Size;
-
-		Deque() {
-			front = rear = null;
-			Size = 0;
-		}
-
-		// Function to check whether deque
-		// is empty or not
-		boolean isEmpty() {
-			return (front == null);
-		}
-
-		// Function to return the number of elements in the deque
-		int size() {
-			return Size;
-		}
-
-		// Function to insert an element at the front end
-		void insertFront(int data) {
-			Node newNode = Node.getnode(data);
-			// If true then new element cannot be added and it is an 'Overflow' condition
-			if (newNode == null)
-				System.out.print("OverFlow\n");
-			else {
-				// If deque is empty
-				if (front == null)
-					rear = front = newNode;
-
-				// Inserts node at the front end
-				else {
-					newNode.next = front;
-					front.prev = newNode;
-					front = newNode;
-				}
-
-				// Increments count of elements by 1
-				Size++;
-			}
-		}
-
-		// Function to insert an element at the rear end
-		void insertRear(int data) {
-			Node newNode = Node.getnode(data);
-			// If true then new element cannot be added
-			// and it is an 'Overflow' condition
-			if (newNode == null)
-				System.out.print("OverFlow\n");
-			else {
-				// If deque is empty
-				if (rear == null)
-					front = rear = newNode;
-
-				// Inserts node at the rear end
-				else {
-					newNode.prev = rear;
-					rear.next = newNode;
-					rear = newNode;
-				}
-
-				Size++;
-			}
-		}
-
-		// Function to delete the element from the front end
-		void deleteFront() {
-			// If deque is empty then 'Underflow' condition
-			if (isEmpty())
-				System.out.print("UnderFlow\n");
-
-			// Deletes the node from the front end and makes the adjustment in the links
-			else {
-				Node temp = front;
-				front = front.next;
-
-				// If only one element was present
-				if (front == null)
-					rear = null;
-				else
-					front.prev = null;
-
-				// Decrements count of elements by 1
-				Size--;
-			}
-		}
-
-		// Function to delete the element from the rear end
-		void deleteRear() {
-			// If deque is empty then 'Underflow' condition
-			if (isEmpty())
-				System.out.print("UnderFlow\n");
-
-			// Deletes the node from the rear end and makes the adjustment in the links
-			else {
-				Node temp = rear;
-				rear = rear.prev;
-
-				// If only one element was present
-				if (rear == null)
-					front = null;
-				else
-					rear.next = null;
-
-				// Decrements count of elements by 1
-				Size--;
-			}
-		}
-
-		// Function to return the element at the front end
-		int getFront() {
-			// If deque is empty, then returns garbage value
-			if (isEmpty())
-				return -1;
-			return front.data;
-		}
-
-		// Function to return the element at the rear end
-		int getRear() {
-			// If deque is empty, then returns garbage value
-			if (isEmpty())
-				return -1;
-			return rear.data;
-		}
-
-		// Function to delete all the elements from Deque
-		void erase() {
-			rear = null;
-			while (front != null) {
-				Node temp = front;
-				front = front.next;
-			}
-			Size = 0;
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
 		}
 	}
 
-	// Driver program to test above
+	private Node front;
+	private Node rear;
+	private int size;
+
+	public DequeueUsingLinkedList() {
+		this.front = null;
+		this.rear = null;
+		this.size = 0;
+	}
+
+	public boolean isEmpty() {
+		return (size == 0);
+	}
+
+	public int isSize() {
+		return (size);
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=VMnsIC4kams&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=87
+	public void insertFront(int element) {
+		Node newNode = new Node(element);
+		newNode.next = this.front;
+		if (front == null) {
+			// Case 1 : Queue is empty. When inserting a first node of queue
+			front = newNode;
+			rear = newNode;
+		} else {
+			// Case 2 : Queue is not empty. Add node at beginning position
+			newNode.next = front;
+			front = newNode;
+		}
+		size++;
+		System.out.println("Node inserted from Front!");
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
+	public void insertRear(int element) {
+		Node newNode = new Node(element);
+		if (front == null) {
+			// Case 1 : Queue is empty. When inserting a first node of queue
+			front = newNode;
+			rear = newNode;
+		} else {
+			// Case 2 : Queue is not empty. Add node at the end
+			rear.next = newNode;
+			rear = newNode;
+		}
+		size++;
+		System.out.println("Node inserted from Rear!");
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
+	public void deleteFront() {
+		if (isEmpty() == true) {
+			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
+			return;
+		}
+		// Case 2 : Queue is not empty
+		Node tempNode = front;
+		front = tempNode.next;
+		if (front == null) {
+			// Case 2A : Queue was having only one element. So, after deletion update Rear
+			// as null
+			rear = null;
+		}
+		size--;
+		tempNode = null;
+		System.out.println("Node deleted from Front!");
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
+	public void deleteRear() {
+		if (isEmpty() == true) {
+			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
+			return;
+		}
+		// Case 2 : Queue is not empty
+		Node tempNode = front;
+		while (tempNode.next != rear) {
+			tempNode = tempNode.next;
+		}
+		rear = tempNode;
+		if (rear == null) {
+			// Case 2A : Queue was having only one element. So, after deletion update Front
+			// as null
+			front = null;
+		} else {
+			rear.next = null;
+		}
+		size--;
+		tempNode = null;
+		System.out.println("Node deleted from Rear!");
+	}
+
+	public void display() {
+		if (isEmpty() == true) {
+			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
+			return;
+		}
+		Node node = front;
+		System.out.println("Displaying Deque Element :");
+		// Display node of from front to rear
+		while (node != null) {
+			System.out.print(" " + node.data);
+			node = node.next;
+		}
+		System.out.println();
+	}
+
 	public static void main(String[] args) {
-		Deque dq = new Deque();
-		System.out.print("Insert element '5' at rear end\n");
-		dq.insertRear(5);
+		DequeueUsingLinkedList q = new DequeueUsingLinkedList();
+		// Add Deque element
+		// Add node at beginning position
+		q.insertFront(1);
+		q.display();
 
-		System.out.print("Insert element '10' at rear end\n");
-		dq.insertRear(10);
-		System.out.print("Rear end element: " + dq.getRear() + "\n");
-		dq.deleteRear();
-		System.out.print("After deleting rear element new rear" + " is: " + dq.getRear() + "\n");
-		System.out.print("Inserting element '15' at front end \n");
-		dq.insertFront(15);
-		System.out.print("Front end element: " + dq.getFront() + "\n");
+		q.insertFront(2);
+		q.display();
 
-		System.out.print("Number of elements in Deque: " + dq.size() + "\n");
-		dq.deleteFront();
-		System.out.print("After deleting front element new " + "front is: " + dq.getFront() + "\n");
+		// Add node at last position
+		q.insertRear(3);
+		q.display();
+
+		q.insertRear(4);
+		q.display();
+
+		// Add node at beginning position
+		q.insertFront(5);
+		q.display();
+
+		q.insertFront(6);
+		q.display();
+
+		System.out.println("\n Size : " + q.isSize() + "\n");
+
+		// Remove queue element
+		q.deleteFront();
+		q.display();
+
+		q.deleteRear();
+		q.display();
+
+		System.out.println("\n Size : " + q.isSize() + "\n");
+
 	}
 }

@@ -5,6 +5,13 @@ package com.dsa.queue;
 // https://www.prepbytes.com/blog/queues/priority-queue-using-doubly-linked-list/
 // https://kalkicode.com/priority-queue-using-doubly-linked-list
 
+// Other Refer
+// https://www.youtube.com/watch?v=m5-ofLMU-JQ&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=92		
+// https://www.youtube.com/watch?v=OCDMQjpAV8Y&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=93		
+// https://www.youtube.com/watch?v=Z-jGa5L82CA&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=94		
+// https://www.youtube.com/watch?v=F6w8DUaG9UI&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=95		
+// https://www.youtube.com/watch?v=ZwRnyYRocbM&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=96
+
 public class PriorityQueueUsingDoublyLinkedList {
 	private class Node {
 		private int data;
