@@ -1,53 +1,64 @@
 package com.dsa.graph;
 
 // Refer
-// https://www.programiz.com/dsa/graph-dfs
 
-//DFS algorithm in Java
+// https://www.youtube.com/watch?v=WxM-EENBY-w&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=165
+// https://www.youtube.com/watch?v=Wzk6BBEBlYE&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=166
+// https://www.youtube.com/watch?v=MmIeokeCdjY&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=167
+
+// https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+// https://favtutor.com/blogs/depth-first-search-java
+// https://www.programiz.com/dsa/graph-dfs
 
 import java.util.*;
 
 class DFSAlgorithm {
-	private LinkedList<Integer> adjLists[];
-	private boolean visited[];
+	private LinkedList<Integer>[] adj;
+	private int vertex; // number of vertices
+	private int edge; // number of edges
 
-// Graph creation
-	DFSAlgorithm(int vertices) {
-		adjLists = new LinkedList[vertices];
-		visited = new boolean[vertices];
-
-		for (int i = 0; i < vertices; i++)
-			adjLists[i] = new LinkedList<Integer>();
-	}
-
-// Add edges
-	void addEdge(int src, int dest) {
-		adjLists[src].add(dest);
-	}
-
-// DFS algorithm
-	void DFS(int vertex) {
-		visited[vertex] = true;
-		System.out.print(vertex + " ");
-
-		Iterator<Integer> ite = adjLists[vertex].listIterator();
-		while (ite.hasNext()) {
-			int adj = ite.next();
-			if (!visited[adj])
-				DFS(adj);
+	public DFSAlgorithm(int nodes) {
+		this.vertex = nodes;
+		this.edge = 0;
+		this.adj = new LinkedList[nodes];
+		for (int v = 0; v < vertex; v++) {
+			adj[v] = new LinkedList<>();
 		}
 	}
 
-	public static void main(String args[]) {
-		DFSAlgorithm g = new DFSAlgorithm(4);
+	public void addEdge(int u, int v) {
+		adj[u].add(v);
+		adj[v].add(u);
+		edge++;
+	}
 
+	public void dfs(int s) {
+		boolean[] visited = new boolean[vertex];
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(s);
+
+		while (!stack.isEmpty()) {
+			int u = stack.pop();
+			if (!visited[u]) {
+				visited[u] = true;
+				System.out.print(u + " ");
+
+				for (int v : adj[u]) {
+					if (!visited[v]) {
+						stack.push(v);
+					}
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		DFSAlgorithm g = new DFSAlgorithm(5);
 		g.addEdge(0, 1);
-		g.addEdge(0, 2);
 		g.addEdge(1, 2);
 		g.addEdge(2, 3);
-
-		System.out.println("Following is Depth First Traversal");
-
-		g.DFS(2);
+		g.addEdge(3, 0);
+		g.addEdge(2, 4);
+		g.dfs(0);
 	}
 }

@@ -3,6 +3,8 @@ package com.dsa.tree;
 // Reference
 // https://www.programiz.com/dsa/full-binary-tree
 
+// Definition : A full Binary tree is a special type of binary tree in which every parent node/internal node has either two or no children.
+
 class FullBinaryTree {
 
 	private static class Node {

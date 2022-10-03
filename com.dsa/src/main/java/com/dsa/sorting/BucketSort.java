@@ -1,11 +1,15 @@
 package com.dsa.sorting;
 
-// Reference
-// https://www.programiz.com/dsa/bucket-sort
+// Refer
 // https://www.youtube.com/watch?v=E9OccfF9mpI&t=1s
 // https://www.youtube.com/watch?v=7mahJ1axrR8&t=10s
 // https://www.youtube.com/watch?v=JMlYkE8hGJM&t=13s	
 // https://www.youtube.com/watch?v=3Y08uZpgBM8
+
+// https://www.geeksforgeeks.org/bucket-sort-2/
+// https://www.programiz.com/dsa/bucket-sort
+// https://www.tutorialandexample.com/bucket-sort-in-java
+// https://takeuforward.org/data-structure/bucket-sort-detailed-explanation/
 
 import java.util.ArrayList;
 import java.util.Collections;

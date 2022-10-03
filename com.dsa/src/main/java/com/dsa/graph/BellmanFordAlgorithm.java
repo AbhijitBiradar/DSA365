@@ -3,6 +3,12 @@ package com.dsa.graph;
 // REfer
 // https://www.programiz.com/dsa/bellman-ford-algorithm
 
+// https://www.youtube.com/watch?v=FtN3BYH2Zes
+// https://www.youtube.com/watch?v=KudAWAMiQog
+// https://www.youtube.com/watch?v=SiI03wnREt4
+// https://www.youtube.com/watch?v=75yC1vbS8S8
+// https://www.youtube.com/watch?v=ijpVpsmpJtQ
+
 class BellmanFordAlgorithm {
 
 // BellmanFordAlgorithm - it consists of edges

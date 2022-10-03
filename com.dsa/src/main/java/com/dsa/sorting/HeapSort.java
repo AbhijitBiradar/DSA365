@@ -1,11 +1,15 @@
 package com.dsa.sorting;
 
-// Reference
+// Refer
 // https://www.programiz.com/dsa/heap-sort
 // https://www.youtube.com/watch?v=nJ6FdAIr_6g
 // https://www.youtube.com/watch?v=Q_eia3jC9Ts&t=2s
 // https://www.youtube.com/watch?v=UVW0NfG_YWA&t=3s
-// Not Understood
+
+// https://www.geeksforgeeks.org/heap-sort/
+// https://www.programiz.com/dsa/heap-sort
+// https://www.educative.io/answers/how-to-implement-heap-sort-in-java
+// https://www.happycoders.eu/algorithms/heapsort/
 
 public class HeapSort {
 

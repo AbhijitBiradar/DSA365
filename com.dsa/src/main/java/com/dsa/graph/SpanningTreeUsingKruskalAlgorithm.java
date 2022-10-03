@@ -3,6 +3,12 @@ package com.dsa.graph;
 // Refer
 // https://www.programiz.com/dsa/kruskal-algorithm
 
+// https://www.youtube.com/watch?v=huQojf2tevI
+// https://www.youtube.com/watch?v=4ZlRH0eK-qQ
+// https://www.youtube.com/watch?v=1KRmCzBl_mQ
+// https://www.youtube.com/watch?v=EjVHtpWkIho
+// https://www.youtube.com/watch?v=TbzANA0ErDo
+
 import java.util.*;
 
 class SpanningTreeUsingKruskalAlgorithm {

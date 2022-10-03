@@ -1,10 +1,13 @@
 package com.dsa.tree;
 
 // Reference
+// https://www.youtube.com/watch?v=08KwCr2UZBQ
 // https://www.programiz.com/dsa/perfect-binary-tree
 // https://www.geeksforgeeks.org/check-weather-given-binary-tree-perfect-not/
 // https://www.includehelp.com/data-structure-tutorial/perfect-binary-tree.aspx
 // https://www.javatpoint.com/binary-tree
+
+// Definition : A perfect binary tree is a type of binary tree in which every internal node has exactly two child nodes and all the leaf nodes are at the same level.
 
 class PerfectBinaryTree {
 
@@ -22,6 +25,35 @@ class PerfectBinaryTree {
 
 	private Node root;
 
+	// Refer
+	// https://www.youtube.com/watch?v=08KwCr2UZBQ
+
+	/*
+	 * This function tests if a binary tree is perfect or not. It basically checks
+	 * for two things : 1) All leaves are at same level 2) All internal nodes have
+	 * two children
+	 */
+	public boolean isPerfect(Node root, int depth, int level) {
+
+		// Check if the tree is empty. An empty tree is perfect
+		if (root == null) {
+			return true;
+		}
+
+		// If it is leaf node, then its depth must be same as depth of all other leaves.
+		if (root.left == null && root.right == null) {
+			return (depth == level + 1);
+		}
+
+		// If it is an internal node and one child is empty
+		if (root.left == null || root.right == null) {
+			return false;
+		}
+
+		// Left and right subtrees must be perfect.
+		return isPerfect(root.left, depth, level + 1) && isPerfect(root.right, depth, level + 1);
+	}
+
 	// Calculate the depth
 	public int depth(Node node) {
 		int d = 0;
@@ -30,26 +62,6 @@ class PerfectBinaryTree {
 			node = node.left;
 		}
 		return d;
-	}
-
-	
-	public boolean isPerfect(Node root, int depth, int level) {
-
-		// Check if the tree is empty
-		if (root == null) {
-			return true;
-		}
-
-		// If for children
-		if (root.left == null && root.right == null) {
-			return (depth == level + 1);
-		}
-
-		if (root.left == null || root.right == null) {
-			return false;
-		}
-
-		return isPerfect(root.left, depth, level + 1) && isPerfect(root.right, depth, level + 1);
 	}
 
 	// Wrapper function

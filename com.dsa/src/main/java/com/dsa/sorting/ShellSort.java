@@ -2,12 +2,16 @@ package com.dsa.sorting;
 
 import java.util.Arrays;
 
-//Reference
-//https://www.programiz.com/dsa/shell-sort
-//https://www.youtube.com/watch?v=9crZRd8GPWM
-//https://www.youtube.com/watch?v=xtydR3vKw3g
-//https://www.youtube.com/watch?v=4fO6PnW1WSs
-//https://www.youtube.com/watch?v=ZtjCHnHTK5Q
+// Refer
+// https://www.programiz.com/dsa/shell-sort
+// https://www.youtube.com/watch?v=9crZRd8GPWM
+// https://www.youtube.com/watch?v=xtydR3vKw3g
+// https://www.youtube.com/watch?v=4fO6PnW1WSs
+// https://www.youtube.com/watch?v=ZtjCHnHTK5Q
+
+// https://www.geeksforgeeks.org/shellsort/
+// https://www.programiz.com/dsa/shell-sort
+// https://www.educative.io/answers/what-is-a-shell-sort
 
 class ShellSort {
 

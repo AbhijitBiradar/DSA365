@@ -1,64 +1,63 @@
 package com.dsa.graph;
 
-// REfer
+import java.util.LinkedList;
+import java.util.Queue;
+
+// Refer
+// https://www.youtube.com/watch?v=-X6ji6sjxD4&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=163
+// https://www.youtube.com/watch?v=grewOnmAd0k&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=164	
+
+// https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+// https://favtutor.com/blogs/breadth-first-search-java
 // https://www.programiz.com/dsa/graph-bfs
 
-import java.util.*;
-
 public class BFSAlgorithm {
-	private int V;
-	private LinkedList<Integer> adj[];
+	private LinkedList<Integer>[] adj;
+	private int V; // number of vertices
+	private int E; // number of edges
 
-// Create a graph
-	BFSAlgorithm(int v) {
-		V = v;
-		adj = new LinkedList[v];
-		for (int i = 0; i < v; ++i)
-			adj[i] = new LinkedList();
-	}
-
-// Add edges to the graph
-	void addEdge(int v, int w) {
-		adj[v].add(w);
-	}
-
-// BFS algorithm
-	void BFS(int s) {
-
-		boolean visited[] = new boolean[V];
-
-		LinkedList<Integer> queue = new LinkedList();
-
-		visited[s] = true;
-		queue.add(s);
-
-		while (queue.size() != 0) {
-			s = queue.poll();
-			System.out.print(s + " ");
-
-			Iterator<Integer> i = adj[s].listIterator();
-			while (i.hasNext()) {
-				int n = i.next();
-				if (!visited[n]) {
-					visited[n] = true;
-					queue.add(n);
-				}
-			}
+	public BFSAlgorithm(int nodes) {
+		this.V = nodes;
+		this.E = 0;
+		this.adj = new LinkedList[nodes];
+		for(int v = 0; v < V; v++) {
+			adj[v] = new LinkedList<>();
 		}
 	}
 
-	public static void main(String args[]) {
-		BFSAlgorithm g = new BFSAlgorithm(4);
+	public void addEdge(int u, int v) {
+		adj[u].add(v);
+		adj[v].add(u);
+		E++;
+	}
 
+	public void bfs(int s) {
+		boolean[] visited = new boolean[V];
+
+		Queue<Integer> q = new LinkedList<>();
+		visited[s] = true;
+		q.offer(s);
+
+		while (!q.isEmpty()) {
+			int u = q.poll();  // poll means remove element from queue
+			System.out.print(u + " ");
+
+			for (int v : adj[u]) {
+				if (!visited[v]) {
+					visited[v] = true;
+					q.offer(v);  // offer means add element into queue
+				} 
+			}
+		}
+	}	
+
+	public static void main(String[] args) {
+		BFSAlgorithm g = new BFSAlgorithm(5);
 		g.addEdge(0, 1);
-		g.addEdge(0, 2);
 		g.addEdge(1, 2);
-		g.addEdge(2, 0);
 		g.addEdge(2, 3);
-		g.addEdge(3, 3);
-
-		System.out.println("Following is Breadth First Traversal " + "(starting from vertex 2)");
-
-		g.BFS(2);
+		g.addEdge(3, 0);
+		g.addEdge(2, 4);				
+		g.bfs(0);
 	}
 }

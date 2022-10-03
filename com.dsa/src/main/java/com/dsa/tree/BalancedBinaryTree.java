@@ -1,6 +1,14 @@
 package com.dsa.tree;
 
-//Checking if a binary tree is height balanced in Java
+// Checking if a binary tree is height balanced in Java
+// https://www.programiz.com/dsa/balanced-binary-tree
+
+// Definition : A balanced binary tree, also referred to as a height-balanced binary tree, is defined as a binary tree in which the height of the left and right subtree of any node differ by not more than 1.
+
+// https://www.youtube.com/watch?v=lUDgp2D6sf8
+// https://www.youtube.com/watch?v=Yt50Jfbd8Po
+// https://www.youtube.com/watch?v=Y0fmHaY8lx4
+// https://leetcode.com/problems/balanced-binary-tree/discuss/?currentPage=1&orderBy=most_relevant&query=java
 
 class BalancedBinaryTree {
 

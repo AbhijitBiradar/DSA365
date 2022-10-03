@@ -3,6 +3,12 @@ package com.dsa.graph;
 // Refer
 // https://www.programiz.com/dsa/prim-algorithm
 
+// https://www.youtube.com/watch?v=_KX8GDvRzBc
+// https://www.youtube.com/watch?v=4ZlRH0eK-qQ	
+// https://www.youtube.com/watch?v=ZtZaR7EcI5Y
+// https://www.youtube.com/watch?v=HnD676J56ak
+// https://www.youtube.com/watch?v=rnYBi9N_vw4
+
 import java.util.Arrays;
 
 class SpanningTreeUsingPrimAlgorithm {

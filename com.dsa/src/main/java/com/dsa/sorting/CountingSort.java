@@ -1,11 +1,16 @@
 package com.dsa.sorting;
 
-// Reference
+// Refer
 // https://www.programiz.com/dsa/counting-sort
 // https://www.youtube.com/watch?v=mowMVn9wTnE
 // https://www.youtube.com/watch?v=pEJiGC-ObQE
 // https://www.youtube.com/watch?v=HkvChUv9dDg&t=1s
 // https://www.youtube.com/watch?v=bbUqXF5pSD0
+
+// https://www.geeksforgeeks.org/counting-sort/
+// https://www.programiz.com/dsa/counting-sort
+// https://www.happycoders.eu/algorithms/counting-sort/
+// https://prepinsta.com/java-program/counting-sort/
 
 import java.util.Arrays;
 
@@ -31,7 +36,7 @@ class CountingSort {
 			count[array[i]]++;
 		}
 
-		// Store the cummulative count of each array
+		// Store the cumulative count of each array
 		for (int i = 1; i <= max; i++) {
 			count[i] += count[i - 1];
 		}

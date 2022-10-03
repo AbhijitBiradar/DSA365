@@ -18,50 +18,136 @@ class BinarySearchTree {
 
 	private Node root;
 
-	BinarySearchTree() {
+	public BinarySearchTree() {
 		this.root = null;
 	}
 
-	void insert(int data) {
-		this.root = insertKey(root, data);
+	// Function to construct a BST from given keys
+	// user below array
+	// int[] keys = { 15, 10, 20, 8, 12, 16, 25 };
+
+	// Refer
+	// https://www.techiedelight.com/insertion-in-bst/
+	public Node constructBST(int[] keys) {
+		Node root = null;
+		for (int key : keys) {
+			root = insertRec(root, key);
+		}
+		return root;
 	}
 
-	// Insert key in the tree
-	Node insertKey(Node root, int data) {
-		// Return a new node if the tree is empty
+	public void traversePreOrderRec() {
+		traversePreOrderRec(root);
+		System.out.println();
+	}
+
+	public void traversePreOrderRec(Node root) {
+		if (root != null) {
+			System.out.print(root.data + " -> ");
+			traverseInOrderRec(root.left);
+			traverseInOrderRec(root.right);
+		}
+	}
+
+	public void traverseInOrderRec() {
+		traverseInOrderRec(root);
+		System.out.println();
+	}
+
+	public void traverseInOrderRec(Node root) {
+		if (root != null) {
+			traverseInOrderRec(root.left);
+			System.out.print(root.data + " -> ");
+			traverseInOrderRec(root.right);
+		}
+	}
+
+	public void traversePostOrderRec() {
+		traversePostOrderRec(root);
+		System.out.println();
+	}
+
+	public void traversePostOrderRec(Node root) {
+		if (root != null) {
+			traverseInOrderRec(root.left);
+			traverseInOrderRec(root.right);
+			System.out.print(root.data + " -> ");
+		}
+	}
+
+	public void insertRec(int data) {
+		this.root = insertRec(root, data);
+	}
+
+	public Node insertRec(Node root, int data) {
 		if (root == null) {
+			// Case 1 : Tree is empty. Return a new node if the tree is empty
 			root = new Node(data);
 			return root;
 		}
 
-		// Traverse to the right place and insert the node
 		if (data < root.data) {
-			root.left = insertKey(root.left, data);
+			// Case 2A : Tree is not empty. If the given data is smaller than the root node,
+			// recur for the left subtree
+			root.left = insertRec(root.left, data);
 		} else if (data > root.data) {
-			root.right = insertKey(root.right, data);
+			// Case 2A : Tree is not empty. If the given key is larger than the root node,
+			// recur for the right subtree
+			root.right = insertRec(root.right, data);
 		}
+
+		System.out.println("Node with data " + data + " inserted in Tree!");
 
 		return root;
 	}
 
-	void inorder() {
-		inorderRec(root);
+	public void insertIter(int data) {
+		this.root = insertIter(root, data);
 	}
 
-	// Inorder Traversal
-	void inorderRec(Node root) {
-		if (root != null) {
-			inorderRec(root.left);
-			System.out.print(root.data + " -> ");
-			inorderRec(root.right);
+	public Node insertIter(Node root, int data) {
+		// start with the root node
+		Node curr = root;
+
+		// pointer to store the parent of the current node
+		Node parent = null;
+
+		// if the tree is empty, create a new node and set it as root
+		if (root == null) {
+			return new Node(data);
 		}
+
+		// traverse the tree and find the parent node of the given key
+		while (curr != null) {
+			// update the parent to the current node
+			parent = curr;
+
+			// if the given key is less than the current node,
+			// go to the left subtree; otherwise, go to the right subtree.
+			if (data < curr.data) {
+				curr = curr.left;
+			} else {
+				curr = curr.right;
+			}
+		}
+
+		// construct a node and assign it to the appropriate parent pointer
+		if (data < parent.data) {
+			parent.left = new Node(data);
+		} else {
+			parent.right = new Node(data);
+		}
+
+		System.out.println("Node with data " + data + " inserted in Tree!");
+
+		return root;
 	}
 
-	void deleteKey(int data) {
+	public void deleteRec(int data) {
 		root = deleteRec(root, data);
 	}
 
-	Node deleteRec(Node root, int data) {
+	public Node deleteRec(Node root, int data) {
 		// Return if the tree is empty
 		if (root == null)
 			return root;
@@ -90,35 +176,136 @@ class BinarySearchTree {
 		return root;
 	}
 
-	// Find the inorder successor
-	int minValue(Node root) {
-		int minv = root.data;
-		while (root.left != null) {
-			minv = root.left.data;
-			root = root.left;
-		}
-		return minv;
+	public void deleteIter(int data) {
+		root = deleteIter(root, data);
 	}
 
-	// Driver Program to test above functions
+	public Node deleteIter(Node root, int data) {
+		// Refer
+		// https://www.geeksforgeeks.org/binary-search-tree-set-3-iterative-delete/
+		// https://www.digitalocean.com/community/tutorials/binary-search-tree-bst-search-insert-remove
+		// https://www.happycoders.eu/algorithms/binary-search-tree-java/
+		return null;
+	}
+
+	int minValue(Node root) {
+		// initially minval = root
+		int minval = root.data;
+		// find minval
+		while (root.left != null) {
+			minval = root.left.data;
+			root = root.left;
+		}
+		return minval;
+	}
+
+	int maxValue(Node root) {
+		// initially maxValue = root
+		int maxval = root.data;
+		// find maxValue
+		while (root.left != null) {
+			maxval = root.right.data;
+			root = root.right;
+		}
+		return maxval;
+	}
+
+	boolean searchRec(int key) {
+		root = searchRec(root, key);
+		if (root != null)
+			return true;
+		else
+			return false;
+	}
+
+	// recursive insert function
+	Node searchRec(Node root, int data) {
+		// Base Cases: root is null or key is present at root
+		if (root == null || root.data == data)
+			return root;
+		// data is greater than root's key
+		if (root.data > data)
+			return searchRec(root.left, data);
+		// data is less than root's key
+		return searchRec(root.right, data);
+	}
+
+	public boolean searchIter(int key) {
+		return searchIter(root, key);
+	}
+
+	public boolean searchIter(Node root, int key) {
+		// Traverse until root reaches to dead end
+		while (root != null) {
+			// pass right subtree as new tree
+			if (key > root.data)
+				root = root.right;
+
+			// pass left subtree as new tree
+			else if (key < root.data)
+				root = root.left;
+			else
+				return true; // if the key is found return 1
+		}
+		return false;
+	}
+
+	// Refer
+	// https://www.geeksforgeeks.org/print-all-even-nodes-of-binary-search-tree/?ref=rp
+	// Function to print all even nodes
+	public void evenNode(Node root) {
+		if (root != null) {
+			evenNode(root.left);
+			// if node is even then print it
+			if (root.data % 2 == 0)
+				System.out.print(root.data + " ");
+			evenNode(root.right);
+		}
+	}
+
+	// Refer
+	// https://www.geeksforgeeks.org/print-all-odd-nodes-of-binary-search-tree/?ref=rp
+	// Function to print all odd nodes
+	public void oddNode(Node root) {
+		if (root != null) {
+			oddNode(root.left);
+
+			// if node is odd then print it
+			if (root.data % 2 != 0)
+				System.out.print(root.data + " ");
+
+			oddNode(root.right);
+		}
+	}
+
+	public void updateIter(int oldData, int newData) {
+
+	}
+
+	public void updateRec(int oldData, int newData) {
+
+	}
+
 	public static void main(String[] args) {
-		BinarySearchTree tree = new BinarySearchTree();
+		BinarySearchTree bst = new BinarySearchTree();
 
-		tree.insert(8);
-		tree.insert(3);
-		tree.insert(1);
-		tree.insert(6);
-		tree.insert(7);
-		tree.insert(10);
-		tree.insert(14);
-		tree.insert(4);
+		bst.insertRec(8);
+		bst.insertRec(3);
+		bst.insertRec(1);
+		bst.insertRec(6);
+		bst.insertRec(7);
+		bst.insertRec(10);
+		bst.insertRec(14);
+		bst.insertRec(4);
 
-		System.out.print("Inorder traversal: ");
-		tree.inorder();
+		System.out.println("Preorder traversal: ");
+		bst.traversePreOrderRec();
 
-		System.out.println("\n\nAfter deleting 10");
-		tree.deleteKey(10);
-		System.out.print("Inorder traversal: ");
-		tree.inorder();
+		System.out.println("Inorder traversal: ");
+		bst.traverseInOrderRec();
+
+		System.out.println("Postorder traversal: ");
+		bst.traversePostOrderRec();
+
 	}
 }

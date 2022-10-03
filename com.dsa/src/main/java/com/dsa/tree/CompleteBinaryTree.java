@@ -6,6 +6,11 @@ package com.dsa.tree;
 // https://www.geeksforgeeks.org/complete-binary-tree/
 // https://www.interviewcake.com/concept/java/complete-binary-tree
 
+// Definition : A complete binary tree is a binary tree in which all the levels are completely filled except possibly the lowest one, which is filled from the left.
+
+// https://www.youtube.com/watch?v=_Hehd1KSq7Y
+// https://www.geeksforgeeks.org/check-whether-binary-tree-complete-not-set-2-recursive-solution/?ref=rp
+
 class CompleteBinaryTree {
 
 	private static class Node {
