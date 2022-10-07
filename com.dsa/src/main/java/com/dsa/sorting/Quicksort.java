@@ -19,63 +19,58 @@ import java.util.Arrays;
 
 class Quicksort {
 
-	// method to find the partition position
+	// Refer
+	// https://www.youtube.com/watch?v=7h1s2SojIRw&t=1s
 	public int partition(int arr[], int low, int high) {
+		int pivot = arr[low];
+		int i = low, j = high;
 
-		// choose the rightmost element as pivot
-		int pivot = arr[high];
-
-		// pointer for greater element
-		int i = (low - 1);
-
-		// traverse through all elements compare each element with pivot
-		for (int j = low; j < high; j++) {
-			if (arr[j] <= pivot) {
+		while (i < j) {
+			// Step 1 : find left most smallest value from array
+			while (arr[i] < pivot) {
 				i++;
-				// if element smaller than pivot is found swap it with the greater element
-				// pointed by i
-				// swapping element at i with element at j
-				int temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
 			}
 
+			// Step 2 : find right most largest value from array
+			while (arr[j] > pivot) {
+				j--;
+			}
+
+			// Step 3 : Perform swap if i is less than j
+			if (i < j) {
+				swap(arr[i], arr[j]);
+			}
 		}
 
-		// swap the pivot element with the greater element specified by i
-		int temp = arr[i + 1];
-		arr[i + 1] = arr[high];
-		arr[high] = temp;
-
-		// return the position from where partition is done
-		return (i + 1);
+		swap(arr[low], arr[j]);
+		return j;
 	}
 
+	void swap(int x, int y) {
+		int temp = x;
+		x = y;
+		y = temp;
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=7h1s2SojIRw&t=1s
 	public void quickSort(int array[], int low, int high) {
 		if (low < high) {
-
-			// find pivot element such that elements smaller than pivot are on the left
-			// elements greater than pivot are on the right
 			int pivotPos = partition(array, low, high);
-
-			// recursive call on the left of pivot
 			quickSort(array, low, pivotPos - 1);
-
-			// recursive call on the right of pivot
 			quickSort(array, pivotPos + 1, high);
 		}
 	}
 
 	public static void main(String args[]) {
 
-		int[] arr = { 8, 7, 2, 1, 0, 9, 6 };
+		int[] arr = { 11, 13, 7, 12, 16, 9, 24, 5, 10, 3 };
 
 		System.out.println("Array before sorting: ");
 		System.out.println(Arrays.toString(arr));
 
-		// call quicksort() on array data
 		Quicksort q = new Quicksort();
-		q.quickSort(arr, 0, arr.length - 1);
+		q.quickSort(arr, 0, arr.length-1);
 
 		System.out.println("Array after sorting: ");
 		System.out.println(Arrays.toString(arr));

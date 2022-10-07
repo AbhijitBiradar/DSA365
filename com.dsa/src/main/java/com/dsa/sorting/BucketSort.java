@@ -1,58 +1,51 @@
 package com.dsa.sorting;
 
-// Refer
-// https://www.youtube.com/watch?v=E9OccfF9mpI&t=1s
-// https://www.youtube.com/watch?v=7mahJ1axrR8&t=10s
-// https://www.youtube.com/watch?v=JMlYkE8hGJM&t=13s	
-// https://www.youtube.com/watch?v=3Y08uZpgBM8
-
-// https://www.geeksforgeeks.org/bucket-sort-2/
-// https://www.programiz.com/dsa/bucket-sort
-// https://www.tutorialandexample.com/bucket-sort-in-java
-// https://takeuforward.org/data-structure/bucket-sort-detailed-explanation/
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
-public class BucketSort {
-	public void bucketSort(float[] arr, int n) {
-		if (n <= 0)
-			return;
-		@SuppressWarnings("unchecked")
-		ArrayList<Float>[] bucket = new ArrayList[n];
+// Refer
+// https://www.javatpoint.com/bucket-sort-in-java
 
-		// Create empty buckets
-		for (int i = 0; i < n; i++)
-			bucket[i] = new ArrayList<Float>();
-
-		// Add elements into the buckets
-		for (int i = 0; i < n; i++) {
-			int bucketIndex = (int) arr[i] * n;
-			bucket[bucketIndex].add(arr[i]);
+public class BucketSort {	
+	private static void binSort(int[] array, int bucketSize) {
+		// creating a list of buckets for storing lists
+		List<Integer>[] buckets = new List[bucketSize];
+		// Linked list with each bucket array index
+		// as there may be hash collision
+		for (int i = 0; i < bucketSize; i++) {
+			buckets[i] = new LinkedList<Integer>();
 		}
-
-		// Sort the elements of each bucket
-		for (int i = 0; i < n; i++) {
-			Collections.sort((bucket[i]));
+		// calculate the hash and assigns elements to the proper bucket
+		for (int num : array) {
+			buckets[hash(num, bucketSize)].add(num);
 		}
-
-		// Get the sorted array
+		// iterate over the buckets and sorts the elements
+		for (List<Integer> bucket : buckets) {
+			// sorts the bucket
+			Collections.sort(bucket);
+		}
 		int index = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0, size = bucket[i].size(); j < size; j++) {
-				arr[index++] = bucket[i].get(j);
+		// gethered the buckets after sorting
+		for (List<Integer> bucket : buckets) {
+			for (int num : bucket) {
+				array[index++] = num;
 			}
 		}
 	}
 
-// Driver code
-	public static void main(String[] args) {
-		BucketSort b = new BucketSort();
-		float[] arr = { (float) 0.42, (float) 0.32, (float) 0.33, (float) 0.52, (float) 0.37, (float) 0.47,
-				(float) 0.51 };
-		b.bucketSort(arr, 7);
+	// distributing elements
+	private static int hash(int num, int bucketSize) {
+		return num / bucketSize;
+	}
 
-		for (float i : arr)
-			System.out.print(i + "  ");
+	public static void main(String args[]) {
+		// array to be sort
+		int[] array = { 22, 45, 12, 8, 10, 6, 72, 81, 33, 18, 50, 14, 55, 0, 12, 55 };
+		System.out.println("Unsorted Array: " + Arrays.toString(array));
+		// calling the user-defined method to sort the array
+		binSort(array, 10);
+		System.out.println("Sorted Array: " + Arrays.toString(array));
 	}
 }

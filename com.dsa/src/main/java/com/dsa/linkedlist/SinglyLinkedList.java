@@ -140,6 +140,7 @@ public class SinglyLinkedList {
 	public ListNode deleteFirst() {
 		// Case 1 : Linked List is empty
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return null;
 		}
 
@@ -156,6 +157,7 @@ public class SinglyLinkedList {
 	public ListNode deleteLast() {
 		// Case 1 : Linked List is empty
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return head;
 		}
 
@@ -181,15 +183,21 @@ public class SinglyLinkedList {
 		return currentNode;
 	}
 
-	public void delete(int position) {
-		// position is valid and starting from 1
+	public void deleteAt(int position) {
+		// Position is valid and starting from 1
 		// 3 -> 4 -> 7 -> 8 -> 9 -> null
 
+		// Case 1 : Invalid Position. Position <= 0
+		if (position <= 0) {
+			System.out.println("Invalid position. Please enter position between  1 to Size");
+			return;
+		}
+
 		if (position == 1) {
-			// Case 1 : Position == 1
+			// Case 2 : Position == 1
 			head = head.next;
 		} else {
-			// Case 2 : Position > 1
+			// Case 3 : Position > 1
 			ListNode previousNode = head;
 			int count = 1;
 			while (count < position - 1) {
@@ -227,23 +235,28 @@ public class SinglyLinkedList {
 	}
 
 	// Refer
+	// Udemy Course Name : Mastering Data Structures & Algorithms using C and C++
+	// Video No :199, 200 & 201
 	// https://www.youtube.com/watch?v=jY-EUKXYT20&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=36
-	// Not understood
+
 	public ListNode reverse(ListNode head) {
+
+		// Case 1 : Linked List is empty
 		if (head == null) {
 			System.out.println("Linked List is empty!");
 			return null;
 		}
 
+		// Case 2 : Linked List is not empty
 		ListNode currentNode = head;
 		ListNode previousNode = null;
 		ListNode nextNode = null;
 
 		while (currentNode != null) {
-			nextNode = currentNode.next;
-			currentNode.next = previousNode;
-			previousNode = currentNode;
-			currentNode = nextNode;
+			nextNode = currentNode.next; // Step 1: capture address of next node
+			currentNode.next = previousNode; // Step 2: setup next link of current node to previous node
+			previousNode = currentNode; // Shifting pointer to next node
+			currentNode = nextNode; // Shifting pointer to next node
 		}
 		System.out.println("Linked List reversed successfully!");
 
@@ -253,9 +266,14 @@ public class SinglyLinkedList {
 	// Refer
 	// https://www.youtube.com/watch?v=DYpEpZzNmiA&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=36
 	public ListNode getMiddleNode() {
+
+		// Case 1 : Linked List is empty
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return null;
 		}
+
+		// Case 2 : Linked List is not empty
 		ListNode slowPtr = head;
 		ListNode fastPtr = head;
 
@@ -269,14 +287,19 @@ public class SinglyLinkedList {
 	// Refer
 	// https://www.youtube.com/watch?v=adS-s2Stg_A&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=37
 	public ListNode getNthNodeFromEnd(int n) {
+
+		// Case 1 : Linked List is empty
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return null;
 		}
 
+		// Case 2 : Value of N is invalid. Less than or equal to zero
 		if (n <= 0) {
 			throw new IllegalArgumentException("Invalid value: n = " + n);
 		}
 
+		// Case 3 : Linked List is not empty. Value of N is valid one
 		ListNode mainPtr = head;
 		ListNode refPtr = head;
 
@@ -298,11 +321,15 @@ public class SinglyLinkedList {
 
 	// Refer
 	// https://www.youtube.com/watch?v=0Hn18rUkZKY&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=38
+	// We are assuming that linked list is sorted one
 	public void removeDuplicates() {
+		// Case 1 : Linked List is empty
 		if (head == null) {
+			System.out.println("Linked List is empty!");
 			return;
 		}
 
+		// Case 2 : Linked List is not empty
 		ListNode currentNode = head;
 		while (currentNode != null && currentNode.next != null) {
 			if (currentNode.data == currentNode.next.data) {
@@ -317,13 +344,15 @@ public class SinglyLinkedList {
 
 	// Refer
 	// https://www.youtube.com/watch?v=u9igWutVc4o&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=39
-	public ListNode insertInSortedList(int value) {
-		ListNode newNode = new ListNode(value);
+	public ListNode insertInSortedList(int data) {
+		ListNode newNode = new ListNode(data);
 
+		// Case 1 : Linked List is empty
 		if (head == null) {
 			return newNode;
 		}
 
+		// Case 2 : Linked List is not empty
 		ListNode currentNode = head;
 		ListNode previousNode = null;
 
@@ -342,20 +371,23 @@ public class SinglyLinkedList {
 
 	// Refer
 	// https://www.youtube.com/watch?v=8SoncjEIW4c&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=40
-	public void deleteNode(int key) {
+	public void deleteNode(int searchData) {
 		ListNode currentNode = head;
 		ListNode previousNode = null;
 
-		if (currentNode != null && currentNode.data == key) {
+		// Case 1 : head node (First Node) is matching with search data
+		if (currentNode != null && currentNode.data == searchData) {
 			head = currentNode.next;
 			return;
 		}
 
-		while (currentNode != null && currentNode.data != key) {
+		// Case 2 : Linked list is not empty and contains more than one nodes
+		while (currentNode != null && currentNode.data != searchData) {
 			previousNode = currentNode;
 			currentNode = currentNode.next;
 		}
 
+		// Case 3 : Linked List doesn't contain the search data
 		if (currentNode == null) {
 			return;
 		}
@@ -400,12 +432,12 @@ public class SinglyLinkedList {
 	// Refer
 	// https://www.youtube.com/watch?v=yKNOZ8bPdRQ&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=43
 	private ListNode getStartingNode(ListNode slowPtr) {
-		ListNode temp = head;
-		while (temp != slowPtr) {
-			temp = temp.next;
+		ListNode tempNode = head;
+		while (tempNode != slowPtr) {
+			tempNode = tempNode.next;
 			slowPtr = slowPtr.next;
 		}
-		return temp;
+		return tempNode;
 	}
 
 	// Refer
@@ -429,9 +461,9 @@ public class SinglyLinkedList {
 	// Refer
 	// https://www.youtube.com/watch?v=LWDVM_kgvdE&list=PL6Zs6LgrJj3tDXv8a_elC6eT_4R5gfX4d&index=46
 	private void removeLoop(ListNode slowPtr) {
-		ListNode temp = head;
-		while (temp.next != slowPtr.next) {
-			temp = temp.next;
+		ListNode tempNode = head;
+		while (tempNode.next != slowPtr.next) {
+			tempNode = tempNode.next;
 			slowPtr = slowPtr.next;
 		}
 		slowPtr.next = null;
@@ -461,28 +493,25 @@ public class SinglyLinkedList {
 	// Refer
 	// https://www.geeksforgeeks.org/how-to-sort-a-linkedlist-in-java/
 	public void sortLinkedList() {
-		// Node current will point to head
-		ListNode current = head, index = null;
-		int temp;
+		int tempData;
+
 		if (head == null) {
+			// Case 1 : Linked List is empty
+			System.out.println("Linked List is empty!");
 			return;
 		} else {
-			while (current != null) {
-				// Node index will point to node next to current
-				index = current.next;
+			// Case 2 : Linked List is not empty
+			ListNode currentNode = head;
+			ListNode nextNode = currentNode.next;
 
-				while (index != null) {
-					// If current node's data is greater than index's node data, swap the data
-					// between them
-					if (current.data > index.data) {
-						temp = current.data;
-						current.data = index.data;
-						index.data = temp;
-					}
-
-					index = index.next;
+			while (currentNode != null && currentNode.next != null) {
+				if (currentNode.data > nextNode.data) {
+					tempData = currentNode.data;
+					currentNode.data = nextNode.data;
+					nextNode.data = tempData;
 				}
-				current = current.next;
+				nextNode = nextNode.next;
+				currentNode = currentNode.next;
 			}
 		}
 		System.out.println("Linked List is sorted now!");
@@ -514,12 +543,14 @@ public class SinglyLinkedList {
 		sll.deleteLast();
 		sll.display();
 
-		sll.delete(3);
+		sll.deleteAt(3);
 		sll.display();
 
 		sll.search(100);
 		sll.search(12);
 
+		sll.display();
+		sll.sortLinkedList();
 		sll.display();
 
 		ListNode middleNode = sll.getMiddleNode();
