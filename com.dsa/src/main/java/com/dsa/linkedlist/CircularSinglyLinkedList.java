@@ -52,11 +52,13 @@ public class CircularSinglyLinkedList {
 	}
 
 	public void display() {
+		// Case 1 : Linked List is empty
 		if (last == null) {
 			System.out.println("Circular Linked List is empty!");
 			return;
 		}
 
+		// Case 2 : Linked List is not empty
 		System.out.println("Displaying Circular Linked List:");
 
 		ListNode tempNode = last.next;
@@ -70,8 +72,10 @@ public class CircularSinglyLinkedList {
 	public void insertAtFirst(int data) {
 		ListNode newNode = new ListNode(data);
 		if (last == null) {
+			// Case 1 : Linked List is empty
 			last = newNode;
 		} else {
+			// Case 2 : Linked List is not empty
 			newNode.next = last.next;
 		}
 		last.next = newNode;
@@ -83,9 +87,11 @@ public class CircularSinglyLinkedList {
 	public void insertAtLast(int data) {
 		ListNode newNode = new ListNode(data);
 		if (last == null) {
+			// Case 1 : Linked List is empty
 			last = newNode;
 			last.next = last;
 		} else {
+			// Case 2 : Linked List is not empty
 			newNode.next = last.next;
 			last.next = newNode;
 			last = newNode;
@@ -96,14 +102,17 @@ public class CircularSinglyLinkedList {
 	}
 
 	public ListNode removeFromFirst() {
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			throw new NoSuchElementException("Circular Singly Linked List is already empty");
 		}
 
 		ListNode tempNode = last.next;
 		if (last.next == last) {
+			// Case 2 : Linked List contain only one node
 			last = null;
 		} else {
+			// Case 3: Linked List contain more than one nodes
 			last.next = tempNode.next;
 		}
 		tempNode.next = null;
@@ -116,27 +125,27 @@ public class CircularSinglyLinkedList {
 
 	// Refer
 	// https://www.youtube.com/watch?v=2bqbgNQi2UE
-	
 	public ListNode removeFromLast() {
 		ListNode tempNode;
 
-		// case 1: List is empty
+		// Case 1 : Linked List is empty
 		if (last == null) {
 			System.out.println("Circular Singly Linked List is empty!");
 			return last;
 		}
 
-		// case 2: Only one node in the list
+		// Case 2 : Linked List contain only one node
 		if (last.next == last) {
 			last = null;
 			return last;
 		}
 
+		// Case 3: Linked List contain more than one nodes
 		tempNode = last.next;
 		while (tempNode.next != last) {
 			tempNode = tempNode.next;
 		}
-		tempNode.next = last.next;		
+		tempNode.next = last.next;
 		last = tempNode;
 		length--;
 

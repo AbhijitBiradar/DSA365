@@ -38,11 +38,13 @@ public class DoublyLinkedList {
 	}
 
 	public void displayForward() {
+		// Case 1 : Linked List is empty
 		if (head == null) {
 			System.out.println("Linked List is empty!");
 			return;
 		}
 
+		// Case 2 : Linked List is not empty
 		System.out.println("Displaying nodes in forward direction:");
 		ListNode tempNode = head;
 		while (tempNode != null) {
@@ -53,11 +55,13 @@ public class DoublyLinkedList {
 	}
 
 	public void displayBackward() {
+		// Case 1 : Linked List is empty
 		if (head == null) {
 			System.out.println("Linked List is empty!");
 			return;
 		}
 
+		// Case 2 : Linked List is not empty
 		System.out.println("Displaying nodes in backward direction:");
 		ListNode tempNode = tail;
 		while (tempNode != null) {
@@ -66,26 +70,32 @@ public class DoublyLinkedList {
 		}
 		System.out.println("null");
 	}
-	
+
 	public void insertAtStart(int data) {
 		ListNode newNode = new ListNode(data);
+		
 		if (isEmpty()) {
+			// Case 1 : Linked List is empty
 			tail = newNode;
 		} else {
+			// Case 2 : Linked List is not empty
 			head.previous = newNode;
 		}
 		newNode.next = head;
 		head = newNode;
 		length++;
 
-		System.out.println("New Node inserted at first!");
+		System.out.println("New Node inserted at start!");
 	}
 
 	public void insertAtEnd(int value) {
 		ListNode newNode = new ListNode(value);
+		
 		if (isEmpty()) {
+			// Case 1 : Linked List is empty
 			head = newNode;
 		} else {
+			// Case 2 : Linked List is not empty
 			tail.next = newNode;
 			newNode.previous = tail;
 		}
@@ -95,7 +105,8 @@ public class DoublyLinkedList {
 		System.out.println("New Node inserted at end!");
 	}
 
-	public ListNode deleteFirst() {
+	public ListNode deleteFromFirst() {
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Linked List is empty!");
 			throw new NoSuchElementException();
@@ -103,8 +114,10 @@ public class DoublyLinkedList {
 
 		ListNode tempNode = head;
 		if (head == tail) {
+			// Case 2 : Linked List contain only one node
 			tail = null;
 		} else {
+			// Case 3 : Linked List contain more nodes
 			head.next.previous = null;
 		}
 		head = head.next;
@@ -116,7 +129,8 @@ public class DoublyLinkedList {
 		return tempNode;
 	}
 
-	public ListNode deleteLast() {
+	public ListNode deleteFromLast() {
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Linked List is empty!");
 			throw new NoSuchElementException();
@@ -124,8 +138,10 @@ public class DoublyLinkedList {
 
 		ListNode tempNode = tail;
 		if (head == tail) {
+			// Case 2 : Linked List contain only one node
 			head = null;
 		} else {
+			// Case 3 : Linked List contain more nodes
 			tail.previous.next = null;
 		}
 		tail = tail.previous;
@@ -158,12 +174,12 @@ public class DoublyLinkedList {
 
 		System.out.println("Length of Linked List : " + dll.length());
 
-		dll.deleteFirst();
+		dll.deleteFromFirst();
 		dll.displayForward();
 
 		System.out.println("Length of Linked List : " + dll.length());
 
-		dll.deleteLast();
+		dll.deleteFromLast();
 		dll.displayForward();
 
 		System.out.println("Length of Linked List : " + dll.length());

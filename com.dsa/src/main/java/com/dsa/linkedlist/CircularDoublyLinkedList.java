@@ -79,13 +79,13 @@ class CircularDoublyLinkedList {
 	public void insertAtPos(int data, int pos) {
 		ListNode newNode = new ListNode(data);
 
-		// case 1 : position is 1
+		// case 1 : Position is 1
 		if (pos == 1) {
 			insertAtFirst(data);
 			return;
 		}
 
-		// case 2 : position is > 1
+		// case 2 : Position is > 1
 		ListNode currentNode = head;
 		for (int i = 2; i <= length; i++) {
 			if (i == pos) {
@@ -102,13 +102,13 @@ class CircularDoublyLinkedList {
 	}
 
 	public void deleteFromFirst() {
-		// case 1 : list is empty
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Circular Linked list is empty!");
 			return;
 		}
 
-		// case 2: Linked list size =1
+		// Case 2 : Linked list size = 1
 		if (length == 1) {
 			head = null;
 			tail = null;
@@ -117,7 +117,7 @@ class CircularDoublyLinkedList {
 			return;
 		}
 
-		// case 3: Linked list contain more than 1 element
+		// Case 3 : Linked list contain more than one nodes
 		head = head.next;
 		head.previous = tail;
 		tail.next = head;
@@ -126,14 +126,13 @@ class CircularDoublyLinkedList {
 	}
 
 	public void deleteFromEnd() {
-
-		// case 1 : list is empty
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Circular Linked list is empty!");
 			return;
 		}
 
-		// case 2: Linked list contain more than 1 element
+		// Case 2 : Linked list contain more than one nodes
 		tail = tail.previous;
 		tail.next = head;
 		head.previous = tail;
@@ -142,20 +141,20 @@ class CircularDoublyLinkedList {
 	}
 
 	public void deleteAtPos(int pos) {
-		// case 1 : list is empty
+		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Circular Linked list is empty!");
 			return;
 		}
 
-		// case 2 : invalid position (position <=0)
+		// Case 2 : Invalid position (position <=0)
 		if (pos <= 0) {
 			System.out.println("Please provide valid position!");
 			return;
 		}
 
 		if (pos == 1) {
-			// case 3 : position = 1 & linked list length = 1
+			// Case 3 : Position = 1 & linked list length = 1
 			if (length == 1) {
 				head = null;
 				tail = null;
@@ -164,7 +163,7 @@ class CircularDoublyLinkedList {
 				return;
 			}
 
-			// case 4 : position = 1 but linked list contain more than one element
+			// Case 4 : Position = 1 but linked list contain more than one element
 			head = head.next;
 			head.previous = tail;
 			tail.next = head;
@@ -173,7 +172,7 @@ class CircularDoublyLinkedList {
 			return;
 		}
 
-		// case 5 : position is last element
+		// Case 5 : Position is last element
 		if (pos == length) {
 			tail = tail.previous;
 			tail.next = head;
@@ -183,7 +182,7 @@ class CircularDoublyLinkedList {
 			return;
 		}
 
-		// case 6 : position > 1 & less than last position
+		// case 6 : Position > 1 & less than last position
 		ListNode tempNode = head.next;
 		for (int i = 2; i <= length; i++) {
 			if (i == pos) {
@@ -201,14 +200,13 @@ class CircularDoublyLinkedList {
 	}
 
 	public boolean search(int data) {
-
-		// case 1 : list is empty
+		// Case 1 : Linked List is empty
 		if (length == 0) {
 			System.out.println("Linked list is empty");
 			return false;
 		}
 
-		// case 2 : element found
+		// Case 2 : Node present in Linked List
 		ListNode tempNode = head;
 		while (tempNode.next != tail) {
 			if (tempNode.data == data) {
@@ -217,8 +215,8 @@ class CircularDoublyLinkedList {
 			}
 			tempNode = tempNode.next;
 		}
-		
-		// case 3 : element not found
+
+		// Case 3 : Node not present in Linked List
 		System.out.println("Element not found in circular linked list!");
 		return false;
 	}
@@ -230,15 +228,20 @@ class CircularDoublyLinkedList {
 	public void display() {
 		System.out.print("Displaying Circular Doubly Linked List : ");
 		ListNode tempNode = head;
+
+		// Case 1 : Linked List is empty
 		if (length == 0) {
 			System.out.println("Linked list is empty");
 			return;
 		}
+
+		// Case 2 : Linked List contain only one node
 		if (head.next == head) {
 			System.out.print(head.data + " ==> " + tempNode.data + "\n");
 			return;
 		}
 
+		// Case 3 : Linked List contain more than one nodes
 		System.out.print(head.data + " ==> ");
 		tempNode = head.next;
 		while (tempNode.next != head) {
