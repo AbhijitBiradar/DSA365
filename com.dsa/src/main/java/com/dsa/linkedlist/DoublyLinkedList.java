@@ -45,7 +45,7 @@ public class DoublyLinkedList {
 		}
 
 		// Case 2 : Linked List is not empty
-		System.out.println("Displaying nodes in forward direction:");
+		System.out.println("Displaying nodes in Forward Direction : ");
 		ListNode tempNode = head;
 		while (tempNode != null) {
 			System.out.print(tempNode.data + " --> ");
@@ -62,7 +62,7 @@ public class DoublyLinkedList {
 		}
 
 		// Case 2 : Linked List is not empty
-		System.out.println("Displaying nodes in backward direction:");
+		System.out.println("Displaying nodes in Backward Direction : ");
 		ListNode tempNode = tail;
 		while (tempNode != null) {
 			System.out.print(tempNode.data + " --> ");
@@ -73,7 +73,7 @@ public class DoublyLinkedList {
 
 	public void insertAtStart(int data) {
 		ListNode newNode = new ListNode(data);
-		
+
 		if (isEmpty()) {
 			// Case 1 : Linked List is empty
 			tail = newNode;
@@ -90,7 +90,7 @@ public class DoublyLinkedList {
 
 	public void insertAtEnd(int value) {
 		ListNode newNode = new ListNode(value);
-		
+
 		if (isEmpty()) {
 			// Case 1 : Linked List is empty
 			head = newNode;
@@ -141,7 +141,7 @@ public class DoublyLinkedList {
 			// Case 2 : Linked List contain only one node
 			head = null;
 		} else {
-			// Case 3 : Linked List contain more nodes
+			// Case 3 : Linked List contain more than one nodes
 			tail.previous.next = null;
 		}
 		tail = tail.previous;
@@ -151,6 +151,62 @@ public class DoublyLinkedList {
 		System.out.println("Node deleted from end!");
 
 		return tempNode;
+	}
+
+	public void sortLinkedList() {
+
+	}
+
+	public void insertAt(int position, int data) {
+
+	}
+
+	public void deleteAt(int position) {
+
+	}
+
+	public void deleteNode(int searchData) {
+
+	}
+
+	public boolean search(int searchKey) {
+		return false;
+	}
+
+	public ListNode reverse(ListNode head) {
+		return null;
+	}
+
+	public ListNode getMiddleNode() {
+		return null;
+	}
+
+	public ListNode getNthNodeFromEnd(int n) {
+		return null;
+	}
+
+	public void removeDuplicates() {
+
+	}
+
+	public ListNode insertInSortedList(int data) {
+		return null;
+	}
+
+	public boolean containsLoop() {
+		return false;
+	}
+
+	public ListNode startNodeInALoop() {
+		return null;
+	}
+
+	public void removeLoop() {
+
+	}
+
+	public void createALoopInLinkedList() {
+
 	}
 
 	public static void main(String[] args) {
