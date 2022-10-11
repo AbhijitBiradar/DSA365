@@ -25,10 +25,11 @@ class CircularDoublyLinkedList {
 	public CircularDoublyLinkedList() {
 		this.head = null;
 		this.tail = null;
+		this.length = 0;
 	}
 
 	public boolean isEmpty() {
-		return head == null;
+		return (head == null);
 	}
 
 	public int length() {
@@ -47,9 +48,9 @@ class CircularDoublyLinkedList {
 		} else {
 			// case 2: Linked list is not empty
 			newNode.previous = tail;
+			newNode.next = head;
 			tail.next = newNode;
 			head.previous = newNode;
-			newNode.next = head;
 			head = newNode;
 		}
 		length++;
@@ -58,6 +59,7 @@ class CircularDoublyLinkedList {
 
 	public void insertAtEnd(int data) {
 		ListNode newNode = new ListNode(data);
+
 		if (head == null) {
 			// case 1: Linked list is empty
 			newNode.next = newNode;
@@ -76,29 +78,29 @@ class CircularDoublyLinkedList {
 		System.out.println("New node inserted at end");
 	}
 
-	public void insertAtPos(int data, int pos) {
-		ListNode newNode = new ListNode(data);
-
+	public void insertAtPos(int data, int position) {
 		// case 1 : Position is 1
-		if (pos == 1) {
+		if (position == 1) {
 			insertAtFirst(data);
 			return;
 		}
 
 		// case 2 : Position is > 1
+		ListNode newNode = new ListNode(data);
 		ListNode currentNode = head;
 		for (int i = 2; i <= length; i++) {
-			if (i == pos) {
+			if (i == position) {
 				ListNode nextNode = currentNode.next;
-				currentNode.next = newNode;
-				newNode.previous = currentNode;
 				newNode.next = nextNode;
+				newNode.previous = currentNode;
+				currentNode.next = newNode;
 				nextNode.previous = newNode;
+				break;
 			}
 			currentNode = currentNode.next;
 		}
 		length++;
-		System.out.println("New node inserted at " + pos + " position");
+		System.out.println("New node inserted at " + position + " position");
 	}
 
 	public void deleteFromFirst() {
@@ -121,11 +123,12 @@ class CircularDoublyLinkedList {
 		head = head.next;
 		head.previous = tail;
 		tail.next = head;
+
 		length--;
 		System.out.println("Node deleted from first position : ");
 	}
 
-	public void deleteFromEnd() {
+	public void deleteFromLast() {
 		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Circular Linked list is empty!");
@@ -140,7 +143,7 @@ class CircularDoublyLinkedList {
 		System.out.println("Node deleted from end position : ");
 	}
 
-	public void deleteAtPos(int pos) {
+	public void deleteFromPos(int pos) {
 		// Case 1 : Linked List is empty
 		if (isEmpty()) {
 			System.out.println("Circular Linked list is empty!");
@@ -191,6 +194,7 @@ class CircularDoublyLinkedList {
 
 				previousNode.next = nextNode;
 				nextNode.previous = previousNode;
+
 				length--;
 				System.out.println("Node deleted from position : " + pos);
 				return;
@@ -221,14 +225,7 @@ class CircularDoublyLinkedList {
 		return false;
 	}
 
-	public void createCircularDoublyLinkedList() {
-
-	}
-
 	public void display() {
-		System.out.print("Displaying Circular Doubly Linked List : ");
-		ListNode tempNode = head;
-
 		// Case 1 : Linked List is empty
 		if (length == 0) {
 			System.out.println("Linked list is empty");
@@ -236,6 +233,8 @@ class CircularDoublyLinkedList {
 		}
 
 		// Case 2 : Linked List contain only one node
+		System.out.print("Displaying Circular Doubly Linked List : ");
+		ListNode tempNode = head;
 		if (head.next == head) {
 			System.out.print(head.data + " ==> " + tempNode.data + "\n");
 			return;
@@ -251,6 +250,62 @@ class CircularDoublyLinkedList {
 		System.out.print(tempNode.data + " ==> ");
 		tempNode = tempNode.next;
 		System.out.print(tempNode.data + "\n");
+	}
+
+	public void createCircularDoublyLinkedList() {
+
+	}
+
+	public void sortLinkedList() {
+
+	}
+
+	public void insertAt(int position, int data) {
+
+	}
+
+	public void deleteAt(int position) {
+
+	}
+
+	public void deleteNode(int searchData) {
+
+	}
+
+	public ListNode reverse(ListNode head) {
+		return null;
+	}
+
+	public ListNode getMiddleNode() {
+		return null;
+	}
+
+	public ListNode getNthNodeFromEnd(int n) {
+		return null;
+	}
+
+	public void removeDuplicates() {
+
+	}
+
+	public ListNode insertInSortedList(int data) {
+		return null;
+	}
+
+	public boolean containsLoop() {
+		return false;
+	}
+
+	public ListNode startNodeInALoop() {
+		return null;
+	}
+
+	public void removeLoop() {
+
+	}
+
+	public void createALoopInLinkedList() {
+
 	}
 
 	public static void main(String[] args) {
@@ -278,14 +333,14 @@ class CircularDoublyLinkedList {
 		c.deleteFromFirst();
 		c.display();
 
-		c.deleteFromEnd();
+		c.deleteFromLast();
 		c.display();
 
-		c.deleteAtPos(1); // first position
+		c.deleteFromPos(1); // first position
 		c.display();
-		c.deleteAtPos(3); // middle position
+		c.deleteFromPos(3); // middle position
 		c.display();
-		c.deleteAtPos(5); // last position
+		c.deleteFromPos(5); // last position
 		c.display();
 	}
 

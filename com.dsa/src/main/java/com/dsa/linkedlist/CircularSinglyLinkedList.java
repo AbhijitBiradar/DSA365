@@ -1,7 +1,5 @@
 package com.dsa.linkedlist;
 
-import java.util.NoSuchElementException;
-
 // Refer
 // https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/list/CircularLinkedList.java
 // https://www.youtube.com/watch?v=2bqbgNQi2UE
@@ -36,17 +34,17 @@ public class CircularSinglyLinkedList {
 	}
 
 	public void createCircularLinkedList() {
-		ListNode first = new ListNode(1);
-		ListNode second = new ListNode(5);
-		ListNode third = new ListNode(10);
-		ListNode fourth = new ListNode(15);
+		ListNode firstNode = new ListNode(1);
+		ListNode secondNode = new ListNode(5);
+		ListNode thirdNode = new ListNode(10);
+		ListNode fourthNode = new ListNode(15);
 
-		first.next = second;
-		second.next = third;
-		third.next = fourth;
-		fourth.next = first;
+		firstNode.next = secondNode;
+		secondNode.next = thirdNode;
+		thirdNode.next = fourthNode;
+		fourthNode.next = firstNode;
 
-		last = fourth;
+		last = fourthNode;
 
 		System.out.println("A Circular Linked List created successfully!");
 	}
@@ -104,7 +102,8 @@ public class CircularSinglyLinkedList {
 	public ListNode removeFromFirst() {
 		// Case 1 : Linked List is empty
 		if (isEmpty()) {
-			throw new NoSuchElementException("Circular Singly Linked List is already empty");
+			System.out.println("Circular Singly Linked List is empty!");
+			return null;
 		}
 
 		ListNode tempNode = last.next;
@@ -129,9 +128,9 @@ public class CircularSinglyLinkedList {
 		ListNode tempNode;
 
 		// Case 1 : Linked List is empty
-		if (last == null) {
+		if (isEmpty()) {
 			System.out.println("Circular Singly Linked List is empty!");
-			return last;
+			return null;
 		}
 
 		// Case 2 : Linked List contain only one node
@@ -154,28 +153,84 @@ public class CircularSinglyLinkedList {
 		return tempNode;
 	}
 
+	public void sortLinkedList() {
+
+	}
+
+	public void insertAt(int position, int data) {
+
+	}
+
+	public void deleteAt(int position) {
+
+	}
+
+	public void deleteNode(int searchData) {
+
+	}
+
+	public boolean search(int searchKey) {
+		return false;
+	}
+
+	public ListNode reverse(ListNode head) {
+		return null;
+	}
+
+	public ListNode getMiddleNode() {
+		return null;
+	}
+
+	public ListNode getNthNodeFromEnd(int n) {
+		return null;
+	}
+
+	public void removeDuplicates() {
+
+	}
+
+	public ListNode insertInSortedList(int data) {
+		return null;
+	}
+
+	public boolean containsLoop() {
+		return false;
+	}
+
+	public ListNode startNodeInALoop() {
+		return null;
+	}
+
+	public void removeLoop() {
+
+	}
+
+	public void createALoopInLinkedList() {
+
+	}
+
 	public static void main(String[] args) {
-		CircularSinglyLinkedList cll = new CircularSinglyLinkedList();
+		CircularSinglyLinkedList csl = new CircularSinglyLinkedList();
 
-		cll.createCircularLinkedList();
-		cll.display();
+		csl.createCircularLinkedList();
+		csl.display();
 
-		cll.insertAtFirst(20);
-		cll.insertAtFirst(25);
-		cll.insertAtFirst(30);
+		csl.insertAtFirst(20);
+		csl.insertAtFirst(25);
+		csl.insertAtFirst(30);
 
-		cll.display();
+		csl.display();
 
-		cll.insertAtLast(35);
-		cll.insertAtLast(40);
-		cll.insertAtLast(45);
+		csl.insertAtLast(35);
+		csl.insertAtLast(40);
+		csl.insertAtLast(45);
 
-		cll.display();
+		csl.display();
 
-		cll.removeFromFirst();
-		cll.display();
+		csl.removeFromFirst();
+		csl.display();
 
-		cll.removeFromLast();
-		cll.display();
+		csl.removeFromLast();
+		csl.display();
 	}
 }

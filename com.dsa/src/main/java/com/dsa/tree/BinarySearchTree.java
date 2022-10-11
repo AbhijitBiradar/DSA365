@@ -286,6 +286,12 @@ class BinarySearchTree {
 
 	}
 
+	// Refer
+	// https://www.youtube.com/watch?v=ACoLBU0nPAw
+	public boolean isBinarySearchTree() {
+		return true;
+	}
+
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
 
