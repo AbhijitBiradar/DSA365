@@ -4,6 +4,43 @@ package com.dsa.tree;
 // https://www.programiz.com/dsa/binary-search-tree
 
 class BinarySearchTree {
+
+	public class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
+
+		TreeNode() {
+		}
+
+		TreeNode(int val) {
+			this.val = val;
+		}
+
+		TreeNode(int val, TreeNode left, TreeNode right) {
+			this.val = val;
+			this.left = left;
+			this.right = right;
+		}
+	}
+
+	public class ListNode {
+		int val;
+		ListNode next;
+
+		ListNode() {
+		}
+
+		ListNode(int val) {
+			this.val = val;
+		}
+
+		ListNode(int val, ListNode next) {
+			this.val = val;
+			this.next = next;
+		}
+	}
+
 	private static class Node {
 		private int data;
 		private Node left;
@@ -290,6 +327,70 @@ class BinarySearchTree {
 	// https://www.youtube.com/watch?v=ACoLBU0nPAw
 	public boolean isBinarySearchTree() {
 		return true;
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=_Vo3cQ2xtqk
+	// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/discuss/2404676/Java-Solution-oror-Recursion-oror-0ms-100-Faster-oror-Beginner-Friendly
+	public TreeNode sortedArrayToBST(int[] nums) {
+		if (nums.length == 0) {
+			return null;
+		}
+
+		return createBST(nums, 0, nums.length - 1);
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=_Vo3cQ2xtqk
+	// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/discuss/2404676/Java-Solution-oror-Recursion-oror-0ms-100-Faster-oror-Beginner-Friendly
+	private TreeNode createBST(int nums[], int left, int right) {
+		if (left > right) {
+			return null;
+		}
+
+		int mid = (left + right) / 2;
+		TreeNode root = new TreeNode(nums[mid]);
+		root.left = createBST(nums, left, mid - 1);
+		root.right = createBST(nums, mid + 1, right);
+
+		return root;
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=5IQF13nNq6A
+	// https://github.com/Algorithms-Made-Easy/Tree/blob/master/Convert-Sorted-List-to-Binary-Search-Tree
+	public TreeNode sortedListToBST(ListNode head) {
+		if (head == null)
+			return null;
+
+		ListNode mid = mid(head);
+		TreeNode root = new TreeNode(mid.val);
+
+		if (head == mid)
+			return root;
+
+		root.left = sortedListToBST(head);
+		root.right = sortedListToBST(mid.next);
+		return root;
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=5IQF13nNq6A
+	// https://github.com/Algorithms-Made-Easy/Tree/blob/master/Convert-Sorted-List-to-Binary-Search-Tree
+	public ListNode mid(ListNode head) {
+		ListNode fast = head;
+		ListNode slow = head;
+		ListNode prev = head;
+		while (fast != null && fast.next != null) {
+			prev = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		if (prev != null)
+			prev.next = null;
+
+		return slow;
 	}
 
 	public static void main(String[] args) {

@@ -20,6 +20,25 @@ import java.util.Stack;
 
 class SimpleBinaryTree {
 
+	public class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
+
+		TreeNode() {
+		}
+
+		TreeNode(int val) {
+			this.val = val;
+		}
+
+		TreeNode(int val, TreeNode left, TreeNode right) {
+			this.val = val;
+			this.left = left;
+			this.right = right;
+		}
+	}
+
 	private static class Node {
 		private int data;
 		private Node left;
@@ -138,15 +157,17 @@ class SimpleBinaryTree {
 
 	// Refer
 	// https://www.geeksforgeeks.org/level-order-tree-traversal/
-
-	void printCurrentLevel(Node root, int level) {
-		if (root == null)
+	// This function is of level order traversal
+	void levelOrderTraversal(Node root, int level) {
+		if (root == null) {
 			return;
-		if (level == 1)
+		}
+
+		if (level == 1) {
 			System.out.print(root.data + " ");
-		else if (level > 1) {
-			printCurrentLevel(root.left, level - 1);
-			printCurrentLevel(root.right, level - 1);
+		} else if (level > 1) {
+			levelOrderTraversal(root.left, level - 1);
+			levelOrderTraversal(root.right, level - 1);
 		}
 	}
 
@@ -201,6 +222,42 @@ class SimpleBinaryTree {
 		// If root is Not NULL and its one of its
 		// child is also not NULL
 		return 1 + countNonleaf(root.left) + countNonleaf(root.right);
+	}
+
+	// Refer
+	// https://leetcode.com/problems/maximum-depth-of-binary-tree/discuss/2424930/Very-Easy-oror-100-oror-Fully-Explained-(C%2B%2B-Java-Python-JS-C-Python3)
+	public int maxDepth(Node root) {
+		// Base case...
+		// If the subtree is empty i.e. root is NULL, return depth as 0...
+		if (root == null)
+			return 0;
+		// if root is not NULL, call the same function recursively for its left child
+		// and right child...
+		int leftDepth = maxDepth(root.left);
+		int rightDepth = maxDepth(root.right);
+		// When the two child function return its depth...
+		// Pick the maximum out of these two subtrees and return this value after adding
+		// 1 to it...
+		return Math.max(leftDepth, rightDepth) + 1; // Adding 1 is the current node which is the parent of the two
+													// subtrees...
+	}
+
+	// Refer
+	// https://www.youtube.com/watch?v=cajtJQQpbyI
+	// https://github.com/Algorithms-Made-Easy/Tree/blob/master/Binary-Tree-Maximum-Path-Sum
+	static int maxSum = Integer.MIN_VALUE;
+
+	public int BinaryTreeMaximumPathSum(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		int left = Math.max(0, BinaryTreeMaximumPathSum(node.left));
+		int right = Math.max(0, BinaryTreeMaximumPathSum(node.right));
+		int currSum = node.val + left + right; // sum of left, root, right
+
+		maxSum = Math.max(currSum, maxSum);
+
+		return Math.max(node.val + left, node.val + right);
 	}
 
 	public static void main(String[] args) {

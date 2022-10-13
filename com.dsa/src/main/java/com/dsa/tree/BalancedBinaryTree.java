@@ -1,5 +1,8 @@
 package com.dsa.tree;
 
+// Refer
+// https://www.youtube.com/watch?v=OgdYyBT8iU8
+
 // Checking if a binary tree is height balanced in Java
 // https://www.programiz.com/dsa/balanced-binary-tree
 
@@ -12,62 +15,79 @@ package com.dsa.tree;
 
 class BalancedBinaryTree {
 
-	private static class Node {
+	public class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
 
-		private int data;
-		private Node left;
-		private Node right;
+		TreeNode() {
+		}
 
-		Node(int data) {
-			this.data = data;
-			this.left = null;
-			this.right = null;
+		TreeNode(int val) {
+			this.val = val;
+		}
+
+		TreeNode(int val, TreeNode left, TreeNode right) {
+			this.val = val;
+			this.left = left;
+			this.right = right;
 		}
 	}
 
-	private static class Height {
-		private int height = 0;
-	}
-
-	private Node root;
-
-	// Check height balance
-	boolean checkHeightBalance(Node root, Height height) {
-
-		// Check for emptiness
+	// Refer
+	// This is Top-Down approach
+	// https://www.youtube.com/watch?v=OgdYyBT8iU8
+	public boolean isBalanced1(TreeNode root) {
 		if (root == null) {
-			height.height = 0;
 			return true;
 		}
 
-		Height leftHeighteight = new Height(), rightHeighteight = new Height();
-		boolean l = checkHeightBalance(root.left, leftHeighteight);
-		boolean r = checkHeightBalance(root.right, rightHeighteight);
-		int leftHeight = leftHeighteight.height, rightHeight = rightHeighteight.height;
-
-		height.height = (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
-
-		if ((leftHeight - rightHeight >= 2) || (rightHeight - leftHeight >= 2)) {
+		if (Math.abs(height1(root.left) - height1(root.right)) > 1) {
 			return false;
+		}
+
+		return (isBalanced1(root.left) && isBalanced1(root.right));
+
+	}
+
+	// Refer
+	// This is Top-Down approach
+	// https://www.youtube.com/watch?v=OgdYyBT8iU8
+	public int height1(TreeNode node) {
+		if (node == null) {
+			return 0;
 		} else {
-			return l && r;
+			return (1 + Math.max(height1(node.left), height1(node.right)));
 		}
 	}
 
-	public static void main(String args[]) {
-		Height height = new Height();
-
-		BalancedBinaryTree tree = new BalancedBinaryTree();
-		tree.root = new Node(1);
-		tree.root.left = new Node(2);
-		tree.root.right = new Node(3);
-		tree.root.left.left = new Node(4);
-		tree.root.left.right = new Node(5);
-
-		if (tree.checkHeightBalance(tree.root, height)) {
-			System.out.println("The tree is balanced");
+	// Refer
+	// This is Bottom-Up approach
+	// https://www.youtube.com/watch?v=OgdYyBT8iU8
+	public boolean isBalanced2(TreeNode root) {
+		if (root == null) {
+			return true;
 		} else {
-			System.out.println("The tree is not balanced");
+			return (height2(root) != -1);
+		}
+	}
+
+	// Refer
+	// This is Bottom-Up approach
+	// https://www.youtube.com/watch?v=OgdYyBT8iU8
+	public int height2(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+
+		int leftHeight = height2(node.left);
+		int rightHight = height2(node.right);
+		int balanceFactor = Math.abs(leftHeight - rightHight);
+
+		if (balanceFactor > 1 || leftHeight == -1 || rightHight == -1) {
+			return -1;
+		} else {
+			return (1 + Math.max(leftHeight, rightHight));
 		}
 	}
 }

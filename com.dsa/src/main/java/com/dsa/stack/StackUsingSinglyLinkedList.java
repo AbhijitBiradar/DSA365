@@ -1,7 +1,5 @@
 package com.dsa.stack;
 
-import java.util.EmptyStackException;
-
 // Refer
 // https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/stack/Stack.java
 // https://www.youtube.com/watch?v=Hxvn3IkE5SM&list=PL6Zs6LgrJj3vWOf01wMHiTy9IFufptfG3&index=1
@@ -17,6 +15,11 @@ public class StackUsingSinglyLinkedList {
 	private ListNode top;
 	private int length;
 
+	public StackUsingSinglyLinkedList() {
+		this.top = null;
+		this.length = 0;
+	}
+
 	private class ListNode {
 		private int data;
 		private ListNode next;
@@ -25,11 +28,6 @@ public class StackUsingSinglyLinkedList {
 			this.data = data;
 			this.next = null;
 		}
-	}
-
-	public StackUsingSinglyLinkedList() {
-		this.top = null;
-		this.length = 0;
 	}
 
 	public int length() {
@@ -41,10 +39,10 @@ public class StackUsingSinglyLinkedList {
 	}
 
 	public void push(int data) {
-		ListNode temp = new ListNode(data);
+		ListNode newNode = new ListNode(data);
 
-		temp.next = top;
-		top = temp;
+		newNode.next = top;
+		top = newNode;
 		length++;
 
 		System.out.println("\n" + data + " Pushed into Stack successfully!");
@@ -53,7 +51,8 @@ public class StackUsingSinglyLinkedList {
 	public int pop() {
 		// Case 1 : Stack is empty
 		if (isEmpty()) {
-			throw new EmptyStackException();
+			System.out.println("Stack is empty!");
+			return -1;
 		}
 
 		// Case 2 : Stack is not empty
@@ -69,7 +68,8 @@ public class StackUsingSinglyLinkedList {
 	public int peek() {
 		// Case 1 : Stack is empty
 		if (isEmpty()) {
-			throw new EmptyStackException();
+			System.out.println("Stack is empty!");
+			return -1;
 		}
 
 		// Case 2 : Stack is not empty
@@ -78,17 +78,17 @@ public class StackUsingSinglyLinkedList {
 
 	public void printStack() {
 		// Case 1 : Stack is empty
-		if (top == null) {
-			System.out.printf("\nStack Underflow");
+		if (isEmpty()) {
+			System.out.println("Stack is empty!");
 			return;
 		}
 
 		// Case 2 : Stack is not empty
 		System.out.println("\nDisplaying Stack elements:");
-		ListNode temp = top;
-		while (temp != null) {
-			System.out.print(temp.data + " ==> ");
-			temp = temp.next;
+		ListNode tempNode = top;
+		while (tempNode != null) {
+			System.out.print(tempNode.data + " ==> ");
+			tempNode = tempNode.next;
 		}
 		System.out.print("null");
 		System.out.println();
