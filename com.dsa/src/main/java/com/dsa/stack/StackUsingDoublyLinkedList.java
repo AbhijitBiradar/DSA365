@@ -7,8 +7,8 @@ package com.dsa.stack;
 
 public class StackUsingDoublyLinkedList {
 
-	private Node head;
-	private Node top;
+	private ListNode head;
+	private ListNode top;
 	private int length;
 
 	StackUsingDoublyLinkedList() {
@@ -17,12 +17,12 @@ public class StackUsingDoublyLinkedList {
 		this.length = 0;
 	}
 
-	private class Node {
+	private class ListNode {
 		private int data;
-		private Node next;
-		private Node previous;
+		private ListNode next;
+		private ListNode previous;
 
-		public Node(int data) {
+		public ListNode(int data) {
 			this.data = data;
 			this.next = null;
 			this.previous = null;
@@ -30,7 +30,7 @@ public class StackUsingDoublyLinkedList {
 	}
 
 	public boolean isEmpty() {
-		return (head == null && top == null);
+		return (head == null || top == null);
 	}
 
 	public int length() {
@@ -38,7 +38,7 @@ public class StackUsingDoublyLinkedList {
 	}
 
 	public void push(int data) {
-		Node newNode = new Node(data);
+		ListNode newNode = new ListNode(data);
 
 		if (isEmpty()) {
 			// Case 1 : Linked List is empty
@@ -71,6 +71,7 @@ public class StackUsingDoublyLinkedList {
 		if (top.next == null) {
 			top = null;
 			head = null;
+			length = 0;
 
 			System.out.println("\n" + result + " Popped from Stack successfully!");
 
@@ -81,6 +82,7 @@ public class StackUsingDoublyLinkedList {
 		head = head.next;
 		top = top.next;
 		head.previous = null;
+		top.previous = null;
 		length--;
 
 		System.out.println("\n" + result + " Popped from Stack successfully!");
@@ -103,7 +105,7 @@ public class StackUsingDoublyLinkedList {
 			System.out.println("Stack is empty");
 		else {
 			System.out.println("\nDisplaying Stack elements:");
-			Node tempNode = top;
+			ListNode tempNode = top;
 			while (tempNode != null) {
 				System.out.print(tempNode.data + " ==> ");
 				tempNode = tempNode.next;
@@ -145,17 +147,17 @@ public class StackUsingDoublyLinkedList {
 		sudll.printstack();
 		sudll.length();
 		System.out.println("\nData at Peek in Stack: " + sudll.peek());
-		
+
 		sudll.pop();
 		sudll.printstack();
 		sudll.length();
 		System.out.println("\nData at Peek in Stack: " + sudll.peek());
-		
+
 		sudll.pop();
 		sudll.printstack();
 		sudll.length();
 		System.out.println("\nData at Peek in Stack: " + sudll.peek());
-		
+
 		sudll.pop();
 		sudll.printstack();
 		sudll.length();
