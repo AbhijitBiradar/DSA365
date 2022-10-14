@@ -4,24 +4,27 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 // Refer
+// https://www.youtube.com/watch?v=VT7yfBG1_F8
 // https://www.geeksforgeeks.org/implement-a-stack-using-single-queue/
 // https://www.tutorialcup.com/interview/stack/implement-a-stack-using-single-queue.htm
-// https://www.youtube.com/watch?v=VT7yfBG1_F8
 
 public class StackUsingOneQueue {
 
-	Queue<Integer> intQueue = new LinkedList<Integer>();
+	private Queue<Integer> intQueue;
+
+	StackUsingOneQueue() {
+		this.intQueue = new LinkedList<Integer>();
+	}
 
 	public void push(int newData) {
-		// get previous size of queue
+		// get current size of queue
 		int size = intQueue.size();
 
-		// Add current element
+		// Add new element
 		intQueue.add(newData);
 
-		// Pop (or Dequeue) all previous elements and put them after current element
+		// Pop (or Dequeue) all old elements and add after new element
 		for (int i = 0; i < size; i++) {
-			// this will add front element into rear of queue
 			int queueData = intQueue.remove();
 			intQueue.add(queueData);
 		}
@@ -62,11 +65,12 @@ public class StackUsingOneQueue {
 	}
 
 	public void printStack() {
-		// Case 1 : Stack is empty
 		if (isEmpty()) {
+			// Case 1 : Stack is empty
 			System.out.println("Stack is empty!");
 			return;
 		} else {
+			// Case 2 : Stack is not empty
 			System.out.println("Displaying elements from Stack: ");
 			System.out.println(intQueue);
 		}
@@ -129,7 +133,5 @@ public class StackUsingOneQueue {
 		suoq.printStack();
 		System.out.println("Top : " + suoq.top());
 		System.out.println("Size : " + suoq.size());
-
 	}
-
 }
