@@ -22,23 +22,22 @@ public class StackUsingTwoQueues {
 	}
 
 	public void push(int data) {
-		// Case 1 : if no element is present in queue q then enqueue the new element
-		// into mainQueue
-		if (mainQueue.size() == 0) {
+		// Case 1 : if no element is present in queue mainQueue then enqueue the new
+		// element into mainQueue
+		if (isEmpty()) {
 			mainQueue.add(data);
 		} else {
-			// Case 1 : if elements are present in q then dequeue all the elements to
-			// temporary queue tempQueue
-
-			int size = mainQueue.size();
+			// Case 2 : if elements are present in mainQueue then dequeue all the elements
+			// to temporary queue tempQueue
+			int size = size();
 			for (int i = 0; i < size; i++) {
 				tempQueue.add(mainQueue.remove());
 			}
 
-			// enqueue the new element into q
+			// enqueue the new element into mainQueue
 			mainQueue.add(data);
 
-			// dequeue all the elements from temporary queue tmp to q
+			// dequeue all the elements from temporary queue tempQueue to mainQueue
 			for (int i = 0; i < size; i++) {
 				mainQueue.add(tempQueue.remove());
 			}
@@ -47,7 +46,7 @@ public class StackUsingTwoQueues {
 	}
 
 	public int pop() {
-		if (mainQueue.size() == 0) {
+		if (isEmpty()) {
 			// Case 1 : Stack is empty
 			System.out.println("Stack is empty!");
 			return -1;
@@ -60,7 +59,7 @@ public class StackUsingTwoQueues {
 	}
 
 	public int peek() {
-		if (mainQueue.size() == 0) {
+		if (isEmpty()) {
 			// Case 1 : Stack is empty
 			System.out.println("Stack is empty!");
 			return -1;
@@ -79,7 +78,7 @@ public class StackUsingTwoQueues {
 	}
 
 	public void display() {
-		if (size() == 0) {
+		if (isEmpty()) {
 			// Case 1 : Stack is empty
 			System.out.println("Stack is empty!");
 			return;
@@ -147,7 +146,5 @@ public class StackUsingTwoQueues {
 		sutq.display();
 		System.out.println("Top : " + sutq.peek());
 		System.out.println("Size : " + sutq.size());
-
 	}
-
 }
