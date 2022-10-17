@@ -10,7 +10,7 @@ package com.dsa.queue;
 //https://www.youtube.com/watch?v=LPrPHjH5CWE&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=90		
 //https://www.youtube.com/watch?v=incgHtVrYAk&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=91
 
-class DequeueUsingLinkedList {
+class DequeueUsingSinglyLinkedList {
 
 	private class Node {
 		private int data;
@@ -26,7 +26,7 @@ class DequeueUsingLinkedList {
 	private Node rear;
 	private int size;
 
-	public DequeueUsingLinkedList() {
+	public DequeueUsingSinglyLinkedList() {
 		this.front = null;
 		this.rear = null;
 		this.size = 0;
@@ -139,7 +139,7 @@ class DequeueUsingLinkedList {
 	}
 
 	public static void main(String[] args) {
-		DequeueUsingLinkedList q = new DequeueUsingLinkedList();
+		DequeueUsingSinglyLinkedList q = new DequeueUsingSinglyLinkedList();
 		// Add Deque element
 		// Add node at beginning position
 		q.insertFront(1);

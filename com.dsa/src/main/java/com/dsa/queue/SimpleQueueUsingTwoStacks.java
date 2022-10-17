@@ -3,15 +3,18 @@ package com.dsa.queue;
 // Refer
 // https://www.youtube.com/watch?v=EFO7bbFcOMw&t=1s
 
-public class QueueUsingTwoStacks {
-	private int stack1[];
-	private int stack2[];
+public class SimpleQueueUsingTwoStacks {
+
+	private int[] stack1;
+	private int[] stack2;
+
 	private int count = 0;
 	private int size = 0;
+
 	int top1 = -1;
 	int top2 = -1;
 
-	public QueueUsingTwoStacks(int size) {
+	public SimpleQueueUsingTwoStacks(int size) {
 		stack1 = new int[size];
 		stack2 = new int[size];
 		this.size = size;

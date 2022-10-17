@@ -8,7 +8,7 @@ import java.util.*;
 // https://tutorialspoint.dev/data-structure/queue-data-structure/priority-queue-using-linked-list
 // https://www.codingninjas.com/codestudio/library/priority-queue-implementation-using-linked-list
 
-class PriorityQueueUsingLinkedList {
+class PriorityQueueUsingSinglyLinkedList {
 
 	private class Node {
 		private int data;
@@ -24,7 +24,7 @@ class PriorityQueueUsingLinkedList {
 
 	private Node head;
 
-	public PriorityQueueUsingLinkedList() {
+	public PriorityQueueUsingSinglyLinkedList() {
 		this.head = null;
 	}
 
@@ -102,7 +102,7 @@ class PriorityQueueUsingLinkedList {
 	}
 
 	public static void main(String[] args) {
-		PriorityQueueUsingLinkedList pqull = new PriorityQueueUsingLinkedList();
+		PriorityQueueUsingSinglyLinkedList pqull = new PriorityQueueUsingSinglyLinkedList();
 		pqull.push(5, 2);
 		pqull.push(1, 3);
 		System.out.println("Peek value with maximum priority : " + pqull.peek());

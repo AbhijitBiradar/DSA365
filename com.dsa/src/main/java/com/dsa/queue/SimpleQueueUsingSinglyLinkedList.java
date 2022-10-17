@@ -17,31 +17,31 @@ package com.dsa.queue;
 // https://www.youtube.com/watch?v=Ey_CeVcZi4c
 
 // Rules
-// Rule 0 : front will point deletion activity and Rear will point to inserting activity
-// Rule 2 : While Enquing, rear will point to latest added node
-// Rule 3 : While Dequing, front will point to next node of deleted node
-// Rule 4 : While Dequing, for the last element, reset the values of FRONT and REAR to -1
+// Rule 0 : Front will point deletion activity and Rear will point to insertion activity
+// Rule 2 : While Enquing, Rear will point to latest added node
+// Rule 3 : While Dequing, Front will point to next node of deleted node
+// Rule 4 : While Dequing, for the last element, reset the values of Front and Rear to -1
 
-class SimpleQueueUsingLinkedList {
-
-	private class ListNode {
-		int data;
-		ListNode next;
-
-		public ListNode(int data) {
-			this.data = data;
-			this.next = null;
-		}
-	}
+class SimpleQueueUsingSinglyLinkedList {
 
 	private ListNode front;
 	private ListNode rear;
 	private int length;
 
-	public SimpleQueueUsingLinkedList() {
+	public SimpleQueueUsingSinglyLinkedList() {
 		this.front = null;
 		this.rear = null;
 		this.length = 0;
+	}
+
+	private class ListNode {
+		private int data;
+		private ListNode next;
+
+		public ListNode(int data) {
+			this.data = data;
+			this.next = null;
+		}
 	}
 
 	public int length() {
@@ -52,29 +52,30 @@ class SimpleQueueUsingLinkedList {
 		return (length == 0);
 	}
 
-	public void enqueue(int data) {
+	public void enQueue(int data) {
 		ListNode newNode = new ListNode(data);
 
-		// Case 1 : If queue is empty, then new node is front and rear both
+		// Case 1 : If queue is empty then, Front and Rear point to New node
 		if (isEmpty()) {
 			rear = newNode;
 			front = rear;
 			return;
 		} else {
-			// Case 2 : Add the new node at the end of queue and change rear
+			// Case 2 : If queue is not empty then, Add the New node at the end of queue and
+			// Rear will point to New node
 			rear.next = newNode;
 		}
 		rear = newNode;
 		length++;
 	}
 
-	public int dequeue() {
+	public int deQueue() {
 		// Case 1 : Queue is empty
 		if (isEmpty()) {
 			return (-1);
 		}
 
-		// Case 2 : Queue is not empty
+		// Case 2 : Queue is not empty and contains only element
 		int result = front.data;
 		front = front.next;
 
@@ -82,14 +83,16 @@ class SimpleQueueUsingLinkedList {
 			rear = null;
 		}
 
+		// Case 3 : Queue is not empty and contains more elements
 		length--;
 
 		return result;
 	}
 
 	public int peek() {
-		if (front == null) {
+		if (front == null) {			
 			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
 			return (-1);
 		} else {
 			// Case 2 : Queue is not empty
@@ -103,7 +106,7 @@ class SimpleQueueUsingLinkedList {
 			System.out.println("Queue is empty!");
 		} else {
 			// Case 2 : Queue is not empty
-			System.out.println("Displaying elements from Queue: ");
+			System.out.println("Displaying Queue elements : ");
 			ListNode tempNode = front;
 			while (tempNode != rear) {
 				System.out.print(tempNode.data + "==> ");
@@ -114,19 +117,19 @@ class SimpleQueueUsingLinkedList {
 	}
 
 	public static void main(String[] args) {
-		SimpleQueueUsingLinkedList squll = new SimpleQueueUsingLinkedList();
+		SimpleQueueUsingSinglyLinkedList squll = new SimpleQueueUsingSinglyLinkedList();
 
-		squll.enqueue(10);
-		squll.enqueue(20);
+		squll.enQueue(10);
+		squll.enQueue(20);
 
-		squll.dequeue();
-		squll.dequeue();
+		squll.deQueue();
+		squll.deQueue();
 
-		squll.enqueue(30);
-		squll.enqueue(40);
-		squll.enqueue(50);
+		squll.enQueue(30);
+		squll.enQueue(40);
+		squll.enQueue(50);
 
-		squll.dequeue();
+		squll.deQueue();
 
 		System.out.println("Queue Front : " + squll.front.data);
 		System.out.println("Queue Rear : " + squll.rear.data);

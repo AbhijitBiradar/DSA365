@@ -9,7 +9,7 @@ package com.dsa.queue;
 // https://tutorialspoint.dev/data-structure/queue-data-structure/circular-queue-set-2-circular-linked-list-implementation
 // http://www.cs.columbia.edu/~allen/S14/NOTES/CQueue.java.txt
 
-class CircularQueueUsingLinkedList {
+class CircularQueueUsingSinglyLinkedList {
 
 	private static class Node {
 		private int data;
@@ -24,7 +24,7 @@ class CircularQueueUsingLinkedList {
 	private Node front;
 	private Node rear;
 
-	public CircularQueueUsingLinkedList() {
+	public CircularQueueUsingSinglyLinkedList() {
 		this.front = null;
 		this.rear = null;
 	}
@@ -91,7 +91,7 @@ class CircularQueueUsingLinkedList {
 	}
 
 	public static void main(String args[]) {
-		CircularQueueUsingLinkedList cqull = new CircularQueueUsingLinkedList();
+		CircularQueueUsingSinglyLinkedList cqull = new CircularQueueUsingSinglyLinkedList();
 
 		cqull.enQueue(14);
 		cqull.enQueue(22);
