@@ -8,11 +8,18 @@ public class SimpleQueueUsingTwoStacks {
 	private int[] stack1;
 	private int[] stack2;
 
-	private int count = 0;
-	private int size = 0;
+	private int count;
+	private int size;
 
-	int top1 = -1;
-	int top2 = -1;
+	private int top1 = -1;
+	private int top2 = -1;
+
+	public SimpleQueueUsingTwoStacks(int size) {
+		this.stack1 = new int[size];
+		this.stack2 = new int[size];
+		this.size = size;
+		this.count = 0;
+	}
 
 	public boolean isEmpty() {
 		return (top1 == -1 && top2 == -1);
@@ -27,13 +34,23 @@ public class SimpleQueueUsingTwoStacks {
 	}
 
 	public int peek() {
-		return top1;
+		return stack1[top1];
 	}
 
-	public SimpleQueueUsingTwoStacks(int size) {
-		stack1 = new int[size];
-		stack2 = new int[size];
-		this.size = size;
+	// Refer
+	// https://www.youtube.com/watch?v=EFO7bbFcOMw&t=1s
+	public void display() {
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			System.out.println("Queue is empty!");
+		} else {
+			// Case 2 : Queue is not empty
+			for (int i = 0; i <= top1; i++) {
+				System.out.print(stack1[i] + " ");
+			}
+			System.out.println();
+			System.out.println();
+		}
 	}
 
 	public void enqueue(int data) {
@@ -46,13 +63,13 @@ public class SimpleQueueUsingTwoStacks {
 	// https://www.youtube.com/watch?v=EFO7bbFcOMw&t=1s
 	private void pushToStack1(int data) {
 		if (isFull()) {
+			// Case 1 : Stack 1 is full
 			System.out.println("Queue is Full!");
-			return;
 		} else {
+			// Case 2 : Stack 1 is not full
 			top1++;
 			stack1[top1] = data;
 		}
-
 	}
 
 	// Refer
@@ -68,6 +85,7 @@ public class SimpleQueueUsingTwoStacks {
 				pushToStack2(data);
 				// Step 3 : Delete item
 				int deletedData = popFromStack2();
+
 				System.out.println("Poped data: " + deletedData);
 				System.out.println(deletedData + " Poped from Queue successfully!");
 			}
@@ -75,7 +93,9 @@ public class SimpleQueueUsingTwoStacks {
 			count--;
 
 			for (int i = 0; i < count; i++) {
+				// Step 4: Pop each item from Stack2
 				int data = popFromStack2();
+				// Step 5: Push each item into Stack1
 				pushToStack1(data);
 			}
 		}
@@ -115,31 +135,21 @@ public class SimpleQueueUsingTwoStacks {
 		}
 	}
 
-	// Refer
-	// https://www.youtube.com/watch?v=EFO7bbFcOMw&t=1s
-	public void display() {
-		for (int i = 0; i <= top1; i++) {
-			System.out.print(stack1[i] + " ");
-		}
-		System.out.println();
-		System.out.println();
-	}
-
 	public static void main(String[] args) {
-		SimpleQueueUsingTwoStacks s = new SimpleQueueUsingTwoStacks(5);
-		s.enqueue(1);
-		s.display();
+		SimpleQueueUsingTwoStacks squts = new SimpleQueueUsingTwoStacks(5);
+		squts.enqueue(1);
+		squts.display();
 
-		s.enqueue(3);
-		s.display();
+		squts.enqueue(3);
+		squts.display();
 
-		s.enqueue(5);
-		s.display();
+		squts.enqueue(5);
+		squts.display();
 
-		s.enqueue(7);
-		s.display();
+		squts.enqueue(7);
+		squts.display();
 
-		s.enqueue(9);
-		s.display();
+		squts.enqueue(9);
+		squts.display();
 	}
 }
