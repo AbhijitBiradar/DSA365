@@ -1,6 +1,6 @@
 package com.dsa.queue;
 
-// Reference
+// Refer
 // https://www.youtube.com/watch?v=7LTEqqlHx8s
 
 // Other Reference
@@ -10,6 +10,14 @@ package com.dsa.queue;
 // http://www.cs.columbia.edu/~allen/S14/NOTES/CQueue.java.txt
 
 class CircularQueueUsingSinglyLinkedList {
+
+	private Node front;
+	private Node rear;
+
+	public CircularQueueUsingSinglyLinkedList() {
+		this.front = null;
+		this.rear = null;
+	}
 
 	private static class Node {
 		private int data;
@@ -21,12 +29,34 @@ class CircularQueueUsingSinglyLinkedList {
 		}
 	}
 
-	private Node front;
-	private Node rear;
+	public boolean isEmpty() {
+		return front == null;
+	}
+	
+	public Node getFront() {
+		return front;
+	}
+	
+	public Node getRear() {
+		return rear;
+	}
 
-	public CircularQueueUsingSinglyLinkedList() {
-		this.front = null;
-		this.rear = null;
+	// Refer
+	// https://www.youtube.com/watch?v=7LTEqqlHx8s
+	public void display() {
+		// Case 1 : Queue is empty
+		if (front == null) {
+			System.out.println("\nQueue is empty!");
+		} else {
+			// Case 2 : Queue is not empty
+			System.out.println("\nDisplaying elements in Queue: ");
+			Node tempNode = front;
+			while (tempNode.next != front) {
+				System.out.print(tempNode.data + " ==> ");
+				tempNode = tempNode.next;
+			}
+			System.out.println(tempNode.data);
+		}
 	}
 
 	// Refer
@@ -43,7 +73,7 @@ class CircularQueueUsingSinglyLinkedList {
 			rear = newNode;
 		}
 		rear.next = front; // This code is to make it circular connection
-		System.out.println(data + " data Inserted successfully!");
+		System.out.println("\n" + data + " data Inserted successfully!");
 	}
 
 	// Refer
@@ -51,7 +81,7 @@ class CircularQueueUsingSinglyLinkedList {
 	public int deQueue() {
 		if (front == null) {
 			// Case 1 : Queue is empty
-			System.out.printf("Queue is empty");
+			System.out.printf("\nQueue is empty");
 			return (-1);
 		}
 
@@ -68,47 +98,35 @@ class CircularQueueUsingSinglyLinkedList {
 			front = front.next;
 			rear.next = front; // This code is to make it circular connection
 		}
-		System.out.println(value + " data deleted successfully!");
+		System.out.println("\n" + value + " data deleted successfully!");
 		return value;
-	}
-
-	// Refer
-	// https://www.youtube.com/watch?v=7LTEqqlHx8s
-	public void display() {
-		System.out.println("Displaying elements in Queue: ");
-		// Case 1 : Queue is empty
-		if (front == null) {
-			System.out.println("Queue is empty!");
-		} else {
-			// Case 2 : Queue is not empty
-			Node tempNode = front;
-			while (tempNode.next != front) {
-				System.out.print(tempNode.data + " ==> ");
-				tempNode = tempNode.next;
-			}
-			System.out.println(tempNode.data);
-		}
 	}
 
 	public static void main(String args[]) {
 		CircularQueueUsingSinglyLinkedList cqull = new CircularQueueUsingSinglyLinkedList();
 
-		cqull.enQueue(14);
-		cqull.enQueue(22);
-		cqull.enQueue(6);
-
+		cqull.enQueue(1);
 		cqull.display();
 
-		System.out.println();
-		cqull.deQueue();
-		System.out.println();
-		cqull.deQueue();
-		System.out.println();
+		cqull.enQueue(3);
+		cqull.display();
 
+		cqull.enQueue(5);
+		cqull.display();
+
+		cqull.deQueue();
+		cqull.display();
+
+		cqull.deQueue();
+		cqull.display();
+
+		cqull.deQueue();
+		cqull.display();
+
+		cqull.enQueue(7);
 		cqull.display();
 
 		cqull.enQueue(9);
-		cqull.enQueue(20);
 		cqull.display();
 	}
 }
