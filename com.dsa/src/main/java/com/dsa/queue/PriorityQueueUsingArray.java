@@ -1,7 +1,5 @@
 package com.dsa.queue;
 
-import java.util.*;
-
 // Refer
 // https://www.geeksforgeeks.org/priority-queue-set-1-introduction/
 

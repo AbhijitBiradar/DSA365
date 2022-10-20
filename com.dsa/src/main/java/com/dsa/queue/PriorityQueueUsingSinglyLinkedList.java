@@ -1,7 +1,5 @@
 package com.dsa.queue;
 
-import java.util.*;
-
 // Reference
 // https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
 // https://www.geeksforgeeks.org/priority-queue-using-linked-list/#:~:text=Implement%20Priority%20Queue%20using%20Linked,removing%20it%20from%20the%20queue.
