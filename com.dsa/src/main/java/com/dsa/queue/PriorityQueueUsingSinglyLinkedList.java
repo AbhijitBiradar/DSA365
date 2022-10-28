@@ -26,13 +26,27 @@ class PriorityQueueUsingSinglyLinkedList {
 		this.head = null;
 	}
 
+	public int peek() {
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			return -1;
+		} else {
+			// Case 2 : Queue is not empty
+			return head.data; // head of the linked list contains the maximum priority element
+		}
+	}
+
+	public boolean isEmpty() {
+		return (head == null);
+	}
+
 	// Reference
 	// https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
 	public void push(int data, int priority) {
 		Node newNode = new Node(data, priority);
 		// Case 1 : Queue is empty
-		// If head is null, this is the first node to be added so make head = newNode
 		if (head == null) {
+			// If head is null, this is the first node to be added so make head = newNode
 			head = newNode;
 			System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
 			return;
@@ -46,6 +60,7 @@ class PriorityQueueUsingSinglyLinkedList {
 			previousNode = tempNode;
 			tempNode = tempNode.next;
 		}
+
 		if (tempNode == null) {
 			// Case 2A : No node with priority less than this node (Case 1)
 			previousNode.next = newNode;
@@ -86,17 +101,8 @@ class PriorityQueueUsingSinglyLinkedList {
 		}
 	}
 
-	public int peek() {
-		if (isEmpty()) {
-			return -1;
-		} else {
-			// head of the linked list contains the maximum priority element
-			return head.data;
-		}
-	}
+	public void display() {
 
-	public boolean isEmpty() {
-		return (head == null);
 	}
 
 	public static void main(String[] args) {

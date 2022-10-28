@@ -260,6 +260,18 @@ class SimpleBinaryTree {
 		return Math.max(node.val + left, node.val + right);
 	}
 
+	public void constructBinaryTreeFromPreOrderTraversal() {
+		// https://www.youtube.com/watch?v=hKE-0eZtLBY
+	}
+
+	public void constructBinaryTreeFromPostOrderTraversal() {
+		// https://www.youtube.com/watch?v=hKE-0eZtLBY
+	}
+	
+	public void constructBinaryTreeFromInOrderTraversal() {
+		// https://www.youtube.com/watch?v=hKE-0eZtLBY
+	}
+
 	public static void main(String[] args) {
 		SimpleBinaryTree sbTree = new SimpleBinaryTree();
 
