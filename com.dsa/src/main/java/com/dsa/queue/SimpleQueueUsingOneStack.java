@@ -5,6 +5,8 @@ import java.util.Stack;
 // Refer
 // https://stackoverflow.com/questions/12470626/how-can-one-implement-a-queue-with-only-a-stack-implementation
 
+// Not understood this
+
 public class SimpleQueueUsingOneStack {
 	Stack<Integer> stack = new Stack<Integer>();
 

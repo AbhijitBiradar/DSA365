@@ -8,6 +8,12 @@ package com.dsa.queue;
 
 class PriorityQueueUsingSinglyLinkedList {
 
+	private Node head;
+
+	public PriorityQueueUsingSinglyLinkedList() {
+		this.head = null;
+	}
+
 	private class Node {
 		private int data;
 		private int priority;
@@ -20,10 +26,8 @@ class PriorityQueueUsingSinglyLinkedList {
 		}
 	}
 
-	private Node head;
-
-	public PriorityQueueUsingSinglyLinkedList() {
-		this.head = null;
+	public boolean isEmpty() {
+		return (head == null);
 	}
 
 	public int peek() {
@@ -36,25 +40,23 @@ class PriorityQueueUsingSinglyLinkedList {
 		}
 	}
 
-	public boolean isEmpty() {
-		return (head == null);
-	}
-
 	// Reference
 	// https://www.tutorialcup.com/interview/queue/priority-queue-using-singly-linked-list.htm
 	public void push(int data, int priority) {
 		Node newNode = new Node(data, priority);
+
 		// Case 1 : Queue is empty
 		if (head == null) {
 			// If head is null, this is the first node to be added so make head = newNode
 			head = newNode;
-			System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+			System.out.println("\nPushed data: " + data + " with Priority : " + priority + " into queue!");
 			return;
 		}
 
 		// Case 2 : Queue is not empty
 		Node tempNode = head;
 		Node previousNode = null;
+
 		// search for first node having priority less than new node's priority
 		while (tempNode != null && tempNode.priority > priority) {
 			previousNode = tempNode;
@@ -62,22 +64,23 @@ class PriorityQueueUsingSinglyLinkedList {
 		}
 
 		if (tempNode == null) {
-			// Case 2A : No node with priority less than this node (Case 1)
+			// Case 2A : No node with priority less than this node. So, newNode will be the
+			// last node
 			previousNode.next = newNode;
-			System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+			System.out.println("\nPushed data: " + data + " with Priority : " + priority + " into queue!");
 		} else {
 			if (previousNode == null) {
 				// Case 2B-A : All the nodes have priority less than new node's priority then
 				// add this new node at the starting
 				newNode.next = head;
 				head = newNode;
-				System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+				System.out.println("\nPushed data: " + data + " with Priority : " + priority + " into queue!");
 			} else {
 				// Case 2B-B : Add this node before the node with priority less than new node's
 				// priority
 				newNode.next = tempNode;
 				previousNode.next = newNode;
-				System.out.println("Inserted data: " + data + " & priority : " + priority + " into queue!");
+				System.out.println("\nPushed data: " + data + " with Priority : " + priority + " into queue!");
 			}
 		}
 	}
@@ -87,33 +90,62 @@ class PriorityQueueUsingSinglyLinkedList {
 	private int pop() {
 		if (isEmpty()) {
 			// Case 1 : Queue is empty
-			System.out.println("Queue is empty!");
+			System.out.println("\nQueue is empty!");
 			return -1;
 		} else {
 			// Case 2 : Queue is not empty
 			// head of the linked list contains the maximum priority element
-			int data = head.data;
-			int priority = head.priority;
+			int deletedData = head.data;
+			int deletedDataPriority = head.priority;
 			// removing the highest priority element
 			head = head.next;
-			System.out.println("Removed data: " + data + " & priority : " + priority + " from queue!");
-			return data;
+			System.out.println(
+					"\nPopped data: " + deletedData + " with Priority : " + deletedDataPriority + " from queue!");
+			return deletedData;
 		}
 	}
 
 	public void display() {
-
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			System.out.println("\nQueue is empty!");
+		} else {
+			// Case 2 : Queue is not empty
+			System.out.println("\nDisplaying Queue Elements: ");
+			Node tempNode = head;
+			while (tempNode != null) {
+				System.out.println("Data : " + tempNode.data + ", Priority : " + tempNode.priority);
+				tempNode = tempNode.next;
+			}
+			System.out.println();
+		}
 	}
 
 	public static void main(String[] args) {
 		PriorityQueueUsingSinglyLinkedList pqull = new PriorityQueueUsingSinglyLinkedList();
+
 		pqull.push(5, 2);
-		pqull.push(1, 3);
+		pqull.display();
 		System.out.println("Peek value with maximum priority : " + pqull.peek());
+
+		pqull.push(1, 3);
+		pqull.display();
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
+
 		pqull.push(7, 5);
+		pqull.display();
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
+
 		pqull.push(9, 1);
+		pqull.display();
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
+
 		pqull.pop();
+		pqull.display();
+		System.out.println("Peek value with maximum priority : " + pqull.peek());
+
 		pqull.pop();
+		pqull.display();
 		System.out.println("Peek value with maximum priority : " + pqull.peek());
 	}
 }

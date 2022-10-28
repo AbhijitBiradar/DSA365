@@ -5,6 +5,8 @@ package com.dsa.tree;
 // https://www.programiz.com/dsa/insertion-in-a-red-black-tree
 // https://www.programiz.com/dsa/deletion-from-a-red-black-tree
 
+// not understood this program
+
 class Node {
 	int data;
 	Node parent;

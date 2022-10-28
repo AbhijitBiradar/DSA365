@@ -1,7 +1,9 @@
 package com.dsa.queue;
 
-//Refer this
+// Refer this
 // https://kalkicode.com/implement-queue-using-doubly-linked-list-in-java
+
+// Not understood this
 
 public class SimpleQueueUsingDoublyLinkedList {
 
