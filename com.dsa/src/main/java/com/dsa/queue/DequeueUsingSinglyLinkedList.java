@@ -1,26 +1,16 @@
 package com.dsa.queue;
 
-//Refer this
-//https://kalkicode.com/deque-implementation-using-doubly-linked-list
-//https://www.youtube.com/watch?v=2ItzVMoenxI&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=85		
-//https://www.youtube.com/watch?v=G81jTgSOf7g&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=86		
-//https://www.youtube.com/watch?v=VMnsIC4kams&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=87		
-//https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=88		
-//https://www.youtube.com/watch?v=M4GdPUfH18k&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89		
-//https://www.youtube.com/watch?v=LPrPHjH5CWE&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=90		
-//https://www.youtube.com/watch?v=incgHtVrYAk&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=91
+// Refer 
+// https://kalkicode.com/deque-implementation-using-doubly-linked-list
+// https://www.youtube.com/watch?v=2ItzVMoenxI&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=85		
+// https://www.youtube.com/watch?v=G81jTgSOf7g&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=86		
+// https://www.youtube.com/watch?v=VMnsIC4kams&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=87		
+// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=88		
+// https://www.youtube.com/watch?v=M4GdPUfH18k&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89		
+// https://www.youtube.com/watch?v=LPrPHjH5CWE&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=90		
+// https://www.youtube.com/watch?v=incgHtVrYAk&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=91
 
 class DequeueUsingSinglyLinkedList {
-
-	private class Node {
-		private int data;
-		private Node next;
-
-		public Node(int data) {
-			this.data = data;
-			this.next = null;
-		}
-	}
 
 	private Node front;
 	private Node rear;
@@ -32,19 +22,51 @@ class DequeueUsingSinglyLinkedList {
 		this.size = 0;
 	}
 
+	private class Node {
+		private int data;
+		private Node next;
+
+		public Node(int data) {
+			this.data = data;
+			this.next = null;
+		}
+	}
+
 	public boolean isEmpty() {
 		return (size == 0);
 	}
 
-	public int isSize() {
+	public int size() {
 		return (size);
+	}
+
+	public int getFront() {
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			System.out.println("\nQueue is empty!");
+			return -1;
+		} else {
+			// Case 2 : Queue is not empty
+			return front.data;
+		}
+	}
+
+	public int getRear() {
+		if (isEmpty()) {
+			// Case 1 : Queue is empty
+			System.out.println("\nQueue is empty!");
+			return -1;
+		} else {
+			// Case 2 : Queue is not empty
+			return rear.data;
+		}
 	}
 
 	// Refer
 	// https://www.youtube.com/watch?v=VMnsIC4kams&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=87
-	public void insertFront(int element) {
+	public void insertFromFront(int element) {
 		Node newNode = new Node(element);
-		newNode.next = this.front;
+		// newNode.next = front;
 		if (front == null) {
 			// Case 1 : Queue is empty. When inserting a first node of queue
 			front = newNode;
@@ -55,12 +77,12 @@ class DequeueUsingSinglyLinkedList {
 			front = newNode;
 		}
 		size++;
-		System.out.println("Node inserted from Front!");
+		System.out.println("\n" + element + " Pushed from Front");
 	}
 
 	// Refer
 	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
-	public void insertRear(int element) {
+	public void insertFromRear(int element) {
 		Node newNode = new Node(element);
 		if (front == null) {
 			// Case 1 : Queue is empty. When inserting a first node of queue
@@ -72,106 +94,149 @@ class DequeueUsingSinglyLinkedList {
 			rear = newNode;
 		}
 		size++;
-		System.out.println("Node inserted from Rear!");
+		System.out.println("\n" + element + " Pushed from Rear");
 	}
 
 	// Refer
 	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
-	public void deleteFront() {
-		if (isEmpty() == true) {
+	public void deleteFromFront() {
+		if (isEmpty()) {
 			// Case 1 : Queue is empty
-			System.out.println("Queue is empty!");
+			System.out.println("\nQueue is empty!");
 			return;
 		}
 		// Case 2 : Queue is not empty
 		Node tempNode = front;
 		front = tempNode.next;
+
 		if (front == null) {
 			// Case 2A : Queue was having only one element. So, after deletion update Rear
 			// as null
 			rear = null;
 		}
+
 		size--;
+		System.out.println("\n" + tempNode.data + " Poped from Front!");
 		tempNode = null;
-		System.out.println("Node deleted from Front!");
 	}
 
 	// Refer
 	// https://www.youtube.com/watch?v=yIwiRpIYwrU&list=PLoxQvXKPyCeWBT_BLlE_5g0sNxqcVUwJD&index=89
-	public void deleteRear() {
-		if (isEmpty() == true) {
+	public void deleteFromRear() {
+		if (isEmpty()) {
 			// Case 1 : Queue is empty
 			System.out.println("Queue is empty!");
 			return;
 		}
 		// Case 2 : Queue is not empty
-		Node tempNode = front;
-		while (tempNode.next != rear) {
-			tempNode = tempNode.next;
+		Node currentNode = front;
+		Node previousNode = null;
+		while (currentNode != rear) {
+			previousNode = currentNode;
+			currentNode = currentNode.next;
 		}
-		rear = tempNode;
+		rear = previousNode;
+
 		if (rear == null) {
 			// Case 2A : Queue was having only one element. So, after deletion update Front
 			// as null
 			front = null;
 		} else {
+			// Case 2B : Queue was having more than one element
 			rear.next = null;
 		}
+
 		size--;
-		tempNode = null;
-		System.out.println("Node deleted from Rear!");
+		System.out.println("\n" + currentNode.data + " Poped from Rear!");
+		currentNode = null;
 	}
 
 	public void display() {
-		if (isEmpty() == true) {
+		if (isEmpty()) {
 			// Case 1 : Queue is empty
-			System.out.println("Queue is empty!");
+			System.out.println("\nQueue is empty!");
 			return;
+		} else {
+			// Case 2 : Queue is not empty
+			Node tempNode = front;
+			System.out.println("\nDisplaying Deque Element : \n");
+			while (tempNode != null) {
+				System.out.print(tempNode.data + " "); // Display node of from front to rear
+				tempNode = tempNode.next;
+			}
+			System.out.println();
 		}
-		Node node = front;
-		System.out.println("Displaying Deque Element :");
-		// Display node of from front to rear
-		while (node != null) {
-			System.out.print(" " + node.data);
-			node = node.next;
-		}
-		System.out.println();
+	}
+
+	public void displayFromFront() {
+
+	}
+
+	public void displayFromRear() {
+
 	}
 
 	public static void main(String[] args) {
-		DequeueUsingSinglyLinkedList q = new DequeueUsingSinglyLinkedList();
-		// Add Deque element
-		// Add node at beginning position
-		q.insertFront(1);
-		q.display();
+		DequeueUsingSinglyLinkedList dusll = new DequeueUsingSinglyLinkedList();
 
-		q.insertFront(2);
-		q.display();
+		dusll.insertFromFront(1);
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		// Add node at last position
-		q.insertRear(3);
-		q.display();
+		dusll.insertFromFront(3);
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		q.insertRear(4);
-		q.display();
+		dusll.insertFromFront(5);
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		// Add node at beginning position
-		q.insertFront(5);
-		q.display();
+		dusll.deleteFromFront();
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		q.insertFront(6);
-		q.display();
+		dusll.deleteFromFront();
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		System.out.println("\n Size : " + q.isSize() + "\n");
+		dusll.deleteFromFront();
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		// Remove queue element
-		q.deleteFront();
-		q.display();
+		dusll.deleteFromFront();
+		dusll.display();
+		System.out.println("\nFront Element : " + dusll.getFront());
 
-		q.deleteRear();
-		q.display();
+		System.out.println("\nQueue Size : " + dusll.size() + "\n");
 
-		System.out.println("\n Size : " + q.isSize() + "\n");
+		dusll.insertFromRear(7);
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
 
+		dusll.insertFromRear(9);
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		dusll.insertFromRear(11);
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		dusll.deleteFromRear();
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		dusll.deleteFromRear();
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		dusll.deleteFromRear();
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		dusll.deleteFromRear();
+		dusll.display();
+		System.out.println("\nRear Element : " + dusll.getRear());
+
+		System.out.println("\nQueue Size : " + dusll.size() + "\n");
 	}
 }
