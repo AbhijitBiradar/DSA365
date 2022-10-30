@@ -11,6 +11,8 @@ package com.dsa.tree;
 // https://www.youtube.com/watch?v=_Hehd1KSq7Y
 // https://www.geeksforgeeks.org/check-whether-binary-tree-complete-not-set-2-recursive-solution/?ref=rp
 
+// Code not understood this
+
 class CompleteBinaryTree {
 
 	private static class Node {

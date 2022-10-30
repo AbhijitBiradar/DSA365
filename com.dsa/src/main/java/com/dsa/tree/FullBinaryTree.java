@@ -7,21 +7,25 @@ package com.dsa.tree;
 
 class FullBinaryTree {
 
-	private static class Node {
-		private int data;
-		private Node leftChild;
-		private Node rightChild;
+	private TreeNode root;
 
-		public Node(int data) {
-			this.data = data;
+	public FullBinaryTree() {
+		this.root = null;
+	}
+
+	private static class TreeNode {
+		private int val;
+		private TreeNode leftChild;
+		private TreeNode rightChild;
+
+		public TreeNode(int val) {
+			this.val = val;
 			this.leftChild = null;
 			this.rightChild = null;
 		}
 	}
 
-	private Node root;
-
-	public boolean isFullBinaryTree(Node node) {
+	public boolean isFullBinaryTree(TreeNode node) {
 
 		// Case 1: Checking tree emptiness
 		if (node == null)
@@ -32,23 +36,23 @@ class FullBinaryTree {
 			return true;
 		}
 
-		// Case 3:Checking the sub children
+		// Case 3:Checking the full binary for sub children
 		if ((node.leftChild != null) && (node.rightChild != null)) {
 			return (isFullBinaryTree(node.leftChild) && isFullBinaryTree(node.rightChild));
+		} else {
+			return false;
 		}
-
-		return false;
 	}
 
 	public static void main(String args[]) {
 		FullBinaryTree fbTree = new FullBinaryTree();
-		fbTree.root = new Node(1);
-		fbTree.root.leftChild = new Node(2);
-		fbTree.root.rightChild = new Node(3);
-		fbTree.root.leftChild.leftChild = new Node(4);
-		fbTree.root.leftChild.rightChild = new Node(5);
-		fbTree.root.rightChild.leftChild = new Node(6);
-		fbTree.root.rightChild.rightChild = new Node(7);
+		fbTree.root = new TreeNode(1);
+		fbTree.root.leftChild = new TreeNode(2);
+		fbTree.root.rightChild = new TreeNode(3);
+		fbTree.root.leftChild.leftChild = new TreeNode(4);
+		fbTree.root.leftChild.rightChild = new TreeNode(5);
+		fbTree.root.rightChild.leftChild = new TreeNode(6);
+		fbTree.root.rightChild.rightChild = new TreeNode(7);
 
 		if (fbTree.isFullBinaryTree(fbTree.root)) {
 			System.out.print("The tree is a full binary tree");

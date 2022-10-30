@@ -2,7 +2,7 @@ package com.dsa.tree;
 
 import java.util.Stack;
 
-// Reference
+// Refer
 // https://www.programiz.com/dsa/binary-tree
 // https://kalkicode.com/inorder-traversal-of-binary-tree-with-recursion-in-java
 // https://kalkicode.com/preorder-traversal-of-binary-tree-using-recursion-in-java
@@ -20,16 +20,28 @@ import java.util.Stack;
 
 class SimpleBinaryTree {
 
-	public class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
+	private TreeNode root;
+
+	public SimpleBinaryTree() {
+		this.root = null;
+	}
+
+	public SimpleBinaryTree(int val) {
+		this.root = new TreeNode(val);
+	}
+
+	private static class TreeNode {
+		private int val;
+		private TreeNode left;
+		private TreeNode right;
 
 		TreeNode() {
 		}
 
 		TreeNode(int val) {
 			this.val = val;
+			this.left = null;
+			this.right = null;
 		}
 
 		TreeNode(int val, TreeNode left, TreeNode right) {
@@ -39,31 +51,9 @@ class SimpleBinaryTree {
 		}
 	}
 
-	private static class Node {
-		private int data;
-		private Node left;
-		private Node right;
-
-		public Node(int data) {
-			this.data = data;
-			this.left = null;
-			this.right = null;
-		}
-	}
-
-	private Node root;
-
-	public SimpleBinaryTree(int data) {
-		this.root = new Node(data);
-	}
-
-	public SimpleBinaryTree() {
-		this.root = null;
-	}
-
-	public void traversePreOrderRec(Node node) {
+	public void traversePreOrderRec(TreeNode node) {
 		if (node != null) {
-			System.out.print(" " + node.data);
+			System.out.print(node.val + " ");
 			traversePreOrderRec(node.left);
 			traversePreOrderRec(node.right);
 		}
@@ -91,10 +81,10 @@ class SimpleBinaryTree {
 		}
 	}
 
-	public void traverseInOrderRec(Node node) {
+	public void traverseInOrderRec(TreeNode node) {
 		if (node != null) {
 			traverseInOrderRec(node.left);
-			System.out.print(" " + node.data);
+			System.out.print(" " + node.val);
 			traverseInOrderRec(node.right);
 		}
 	}
@@ -121,32 +111,32 @@ class SimpleBinaryTree {
 		}
 	}
 
-	public void traversePostOrderRec(Node node) {
+	public void traversePostOrderRec(TreeNode node) {
 		if (node != null) {
 			traversePostOrderRec(node.left);
 			traversePostOrderRec(node.right);
-			System.out.print(" " + node.data);
+			System.out.print(" " + node.val);
 		}
 	}
 
 	// Refer
 	// https://github.com/dinesh-varyani/ds-algos/blob/master/src/com/hubberspot/dsalgo/tree/BinaryTree.java
 	public void traversePostOrderIter(Node node) {
-		Node current = root;
-		Stack<Node> stack = new Stack<>();
+		TreeNode current = root;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 
 		while (current != null || !stack.isEmpty()) {
 			if (current != null) {
 				stack.push(current);
 				current = current.left;
 			} else {
-				Node temp = stack.peek().right;
+				TreeNode temp = stack.peek().right;
 				if (temp == null) {
 					temp = stack.pop();
-					System.out.print(temp.data + " ");
+					System.out.print(temp.val + " ");
 					while (!stack.isEmpty() && temp == stack.peek().right) {
 						temp = stack.pop();
-						System.out.print(temp.data + " ");
+						System.out.print(temp.val + " ");
 					}
 				} else {
 					current = temp;
@@ -267,7 +257,7 @@ class SimpleBinaryTree {
 	public void constructBinaryTreeFromPostOrderTraversal() {
 		// https://www.youtube.com/watch?v=hKE-0eZtLBY
 	}
-	
+
 	public void constructBinaryTreeFromInOrderTraversal() {
 		// https://www.youtube.com/watch?v=hKE-0eZtLBY
 	}
@@ -275,18 +265,18 @@ class SimpleBinaryTree {
 	public static void main(String[] args) {
 		SimpleBinaryTree sbTree = new SimpleBinaryTree();
 
-		sbTree.root = new Node(1);
-		sbTree.root.left = new Node(2);
-		sbTree.root.right = new Node(3);
-		sbTree.root.left.left = new Node(4);
+		sbTree.root = new TreeNode(1);
+		sbTree.root.left = new TreeNode(2);
+		sbTree.root.right = new TreeNode(3);
+		sbTree.root.left.left = new TreeNode(4);
 
-		System.out.println("Pre Order Traversal: ");
+		System.out.println("\nPre Order Traversal: ");
 		sbTree.traversePreOrderRec(sbTree.root);
 
-		System.out.println("In Order Traversal: ");
+		System.out.println("\nIn Order Traversal: ");
 		sbTree.traverseInOrderRec(sbTree.root);
 
-		System.out.println("Post Order Traversal: ");
+		System.out.println("\nPost Order Traversal: ");
 		sbTree.traversePostOrderRec(sbTree.root);
 	}
 }

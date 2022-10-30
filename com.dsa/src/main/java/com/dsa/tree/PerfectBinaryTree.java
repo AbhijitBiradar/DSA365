@@ -9,6 +9,8 @@ package com.dsa.tree;
 
 // Definition : A perfect binary tree is a type of binary tree in which every internal node has exactly two child nodes and all the leaf nodes are at the same level.
 
+// Code not understood this
+
 class PerfectBinaryTree {
 
 	private static class Node {
