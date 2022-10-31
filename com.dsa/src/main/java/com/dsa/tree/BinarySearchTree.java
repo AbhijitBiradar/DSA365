@@ -3,18 +3,32 @@ package com.dsa.tree;
 // Reference
 // https://www.programiz.com/dsa/binary-search-tree
 
+// Definition :
+// A binary search tree follows some order to arrange the elements. 
+// In a Binary search tree, the value of left node must be smaller than the parent node, 
+// and the value of right node must be greater than the parent node. 
+// This rule is applied recursively to the left and right subtrees of the root.
+
 class BinarySearchTree {
 
-	public class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
+	private TreeNode root;
+
+	public BinarySearchTree() {
+		this.root = null;
+	}
+
+	private static class TreeNode {
+		private int val;
+		private TreeNode left;
+		private TreeNode right;
 
 		TreeNode() {
 		}
 
 		TreeNode(int val) {
 			this.val = val;
+			this.left = null;
+			this.right = null;
 		}
 
 		TreeNode(int val, TreeNode left, TreeNode right) {
@@ -24,15 +38,16 @@ class BinarySearchTree {
 		}
 	}
 
-	public class ListNode {
-		int val;
-		ListNode next;
+	private static class ListNode {
+		private int val;
+		private ListNode next;
 
 		ListNode() {
 		}
 
 		ListNode(int val) {
 			this.val = val;
+			this.next = null;
 		}
 
 		ListNode(int val, ListNode next) {
@@ -41,32 +56,14 @@ class BinarySearchTree {
 		}
 	}
 
-	private static class Node {
-		private int data;
-		private Node left;
-		private Node right;
-
-		public Node(int data) {
-			this.data = data;
-			this.left = null;
-			this.right = null;
-		}
-	}
-
-	private Node root;
-
-	public BinarySearchTree() {
-		this.root = null;
-	}
-
 	// Function to construct a BST from given keys
 	// user below array
 	// int[] keys = { 15, 10, 20, 8, 12, 16, 25 };
 
 	// Refer
 	// https://www.techiedelight.com/insertion-in-bst/
-	public Node constructBST(int[] keys) {
-		Node root = null;
+	public TreeNode constructBST(int[] keys) {
+		TreeNode root = null;
 		for (int key : keys) {
 			root = insertRec(root, key);
 		}
@@ -78,9 +75,9 @@ class BinarySearchTree {
 		System.out.println();
 	}
 
-	public void traversePreOrderRec(Node root) {
+	public void traversePreOrderRec(TreeNode root) {
 		if (root != null) {
-			System.out.print(root.data + " -> ");
+			System.out.print(root.val + " -> ");
 			traverseInOrderRec(root.left);
 			traverseInOrderRec(root.right);
 		}
@@ -91,10 +88,10 @@ class BinarySearchTree {
 		System.out.println();
 	}
 
-	public void traverseInOrderRec(Node root) {
+	public void traverseInOrderRec(TreeNode root) {
 		if (root != null) {
 			traverseInOrderRec(root.left);
-			System.out.print(root.data + " -> ");
+			System.out.print(root.val + " -> ");
 			traverseInOrderRec(root.right);
 		}
 	}
@@ -104,11 +101,11 @@ class BinarySearchTree {
 		System.out.println();
 	}
 
-	public void traversePostOrderRec(Node root) {
+	public void traversePostOrderRec(TreeNode root) {
 		if (root != null) {
 			traverseInOrderRec(root.left);
 			traverseInOrderRec(root.right);
-			System.out.print(root.data + " -> ");
+			System.out.print(root.val + " -> ");
 		}
 	}
 
@@ -116,18 +113,18 @@ class BinarySearchTree {
 		this.root = insertRec(root, data);
 	}
 
-	public Node insertRec(Node root, int data) {
+	public TreeNode insertRec(TreeNode root, int data) {
 		if (root == null) {
 			// Case 1 : Tree is empty. Return a new node if the tree is empty
-			root = new Node(data);
+			root = new TreeNode(data);
 			return root;
 		}
 
-		if (data < root.data) {
+		if (data < root.val) {
 			// Case 2A : Tree is not empty. If the given data is smaller than the root node,
 			// recur for the left subtree
 			root.left = insertRec(root.left, data);
-		} else if (data > root.data) {
+		} else if (data > root.val) {
 			// Case 2A : Tree is not empty. If the given key is larger than the root node,
 			// recur for the right subtree
 			root.right = insertRec(root.right, data);
@@ -142,16 +139,16 @@ class BinarySearchTree {
 		this.root = insertIter(root, data);
 	}
 
-	public Node insertIter(Node root, int data) {
+	public TreeNode insertIter(TreeNode root, int data) {
 		// start with the root node
-		Node curr = root;
+		TreeNode curr = root;
 
 		// pointer to store the parent of the current node
-		Node parent = null;
+		TreeNode parent = null;
 
 		// if the tree is empty, create a new node and set it as root
 		if (root == null) {
-			return new Node(data);
+			return new TreeNode(data);
 		}
 
 		// traverse the tree and find the parent node of the given key
@@ -161,7 +158,7 @@ class BinarySearchTree {
 
 			// if the given key is less than the current node,
 			// go to the left subtree; otherwise, go to the right subtree.
-			if (data < curr.data) {
+			if (data < curr.val) {
 				curr = curr.left;
 			} else {
 				curr = curr.right;
@@ -169,10 +166,10 @@ class BinarySearchTree {
 		}
 
 		// construct a node and assign it to the appropriate parent pointer
-		if (data < parent.data) {
-			parent.left = new Node(data);
+		if (data < parent.val) {
+			parent.left = new TreeNode(data);
 		} else {
-			parent.right = new Node(data);
+			parent.right = new TreeNode(data);
 		}
 
 		System.out.println("Node with data " + data + " inserted in Tree!");
@@ -184,15 +181,15 @@ class BinarySearchTree {
 		root = deleteRec(root, data);
 	}
 
-	public Node deleteRec(Node root, int data) {
+	public TreeNode deleteRec(TreeNode root, int data) {
 		// Return if the tree is empty
 		if (root == null)
 			return root;
 
 		// Find the node to be deleted
-		if (data < root.data)
+		if (data < root.val)
 			root.left = deleteRec(root.left, data);
-		else if (data > root.data)
+		else if (data > root.val)
 			root.right = deleteRec(root.right, data);
 		else {
 			// If the node is with only one child or no child
@@ -204,10 +201,10 @@ class BinarySearchTree {
 
 			// If the node has two children
 			// Place the inorder successor in position of the node to be deleted
-			root.data = minValue(root.right);
+			root.val = minValue(root.right);
 
 			// Delete the inorder successor
-			root.right = deleteRec(root.right, root.data);
+			root.right = deleteRec(root.right, root.val);
 		}
 
 		return root;
@@ -217,7 +214,7 @@ class BinarySearchTree {
 		root = deleteIter(root, data);
 	}
 
-	public Node deleteIter(Node root, int data) {
+	public TreeNode deleteIter(TreeNode root, int data) {
 		// Refer
 		// https://www.geeksforgeeks.org/binary-search-tree-set-3-iterative-delete/
 		// https://www.digitalocean.com/community/tutorials/binary-search-tree-bst-search-insert-remove
@@ -225,23 +222,23 @@ class BinarySearchTree {
 		return null;
 	}
 
-	int minValue(Node root) {
+	int minValue(TreeNode root) {
 		// initially minval = root
-		int minval = root.data;
+		int minval = root.val;
 		// find minval
 		while (root.left != null) {
-			minval = root.left.data;
+			minval = root.left.val;
 			root = root.left;
 		}
 		return minval;
 	}
 
-	int maxValue(Node root) {
+	int maxValue(TreeNode root) {
 		// initially maxValue = root
-		int maxval = root.data;
+		int maxval = root.val;
 		// find maxValue
 		while (root.left != null) {
-			maxval = root.right.data;
+			maxval = root.right.val;
 			root = root.right;
 		}
 		return maxval;
@@ -256,12 +253,12 @@ class BinarySearchTree {
 	}
 
 	// recursive insert function
-	Node searchRec(Node root, int data) {
+	TreeNode searchRec(TreeNode root, int data) {
 		// Base Cases: root is null or key is present at root
-		if (root == null || root.data == data)
+		if (root == null || root.val == data)
 			return root;
 		// data is greater than root's key
-		if (root.data > data)
+		if (root.val > data)
 			return searchRec(root.left, data);
 		// data is less than root's key
 		return searchRec(root.right, data);
@@ -271,15 +268,15 @@ class BinarySearchTree {
 		return searchIter(root, key);
 	}
 
-	public boolean searchIter(Node root, int key) {
+	public boolean searchIter(TreeNode root, int key) {
 		// Traverse until root reaches to dead end
 		while (root != null) {
 			// pass right subtree as new tree
-			if (key > root.data)
+			if (key > root.val)
 				root = root.right;
 
 			// pass left subtree as new tree
-			else if (key < root.data)
+			else if (key < root.val)
 				root = root.left;
 			else
 				return true; // if the key is found return 1
