@@ -12,7 +12,7 @@ package com.dsa.sorting;
 // https://prepinsta.com/java-program/bubble-sort/
 
 // Logic: In each loop, compare first element with second and if it is greater then swap it. 
-// Do this for all element
+// 		  Do this for all element
 
 public class BubbleSort {
 
@@ -27,20 +27,25 @@ public class BubbleSort {
 		boolean isSwapped;
 		for (int i = 0; i < arr.length - 1; i++) {
 			isSwapped = false;
+			// Regarding (arr.length - 1 - i)
+			// This for loop starts from the first element of the array till the second last
+			// index, (arr.length - 1 - i).
+			// Each time one index less than the last is traversed as at the end of each
+			// iteration, the largest element for that iteration reaches the end.
 			for (int j = 0; j < arr.length - 1 - i; j++) {
+
 				if (arr[j] > arr[j + 1]) {
 					int temp = arr[j];
 					arr[j] = arr[j + 1];
 					arr[j + 1] = temp;
+
 					isSwapped = true;
 				}
 			}
 			if (isSwapped == false) {
 				break;
 			}
-
 		}
-
 	}
 
 	public static void main(String[] args) {

@@ -10,6 +10,12 @@ package com.dsa.sorting;
 // https://www.geeksforgeeks.org/insertion-sort/
 // https://www.educative.io/answers/what-is-insertion-sort-in-java
 
+// Logic : Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
+// 		   Insertion sort works similarly as we sort cards in our hand in a card game.
+// 		   We assume that the first card is already sorted then, we select an unsorted card. 
+// 		   If the unsorted card is greater than the card in hand, it is placed on the right otherwise, to the left. 
+// 		   In the same way, other unsorted cards are taken and put in their right place.
+
 public class InsertionSort {
 
 	public void printArray(int[] arr) {
@@ -24,7 +30,7 @@ public class InsertionSort {
 			int temp = arr[i];
 			int j = i - 1; // sorted part can access by j index
 
-			//Below is the logic to compare in sorted part
+			// Below is the logic to compare in sorted part
 			while (j >= 0 && arr[j] > temp) {
 				arr[j + 1] = arr[j]; // shifting larger elements to temp by 1 position
 				j = j - 1;

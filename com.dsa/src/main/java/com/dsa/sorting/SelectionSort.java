@@ -11,6 +11,9 @@ package com.dsa.sorting;
 // https://www.happycoders.eu/algorithms/selection-sort/
 // https://www.programiz.com/dsa/selection-sort
 
+// Logic : Selection sort is a sorting algorithm that selects the smallest element from an unsorted list in each iteration 
+// 		   and places that element at the beginning of the unsorted list.
+
 public class SelectionSort {
 
 	public void printArray(int[] arr) {
@@ -21,15 +24,17 @@ public class SelectionSort {
 	}
 
 	public void sort(int[] arr) {
-		for (int i = 0; i < arr.length - 1; i++) { 
+		for (int i = 0; i < arr.length - 1; i++) {
 			// i index will track sorted part
 			int min = i;
-			for (int j = i + 1; j < arr.length; j++) { 
-				// j index will track unsorted part.This loop is used to find min value in unsored part
+			for (int j = i + 1; j < arr.length; j++) {
+				// j index will track unsorted part. This loop is used to find min value in
+				// unsored part
 				if (arr[j] < arr[min]) {
 					min = j;
 				}
 			}
+			
 			int temp = arr[min];
 			arr[min] = arr[i];
 			arr[i] = temp;
