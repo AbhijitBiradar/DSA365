@@ -26,18 +26,19 @@ public class SelectionSort {
 	public void sort(int[] arr) {
 		for (int i = 0; i < arr.length - 1; i++) {
 			// i index will track sorted part
-			int min = i;
+			int minValueIndex = i;
 			for (int j = i + 1; j < arr.length; j++) {
 				// j index will track unsorted part. This loop is used to find min value in
 				// unsored part
-				if (arr[j] < arr[min]) {
-					min = j;
+				if (arr[j] < arr[minValueIndex]) {
+					minValueIndex = j;
 				}
 			}
-			
-			int temp = arr[min];
-			arr[min] = arr[i];
-			arr[i] = temp;
+
+			// Swap the minimum element with current element
+			int temp = arr[minValueIndex]; // assign smallest value to temp
+			arr[minValueIndex] = arr[i]; // swap existing i th value to existing min value
+			arr[i] = temp; // assign smallest value to arr[i]
 		}
 	}
 

@@ -32,7 +32,7 @@ public class InsertionSort {
 
 			// Below is the logic to compare in sorted part
 			while (j >= 0 && arr[j] > temp) {
-				arr[j + 1] = arr[j]; // shifting larger elements to temp by 1 position
+				arr[j + 1] = arr[j]; // shifting larger elements to temp by 1 position towards right side
 				j = j - 1;
 			}
 			arr[j + 1] = temp;
