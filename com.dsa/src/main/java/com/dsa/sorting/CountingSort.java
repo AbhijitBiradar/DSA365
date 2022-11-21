@@ -1,56 +1,55 @@
 package com.dsa.sorting;
 
 // Refer
-// https://www.programiz.com/dsa/counting-sort
-// https://www.youtube.com/watch?v=mowMVn9wTnE
-// https://www.youtube.com/watch?v=pEJiGC-ObQE
-// https://www.youtube.com/watch?v=HkvChUv9dDg&t=1s
-// https://www.youtube.com/watch?v=bbUqXF5pSD0
 
-// https://www.geeksforgeeks.org/counting-sort/
-// https://www.programiz.com/dsa/counting-sort
-// https://www.happycoders.eu/algorithms/counting-sort/
-// https://prepinsta.com/java-program/counting-sort/
+// https://www.youtube.com/watch?v=mowMVn9wTnE
+// https://www.youtube.com/watch?v=ydj26ZKKrk8
+// https://www.youtube.com/watch?v=7lmz0EcpriQ
 
 import java.util.Arrays;
 
 class CountingSort {
-	void countSort(int array[], int size) {
+	void countSort(int arr[], int size) {
+
 		int[] output = new int[size + 1];
 
-		// Find the largest element of the array
-		int max = array[0];
+		// Step 1 : Find the largest element of the array
+		int max = arr[0];
 		for (int i = 1; i < size; i++) {
-			if (array[i] > max)
-				max = array[i];
+			if (arr[i] > max)
+				max = arr[i];
 		}
-		int[] count = new int[max + 1];
 
-		// Initialize count array with all zeros.
+		// Step 2 : Initialize count array with all zeros.
+		int[] count = new int[max + 1];
 		for (int i = 0; i < max; ++i) {
 			count[i] = 0;
 		}
 
-		// Store the count of each element
+		// Step 3 : Check occurrence of each element in arr array and update the count
+		// in countArray
 		for (int i = 0; i < size; i++) {
-			count[array[i]]++;
+			count[arr[i]]++;
 		}
 
-		// Store the cumulative count of each array
+		// Refer
+		// https://www.youtube.com/watch?v=ydj26ZKKrk8
+		// Step 4 : Store the cumulative count of each array
 		for (int i = 1; i <= max; i++) {
 			count[i] += count[i - 1];
 		}
 
-		// Find the index of each element of the original array in count array, and
-		// place the elements in output array
+		// Refer
+		// https://www.youtube.com/watch?v=ydj26ZKKrk8
+		// Step 5 : Find the index of each element of the original array in count array,
+		// and place the elements in output array
 		for (int i = size - 1; i >= 0; i--) {
-			output[count[array[i]] - 1] = array[i];
-			count[array[i]]--;
+			output[--count[arr[i]]] = arr[i];
 		}
 
-		// Copy the sorted elements into original array
+		// Step 6 : Copy the sorted elements into original array
 		for (int i = 0; i < size; i++) {
-			array[i] = output[i];
+			arr[i] = output[i];
 		}
 	}
 
@@ -58,10 +57,13 @@ class CountingSort {
 	public static void main(String args[]) {
 		int[] arr = { 4, 2, 2, 8, 3, 3, 1 };
 
+		System.out.println("Array before sorting: ");
+		System.out.println(Arrays.toString(arr));
+
 		CountingSort cs = new CountingSort();
 		cs.countSort(arr, arr.length);
 
-		System.out.println("Sorted Array in Ascending Order: ");
+		System.out.println("Array after sorting: ");
 		System.out.println(Arrays.toString(arr));
 	}
 }
