@@ -1,10 +1,7 @@
 package com.dsa.sorting;
 
 // Refer
-
-// https://www.youtube.com/watch?v=mowMVn9wTnE
 // https://www.youtube.com/watch?v=ydj26ZKKrk8
-// https://www.youtube.com/watch?v=7lmz0EcpriQ
 
 import java.util.Arrays;
 
@@ -29,22 +26,21 @@ class CountingSort {
 		// Step 3 : Check occurrence of each element in arr array and update the count
 		// in countArray
 		for (int i = 0; i < size; i++) {
-			count[arr[i]]++;
+			int index = arr[i];
+			count[index]++;
 		}
 
-		// Refer
-		// https://www.youtube.com/watch?v=ydj26ZKKrk8
 		// Step 4 : Store the cumulative count of each array
 		for (int i = 1; i <= max; i++) {
-			count[i] += count[i - 1];
+			count[i] = count[i] + count[i - 1];
 		}
 
-		// Refer
-		// https://www.youtube.com/watch?v=ydj26ZKKrk8
 		// Step 5 : Find the index of each element of the original array in count array,
 		// and place the elements in output array
 		for (int i = size - 1; i >= 0; i--) {
-			output[--count[arr[i]]] = arr[i];
+			int countArrayIndex = arr[i];
+			int outputArrayIndex = --count[countArrayIndex];
+			output[outputArrayIndex] = arr[i];
 		}
 
 		// Step 6 : Copy the sorted elements into original array
@@ -53,7 +49,6 @@ class CountingSort {
 		}
 	}
 
-	// Driver code
 	public static void main(String args[]) {
 		int[] arr = { 4, 2, 2, 8, 3, 3, 1 };
 

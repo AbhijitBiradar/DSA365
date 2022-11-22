@@ -9,7 +9,7 @@ import java.util.List;
 // https://www.javatpoint.com/bucket-sort-in-java
 
 public class BucketSort {	
-	private static void binSort(int[] array, int bucketSize) {
+	public void binSort(int[] array, int bucketSize) {
 		// creating a list of buckets for storing lists
 		List<Integer>[] buckets = new List[bucketSize];
 		// Linked list with each bucket array index
@@ -45,7 +45,8 @@ public class BucketSort {
 		int[] array = { 22, 45, 12, 8, 10, 6, 72, 81, 33, 18, 50, 14, 55, 0, 12, 55 };
 		System.out.println("Unsorted Array: " + Arrays.toString(array));
 		// calling the user-defined method to sort the array
-		binSort(array, 10);
+		BucketSort bs = new BucketSort();
+		bs.binSort(array, 10);
 		System.out.println("Sorted Array: " + Arrays.toString(array));
 	}
 }
