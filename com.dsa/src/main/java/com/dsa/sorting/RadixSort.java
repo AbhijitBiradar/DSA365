@@ -1,78 +1,87 @@
 package com.dsa.sorting;
 
 // Refer
-// https://www.programiz.com/dsa/radix-sort
 // https://www.youtube.com/watch?v=9QSgBO9yjKU&t=8s
-// https://www.youtube.com/watch?v=Il45xNUHGp0&t=7s
-// https://www.youtube.com/watch?v=6du1LrLbDpA&t=4s
-// https://www.youtube.com/watch?v=JMlYkE8hGJM&t=13s
-// https://www.youtube.com/watch?v=Y1QrOxxo1n8
-
-// https://www.geeksforgeeks.org/radix-sort/
-// https://www.programiz.com/dsa/radix-sort
-// https://www.happycoders.eu/algorithms/radix-sort/
+// https://www.youtube.com/watch?v=5n8KZnQvf4k
+// https://www.youtube.com/watch?v=nnd0XtYG7eg
+// https://www.youtube.com/watch?v=jDL5lRPX6yI			
+// https://simplesnippets.tech/radix-sort-algorithm-with-c-code-sorting-algorithms-data-structures-algorithms/
 
 import java.util.Arrays;
 
 class RadixSort {
 
-	// Using counting sort to sort the elements in the basis of significant places
-	void countingSort(int array[], int size, int place) {
+	void countingSort(int[] arr, int div) {
+		int size = arr.length;
 		int[] output = new int[size + 1];
-		int max = array[0];
+
+		// Find Max value in arr array
+		int max = arr[0];
 		for (int i = 1; i < size; i++) {
-			if (array[i] > max)
-				max = array[i];
+			if (arr[i] > max) {
+				max = arr[i];
+			}
 		}
+
+		// Create and Initialize count array with 0
 		int[] count = new int[max + 1];
-
-		for (int i = 0; i < max; ++i)
+		for (int i = 0; i < max; ++i) {
 			count[i] = 0;
+		}
 
-		// Calculate count of elements
-		for (int i = 0; i < size; i++)
-			count[(array[i] / place) % 10]++;
+		// Calculate & update count of elements into count array
+		for (int i = 0; i < size; i++) {
+			int countIndex = (arr[i] / div) % 10;
+			count[countIndex]++;
+		}
 
 		// Calculate cumulative count
-		for (int i = 1; i < 10; i++)
+		for (int i = 1; i < 10; i++) {
 			count[i] += count[i - 1];
+		}
 
 		// Place the elements in sorted order
 		for (int i = size - 1; i >= 0; i--) {
-			output[count[(array[i] / place) % 10] - 1] = array[i];
-			count[(array[i] / place) % 10]--;
+			output[count[(arr[i] / div) % 10] - 1] = arr[i];
+			count[(arr[i] / div) % 10]--;
 		}
 
-		for (int i = 0; i < size; i++)
-			array[i] = output[i];
+		// Update output array result to original array (arr)
+		for (int i = 0; i < size; i++) {
+			arr[i] = output[i];
+		}
 	}
 
-	// Function to get the largest element from an array
-	int getMax(int array[], int n) {
+	int getMax(int[] array) {
 		int max = array[0];
-		for (int i = 1; i < n; i++)
-			if (array[i] > max)
+		for (int i = 1; i < array.length; i++) {
+			if (array[i] > max) {
 				max = array[i];
+			}
+		}
 		return max;
 	}
 
-	// Main function to implement radix sort
-	void radixSort(int array[], int size) {
+	void radixSort(int[] arr) {
 		// Get maximum element
-		int max = getMax(array, size);
+		int max = getMax(arr);
 
-		// Apply counting sort to sort elements based on place value.
-		for (int place = 1; max / place > 0; place *= 10)
-			countingSort(array, size, place);
+		// Apply counting sort for every digit
+		for (int div = 1; max / div > 0; div = div * 10) {
+			countingSort(arr, div);
+		}
 	}
 
-	// Driver code
 	public static void main(String args[]) {
-		int[] data = { 121, 432, 564, 23, 1, 45, 788 };
-		int size = data.length;
+		int[] arr = { 121, 432, 564, 23, 1, 45, 788 };
+
+		System.out.println("Array Before Sorting : ");
+		System.out.println(Arrays.toString(arr));
+
 		RadixSort rs = new RadixSort();
-		rs.radixSort(data, size);
-		System.out.println("Sorted Array in Ascending Order: ");
-		System.out.println(Arrays.toString(data));
+		rs.radixSort(arr);
+
+		System.out.println("Array After Sorting : ");
+		System.out.println(Arrays.toString(arr));
 	}
 }
