@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 class RadixSort {
 
-	void countingSort(int[] arr, int div) {
+	public void countingSort(int[] arr, int div) {
 		int size = arr.length;
 		int[] output = new int[size + 1];
 
@@ -25,14 +25,13 @@ class RadixSort {
 
 		// Create and Initialize count array with 0
 		int[] count = new int[max + 1];
-		for (int i = 0; i < max; ++i) {
+		for (int i = 0; i < max; i++) {
 			count[i] = 0;
 		}
 
 		// Calculate & update count of elements into count array
 		for (int i = 0; i < size; i++) {
-			int countIndex = (arr[i] / div) % 10;
-			count[countIndex]++;
+			count[(arr[i] / div) % 10]++;
 		}
 
 		// Calculate cumulative count
@@ -52,7 +51,7 @@ class RadixSort {
 		}
 	}
 
-	int getMax(int[] array) {
+	public int getMax(int[] array) {
 		int max = array[0];
 		for (int i = 1; i < array.length; i++) {
 			if (array[i] > max) {
@@ -62,7 +61,7 @@ class RadixSort {
 		return max;
 	}
 
-	void radixSort(int[] arr) {
+	public void radixSort(int[] arr) {
 		// Get maximum element
 		int max = getMax(arr);
 
