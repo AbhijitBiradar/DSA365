@@ -1,28 +1,25 @@
 package com.dsa.sorting;
 
 // Refer
-// https://www.programiz.com/dsa/heap-sort
-// https://www.youtube.com/watch?v=nJ6FdAIr_6g
-// https://www.youtube.com/watch?v=Q_eia3jC9Ts&t=2s
-// https://www.youtube.com/watch?v=UVW0NfG_YWA&t=3s
-
-// https://www.geeksforgeeks.org/heap-sort/
-// https://www.programiz.com/dsa/heap-sort
+// https://www.youtube.com/watch?v=SkeQsjpG_fo
+// https://www.youtube.com/watch?v=79KoeErdQtk
+// https://www.youtube.com/watch?v=UVW0NfG_YWA&t=4s
+// https://www.youtube.com/watch?v=kU4KBD4NFtw
 // https://www.educative.io/answers/how-to-implement-heap-sort-in-java
-// https://www.happycoders.eu/algorithms/heapsort/
+// https://www.geeksforgeeks.org/heap-sort/
 
 public class HeapSort {
 
 	public void sort(int arr[]) {
-		int n = arr.length;
+		int size = arr.length;
 
 		// Build max heap
-		for (int i = n / 2 - 1; i >= 0; i--) {
-			heapify(arr, n, i);
+		for (int i = size / 2 - 1; i >= 0; i--) {
+			heapify(arr, size, i);
 		}
 
 		// Heap sort
-		for (int i = n - 1; i >= 0; i--) {
+		for (int i = size - 1; i >= 0; i--) {
 			int temp = arr[0];
 			arr[0] = arr[i];
 			arr[i] = temp;
@@ -32,44 +29,49 @@ public class HeapSort {
 		}
 	}
 
-	void heapify(int arr[], int n, int i) {
-		// Find largest among root, left child and right child
-		int largest = i;
-		int l = 2 * i + 1;
-		int r = 2 * i + 2;
+	void heapify(int arr[], int size, int index) {
+		// Find largest among root, leftChild child and rightChild child
+		int largest = index;
+		int leftChild = 2 * index + 1;
+		int rightChild = 2 * index + 2;
 
-		if (l < n && arr[l] > arr[largest])
-			largest = l;
+		if (leftChild < size && arr[leftChild] > arr[largest]) {
+			largest = leftChild;
+		}
 
-		if (r < n && arr[r] > arr[largest])
-			largest = r;
+		if (rightChild < size && arr[rightChild] > arr[largest]) {
+			largest = rightChild;
+		}
 
 		// Swap and continue heapifying if root is not largest
-		if (largest != i) {
-			int swap = arr[i];
-			arr[i] = arr[largest];
+		if (largest != index) {
+			int swap = arr[index];
+			arr[index] = arr[largest];
 			arr[largest] = swap;
 
-			heapify(arr, n, largest);
+			heapify(arr, size, largest);
 		}
 	}
 
-	// Function to print an array
 	static void printArray(int arr[]) {
-		int n = arr.length;
-		for (int i = 0; i < n; ++i)
+		int size = arr.length;
+		for (int i = 0; i < size; ++i) {
 			System.out.print(arr[i] + " ");
+		}
+
 		System.out.println();
 	}
 
-	// Driver code
 	public static void main(String args[]) {
 		int arr[] = { 1, 12, 9, 5, 6, 10 };
+
+		System.out.println("Array before sorting : ");
+		printArray(arr);
 
 		HeapSort hs = new HeapSort();
 		hs.sort(arr);
 
-		System.out.println("Sorted array is");
+		System.out.println("Array after sorting : ");
 		printArray(arr);
 	}
 }
