@@ -12,7 +12,7 @@ import java.util.List;
 // https://www.javatpoint.com/bucket-sort-in-java
 
 public class BucketSort {
-	public void binSort(int[] array, int bucketSize) {
+	public void binSort(int[] arr, int bucketSize) {
 
 		// Step 1 : Create a bucket list
 		List<Integer>[] buckets = new List[bucketSize];
@@ -23,8 +23,9 @@ public class BucketSort {
 		}
 
 		// Step 3 : Assign number from array to the proper bucket by using hash function
-		for (int num : array) {
-			buckets[hash(num, bucketSize)].add(num);
+		for (int num : arr) {
+			int hashValue = hash(num, bucketSize);
+			buckets[hashValue].add(num);
 		}
 
 		// Step 5 : Sort buckets
@@ -36,27 +37,27 @@ public class BucketSort {
 		int index = 0;
 		for (List<Integer> bucket : buckets) {
 			for (int num : bucket) {
-				array[index] = num;
+				arr[index] = num;
 				index++;
 			}
 		}
-	}
+	}	
 
-	// Step 4 : This function will generate and return hash value
+	// Step 4 : This hash function will generate and return hash value
 	private int hash(int num, int bucketSize) {
 		return num / bucketSize;
 	}
 
 	public static void main(String args[]) {
-		int[] array = { 22, 45, 12, 8, 10, 6, 72, 81, 33, 18, 50, 14, 55, 0, 12, 55 };
+		int[] arr = { 22, 45, 12, 8, 10, 6, 72, 81, 33, 18, 50, 14, 55, 0, 12, 55 };
 
 		System.out.println("Array before sorting: ");
-		System.out.println(Arrays.toString(array));
+		System.out.println(Arrays.toString(arr));
 
 		BucketSort bs = new BucketSort();
-		bs.binSort(array, 10);
+		bs.binSort(arr, 10);
 
 		System.out.println("Array after sorting: ");
-		System.out.println(Arrays.toString(array));
+		System.out.println(Arrays.toString(arr));
 	}
 }
