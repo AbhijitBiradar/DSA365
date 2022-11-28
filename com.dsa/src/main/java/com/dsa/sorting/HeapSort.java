@@ -13,49 +13,57 @@ public class HeapSort {
 	public void sort(int arr[]) {
 		int size = arr.length;
 
-		// Build max heap
+		// building max heap using heapify
 		for (int i = size / 2 - 1; i >= 0; i--) {
 			heapify(arr, size, i);
 		}
 
-		// Heap sort
+		// We will extract elements from heap one by one and reduce size of the heap
+		// (assuming part of array is sorted controlled by index)
 		for (int i = size - 1; i >= 0; i--) {
+
+			// largest resides on root in max-heap
 			int temp = arr[0];
 			arr[0] = arr[i];
 			arr[i] = temp;
 
-			// Heapify root element
+			// call heapify on root of reduced heap
 			heapify(arr, i, 0);
 		}
 	}
 
-	void heapify(int arr[], int size, int index) {
-		// Find largest among root, leftChild child and rightChild child
-		int largest = index;
-		int leftChild = 2 * index + 1;
-		int rightChild = 2 * index + 2;
+	public void heapify(int arr[], int size, int index) {
+		// Check if right and left child are greater than parent and the right and
+		// left child index are not out of bound.
+		int largest = index; // Initialize largest as root
+		int leftChild = 2 * index + 1; // left = 2*i + 1
+		int rightChild = 2 * index + 2; // right = 2*i + 2
 
+		// If left child is larger than root
 		if (leftChild < size && arr[leftChild] > arr[largest]) {
 			largest = leftChild;
 		}
 
+		// If right child is larger than largest so far
 		if (rightChild < size && arr[rightChild] > arr[largest]) {
 			largest = rightChild;
 		}
 
-		// Swap and continue heapifying if root is not largest
+		// If largest is not root
+		// If maximum is not equal to its initial declaration(root) then swap.
 		if (largest != index) {
 			int swap = arr[index];
 			arr[index] = arr[largest];
 			arr[largest] = swap;
 
+			// We will recursively heapify the affected sub-tree
 			heapify(arr, size, largest);
 		}
 	}
 
-	static void printArray(int arr[]) {
+	public void printArray(int arr[]) {
 		int size = arr.length;
-		for (int i = 0; i < size; ++i) {
+		for (int i = 0; i < size; i++) {
 			System.out.print(arr[i] + " ");
 		}
 
@@ -66,12 +74,12 @@ public class HeapSort {
 		int arr[] = { 1, 12, 9, 5, 6, 10 };
 
 		System.out.println("Array before sorting : ");
-		printArray(arr);
-
 		HeapSort hs = new HeapSort();
+		hs.printArray(arr);
+
 		hs.sort(arr);
 
 		System.out.println("Array after sorting : ");
-		printArray(arr);
+		hs.printArray(arr);
 	}
 }

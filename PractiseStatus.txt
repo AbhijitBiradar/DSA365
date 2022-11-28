@@ -1,0 +1,79 @@
+1. Stack 
+	a. StackUsingArray
+	b. StackUsingLinkedList
+
+2. Searching
+	a. LinearSearch
+	b. BinarySearch
+
+3. Linked List
+	a. SinglyLinkedList
+	b. DoublyLinkedList
+	c. CircularSinglyLinkedList
+	d. CircularDoublyLinkedList
+
+4. Queue
+	a. SimpleQueueUsingArray ----- Understood
+	b. SimpleQueueUsingLinkedList ----- Understood
+	c. CircularQueueUsingArray ----- Understood
+	d. CircularQueueUsingLinkedList ----- Understood
+	e. PriorityQueueUsingArray ----- Understood
+	f. PriorityQueueUsingLinkedList ----- Understood
+	g. PriorityQueueUsingDoublyLinkedList ----- Understood
+	h. DequeUsingArray ----- Understood
+	i. DequeueUsingLinkedList ----- Understood
+	j. DequeUsingDoublyLinkedList ----- Understood
+	k. QueueUsingStack ----- Understood
+
+
+5. Tree
+	a. AVLTree --- code not understood
+	b. BalancedBinaryTree 
+	c. BinarySearchTree
+	d. BPlusTree --- code not understood
+	e. BTree --- code not understood
+	f. CompleteBinaryTree
+	g. FullBinaryTree
+	h. PerfectBinaryTree
+	i. RedBlackTree --- code not understood
+	j. SimpleBinaryTree
+
+6. graphs
+	a. Spanning Tree & Minimum Spanning Tree ----- Understood
+	b. Strongly connected components ----- Understood
+	c. Adjacency Matrix ----- Understood
+	d. Adjascency List ----- Understood	
+	e. DFS algorithm ----- Understood
+	f. BFS algorithm ----- Understood	
+	g. Bellman Ford Algorithm ----- ??? ---Not Understood
+	h. Kruskal's Algorithm
+	i. Prim's Algorithm ----- ??? ---Not Understood
+
+7. sorting
+	a. BinaryInsertionSort
+	b. BitonicSort
+	c. BogoSortOrPermutationSort
+	d. BubbleSort ----- 
+	e. BucketSort --- 
+	f. CartesianTreeSorting
+	g. CocktailSort
+	h. CountingSort --- 
+	i. CycleSort
+	j. GnomeSort
+	k. HeapSort --- 
+	l. InsertionSort ----- 
+	m. MergeSort ----- 
+	n. OddEvenOrBrickSort
+	o. PancakeSort
+	p. PigeonholeSort
+	q. Quicksort --- 
+	r. RadixSort --- 
+	s. SelectionSort ----- 
+	t. ShellSort --- 
+	u. SleepSort
+	v. StoogeSort
+	w. StrandSort
+	x. StructureSort
+	y. TagSort
+	Z. TimSort
+	A1. TreeSort
