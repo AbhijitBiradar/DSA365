@@ -2,7 +2,6 @@ package com.dsa.sorting;
 
 // Refer
 // https://www.youtube.com/watch?v=SkeQsjpG_fo
-// https://www.youtube.com/watch?v=79KoeErdQtk
 // https://www.youtube.com/watch?v=UVW0NfG_YWA&t=4s
 // https://www.youtube.com/watch?v=kU4KBD4NFtw
 // https://www.educative.io/answers/how-to-implement-heap-sort-in-java
@@ -36,25 +35,25 @@ public class HeapSort {
 		// Check if right and left child are greater than parent and the right and
 		// left child index are not out of bound.
 		int largest = index; // Initialize largest as root
-		int leftChild = 2 * index + 1; // left = 2*i + 1
-		int rightChild = 2 * index + 2; // right = 2*i + 2
+		int leftChildIndex = 2 * index + 1; // left = 2*i + 1
+		int rightChildIndex = 2 * index + 2; // right = 2*i + 2
 
 		// If left child is larger than root
-		if (leftChild < size && arr[leftChild] > arr[largest]) {
-			largest = leftChild;
+		if (leftChildIndex < size && arr[leftChildIndex] > arr[largest]) {
+			largest = leftChildIndex;
 		}
 
 		// If right child is larger than largest so far
-		if (rightChild < size && arr[rightChild] > arr[largest]) {
-			largest = rightChild;
+		if (rightChildIndex < size && arr[rightChildIndex] > arr[largest]) {
+			largest = rightChildIndex;
 		}
 
 		// If largest is not root
 		// If maximum is not equal to its initial declaration(root) then swap.
 		if (largest != index) {
-			int swap = arr[index];
+			int temp = arr[index];
 			arr[index] = arr[largest];
-			arr[largest] = swap;
+			arr[largest] = temp;
 
 			// We will recursively heapify the affected sub-tree
 			heapify(arr, size, largest);
