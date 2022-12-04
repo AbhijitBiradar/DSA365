@@ -12,6 +12,7 @@ class ShellSort {
 
 	void shellSort(int arr[]) {
 		int size = arr.length;
+
 		for (int gap = size / 2; gap > 0; gap = gap / 2) {
 
 			for (int j = gap; j < size; j = j + 1) {
